@@ -520,7 +520,7 @@ typedef struct
 {
     TMR_COUNTER_MODE_T countMode;           /*!< TMR counter mode selection */
     TMR_CLOCK_DIV_T    clockDivision;       /*!< TMR clock division selection */
-    uint16_t           period;              /*!< This must between 0x0000 and 0xFFFF */
+    uint32_t           period;              /*!< This must between 0x0000 and 0xFFFF */
     uint16_t           division;            /*!< This must between 0x0000 and 0xFFFF */
     uint8_t            repetitionCounter;   /*!< This must between 0x00 and 0xFF, only for TMR1 and TMR8. */
 } TMR_BaseConfig_T;

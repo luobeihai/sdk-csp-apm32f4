@@ -44,7 +44,7 @@
 */
 
 /* System Clock Frequency (Core Clock) */
-extern uint32_t SystemCoreClock;
+extern unsigned int SystemCoreClock;
 
 /**
   * @}

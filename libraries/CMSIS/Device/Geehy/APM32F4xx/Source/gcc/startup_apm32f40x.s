@@ -219,7 +219,7 @@ g_pfnVectors:
   .word     OTG_HS1_IRQHandler                /* USB OTG HS1                  */
   .word     DCI_IRQHandler                    /* DCI                          */
   .word     0                                 /* Reserved                     */
-  .word     0                                 /* Reserved                     */
+  .word     RNG_IRQHandler                    /* RNG                          */
   .word     FPU_IRQHandler                    /* FPU                          */
   .word     SM3_IRQHandler                    /* SM3                          */
   .word     SM4_IRQHandler                    /* SM4                          */
@@ -495,6 +495,9 @@ g_pfnVectors:
 
    .weak      DCI_IRQHandler
    .thumb_set DCI_IRQHandler,Default_Handler
+
+   .weak      RNG_IRQHandler
+   .thumb_set RNG_IRQHandler,Default_Handler
 
    .weak      FPU_IRQHandler
    .thumb_set FPU_IRQHandler,Default_Handler

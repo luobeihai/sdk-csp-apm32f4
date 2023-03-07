@@ -151,7 +151,7 @@ __Vectors       DCD     __initial_sp               ; Top of Stack
                 DCD     OTG_HS1_IRQHandler              ; OTG_HS1
                 DCD     DCI_IRQHandler                  ; DCI
                 DCD     0                               ; Reserved
-                DCD     0                               ; Reserved
+                DCD     RNG_IRQHandler                  ; RNG
                 DCD     FPU_IRQHandler                  ; FPU
                 DCD     SM3_IRQHandler                  ; SM3
                 DCD     SM4_IRQHandler                  ; SM4
@@ -298,6 +298,7 @@ Default_Handler PROC
                 EXPORT  OTG_HS1_WKUP_IRQHandler             [WEAK]
                 EXPORT  OTG_HS1_IRQHandler                  [WEAK]
                 EXPORT  DCI_IRQHandler                      [WEAK]
+                EXPORT  RNG_IRQHandler                      [WEAK]
                 EXPORT  FPU_IRQHandler                      [WEAK]
                 EXPORT  SM3_IRQHandler                      [WEAK]
                 EXPORT  SM4_IRQHandler                      [WEAK]
@@ -382,6 +383,7 @@ OTG_HS1_EP1_IN_IRQHandler
 OTG_HS1_WKUP_IRQHandler
 OTG_HS1_IRQHandler
 DCI_IRQHandler
+RNG_IRQHandler
 FPU_IRQHandler
 SM3_IRQHandler
 SM4_IRQHandler

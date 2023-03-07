@@ -118,7 +118,7 @@ typedef enum
  */
 typedef enum
 {
-    DAC_OUTPUT_BUFFER_ENBALE  = 0x00000000, /*!< DAC Channel Output Buffer Enable */
+    DAC_OUTPUT_BUFFER_ENABLE  = 0x00000000, /*!< DAC Channel Output Buffer Enable */
     DAC_OUTPUT_BUFFER_DISABLE = 0x00000002  /*!< DAC Channel1 Output Buffer Disable */
 } DAC_OUTPUT_BUFFER_T;
 

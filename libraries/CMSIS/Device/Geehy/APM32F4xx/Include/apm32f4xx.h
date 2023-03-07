@@ -71,7 +71,7 @@
  */
 #define __APM32F4XX_STDPERIPH_VERSION_MAIN   (0x01) /*!< [31:24] main version */
 #define __APM32F4XX_STDPERIPH_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
-#define __APM32F4XX_STDPERIPH_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
+#define __APM32F4XX_STDPERIPH_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
 #define __APM32F4XX_STDPERIPH_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 #define __APM32F4XX_STDPERIPH_VERSION        ((__APM32F4XX_STDPERIPH_VERSION_MAIN << 24)\
                                              |(__APM32F4XX_STDPERIPH_VERSION_SUB1 << 16)\
@@ -105,13 +105,13 @@ typedef enum IRQn
 {
     /******  Cortex-M4 Processor Exceptions Numbers ****************************************************************/
     NonMaskableInt_IRQn         = -14,    /*!< 2 Non Maskable Interrupt                                          */
-    MemoryManagement_IRQn       = -12,    /*!< 4 Cortex-M3 Memory Management Interrupt                           */
-    BusFault_IRQn               = -11,    /*!< 5 Cortex-M3 Bus Fault Interrupt                                   */
-    UsageFault_IRQn             = -10,    /*!< 6 Cortex-M3 Usage Fault Interrupt                                 */
-    SVCall_IRQn                 = -5,     /*!< 11 Cortex-M3 SV Call Interrupt                                    */
-    DebugMonitor_IRQn           = -4,     /*!< 12 Cortex-M3 Debug Monitor Interrupt                              */
-    PendSV_IRQn                 = -2,     /*!< 14 Cortex-M3 Pend SV Interrupt                                    */
-    SysTick_IRQn                = -1,     /*!< 15 Cortex-M3 System Tick Interrupt                                */
+    MemoryManagement_IRQn       = -12,    /*!< 4 Cortex-M4 Memory Management Interrupt                           */
+    BusFault_IRQn               = -11,    /*!< 5 Cortex-M4 Bus Fault Interrupt                                   */
+    UsageFault_IRQn             = -10,    /*!< 6 Cortex-M4 Usage Fault Interrupt                                 */
+    SVCall_IRQn                 = -5,     /*!< 11 Cortex-M4 SV Call Interrupt                                    */
+    DebugMonitor_IRQn           = -4,     /*!< 12 Cortex-M4 Debug Monitor Interrupt                              */
+    PendSV_IRQn                 = -2,     /*!< 14 Cortex-M4 Pend SV Interrupt                                    */
+    SysTick_IRQn                = -1,     /*!< 15 Cortex-M4 System Tick Interrupt                                */
 
     /******  APM32 specific Interrupt Numbers **********************************************************************/
     WWDT_IRQn                   = 0,      /*!< Window WatchDog Interrupt                                         */
@@ -195,6 +195,7 @@ typedef enum IRQn
     OTG_HS1_WKUP_IRQn           = 76,     /*!< OTG_HS1 Wakeup through EINT interrupt                             */
     OTG_HS1_IRQn                = 77,     /*!< OTG_HS1 global interrupt                                          */
     DCI_IRQn                    = 78,     /*!< DCMI global interrupt                                             */
+    RNG_IRQn                    = 80,     /*!< RNG global interrupt                                              */
     FPU_IRQn                    = 81,     /*!< FPU global interrupt                                              */
     SM3_IRQn                    = 82,     /*!< SM3 global interrupt                                              */
     SM4_IRQn                    = 83,     /*!< SM4 global interrupt                                              */

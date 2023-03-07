@@ -476,7 +476,7 @@ void DMA_ClearStatusFlag(DMA_Stream_T* stream, uint32_t flag)
         dma = DMA2;
     }
 
-    if ((flag & 0x10000000) == RESET)
+    if ((flag & 0x10000000) == SET)
     {
         dma->LIFCLR = (flag & 0x0F7D0F7D);
     }

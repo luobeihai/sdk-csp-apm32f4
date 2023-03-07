@@ -135,7 +135,7 @@ __vector_table
                 DCD     OTG_HS1_IRQHandler              ; OTG_HS1
                 DCD     DCI_IRQHandler                  ; DCI
                 DCD     0                               ; Reserved
-                DCD     0                               ; Reserved
+                DCD     RNG_IRQHandler                  ; RNG
                 DCD     FPU_IRQHandler                  ; FPU
                 DCD     SM3_IRQHandler                  ; SM3
                 DCD     SM4_IRQHandler                  ; SM4
@@ -594,6 +594,11 @@ OTG_HS1_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 DCI_IRQHandler
         B DCI_IRQHandler
+
+        PUBWEAK RNG_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+RNG_IRQHandler
+        B RNG_IRQHandler
 
         PUBWEAK FPU_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
