@@ -16,6 +16,14 @@
 #include <board.h>
 #include <apm32f4xx.h>
 
+#include "apm32f4xx_gpio.h"
+#include "apm32f4xx_syscfg.h"
+#include "apm32f4xx_rcm.h"
+#include "apm32f4xx_misc.h"
+#include "apm32f4xx_rcm.h"
+#include "apm32f4xx_eint.h"
+#include "apm32f4xx_usart.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

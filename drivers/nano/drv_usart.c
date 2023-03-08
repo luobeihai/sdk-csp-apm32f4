@@ -6,15 +6,13 @@
  * Change Logs:
  * Date           Author        Notes
  * 2022-07-15     Aligagago     first version
+ * 2023-03-08     luobeihai     add rt_hw_console_getchar
  */
 
 #include <string.h>
 #include <stdlib.h>
 #include <board.h>
-#include "apm32f4xx.h"
-#include "apm32f4xx_rcm.h"
-#include "apm32f4xx_gpio.h"
-#include "apm32f4xx_usart.h"
+#include "drv_common.h"
 
 struct apm32_usart
 {
@@ -97,7 +95,7 @@ int uart_init()
 
         USART_ConfigStruct.baudRate = 115200;
         USART_ConfigStruct.hardwareFlow = USART_HARDWARE_FLOW_NONE;
-        USART_ConfigStruct.mode = USART_MODE_TX;
+        USART_ConfigStruct.mode = USART_MODE_TX_RX;
         USART_ConfigStruct.parity = USART_PARITY_NONE;
         USART_ConfigStruct.stopBits = USART_STOP_BIT_1;
         USART_ConfigStruct.wordLength = USART_WORD_LEN_8B;
@@ -148,3 +146,39 @@ void rt_hw_console_output(const char *str)
 #endif
     }
 }
+
+#ifdef RT_USING_FINSH
+char rt_hw_console_getchar(void)
+{
+    int ch = -1;
+#if defined(BSP_USING_UART1)
+    if (USART_ReadStatusFlag(USART1, USART_FLAG_RXBNE) != RESET)
+    {
+        ch = USART_RxData(USART1);
+    }
+    else
+    {
+        if (USART_ReadStatusFlag(USART1, USART_FLAG_OVRE) != RESET)
+        {
+            USART_ClearStatusFlag(USART1, USART_FLAG_OVRE);
+        }
+        rt_thread_mdelay(10);
+    }
+#elif defined BSP_USING_UART2
+    if (USART_ReadStatusFlag(USART2, USART_FLAG_RXBNE) != RESET)
+    {
+        ch = USART_RxData(USART2);
+    }
+    else
+    {
+        if (USART_ReadStatusFlag(USART2, USART_FLAG_OVRE) != RESET)
+        {
+            USART_ClearStatusFlag(USART2, USART_FLAG_OVRE);
+        }
+        rt_thread_mdelay(10);
+    }
+#endif
+
+    return ch;
+}
+#endif /* RT_USING_FINSH */
