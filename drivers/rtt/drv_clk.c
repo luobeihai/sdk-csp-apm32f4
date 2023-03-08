@@ -8,7 +8,7 @@
  * 2022-07-15     Aligagago     first version
  */
 
-#include "apm32f0xx.h"
+#include "apm32f4xx.h"
 
 void clk_init(char *clk_source, int source_freq, int target_freq)
 {

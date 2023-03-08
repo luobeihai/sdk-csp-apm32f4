@@ -176,6 +176,8 @@ series:
           putc: none
           sysTick: none
         marco:
+        - SOC_FAMILY_APM32
+        - SOC_SERIES_APM32F4
         - APM32F40X
         source_files:
         - drivers\baremetal
@@ -188,6 +190,8 @@ series:
           sysTick: none
           heap_init: none
         marco:
+        - SOC_FAMILY_APM32
+        - SOC_SERIES_APM32F4
         - APM32F40X
         source_files:
         - drivers\nano
@@ -198,6 +202,8 @@ series:
           rt_hw_pin_register: none
           heap_init: none
         marco:
+        - SOC_FAMILY_APM32
+        - SOC_SERIES_APM32F4
         - APM32F40X
         source_files:
         - drivers\rtt
@@ -548,6 +554,8 @@ series:
           putc: none
           sysTick: none
         marco:
+        - SOC_FAMILY_APM32
+        - SOC_SERIES_APM32F4
         - APM32F40X
         source_files:
         - drivers\baremetal
@@ -560,6 +568,8 @@ series:
           sysTick: none
           heap_init: none
         marco:
+        - SOC_FAMILY_APM32
+        - SOC_SERIES_APM32F4
         - APM32F40X
         source_files:
         - drivers\nano
@@ -570,6 +580,8 @@ series:
           rt_hw_pin_register: none
           heap_init: none
         marco:
+        - SOC_FAMILY_APM32
+        - SOC_SERIES_APM32F4
         - APM32F40X
         source_files:
         - drivers\rtt
@@ -734,6 +746,8 @@ series:
           putc: none
           sysTick: none
         marco:
+        - SOC_FAMILY_APM32
+        - SOC_SERIES_APM32F4
         - APM32F41X
         source_files:
         - drivers\baremetal
@@ -746,6 +760,8 @@ series:
           sysTick: none
           heap_init: none
         marco:
+        - SOC_FAMILY_APM32
+        - SOC_SERIES_APM32F4
         - APM32F41X
         source_files:
         - drivers\nano
@@ -756,6 +772,8 @@ series:
           rt_hw_pin_register: none
           heap_init: none
         marco:
+        - SOC_FAMILY_APM32
+        - SOC_SERIES_APM32F4
         - APM32F41X
         source_files:
         - drivers\rtt
@@ -1031,6 +1049,8 @@ series:
           putc: none
           sysTick: none
         marco:
+        - SOC_FAMILY_APM32
+        - SOC_SERIES_APM32F4
         - APM32F41X
         source_files:
         - drivers\baremetal
@@ -1043,6 +1063,8 @@ series:
           sysTick: none
           heap_init: none
         marco:
+        - SOC_FAMILY_APM32
+        - SOC_SERIES_APM32F4
         - APM32F41X
         source_files:
         - drivers\nano
@@ -1053,6 +1075,8 @@ series:
           rt_hw_pin_register: none
           heap_init: none
         marco:
+        - SOC_FAMILY_APM32
+        - SOC_SERIES_APM32F4
         - APM32F41X
         source_files:
         - drivers\rtt

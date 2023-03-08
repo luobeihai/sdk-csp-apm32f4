@@ -94,7 +94,7 @@ void DAC_ConfigStructInit(DAC_Config_T* dacConfig)
     dacConfig->trigger = DAC_TRIGGER_NONE;
     dacConfig->waveGeneration = DAC_WAVE_GENERATION_NONE;
     dacConfig->maskAmplitudeSelect = DAC_LFSR_MASK_BIT11_1;
-    dacConfig->outputBuffer = DAC_OUTPUT_BUFFER_ENBALE;
+    dacConfig->outputBuffer = DAC_OUTPUT_BUFFER_ENABLE;
 }
 
 /*!

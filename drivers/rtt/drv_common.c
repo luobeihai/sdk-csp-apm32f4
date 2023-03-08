@@ -7,6 +7,7 @@
  * Date           Author       Notes
  * 2020-08-20     Abbcc        first version
  * 2022-07-15     Aligagago    FINSH_FUNCTION_EXPORT_ALIAS change to MSH_CMD_EXPORT for reboot function.
+ * 2022-03-07     luobeihai    fix uart gpio init bug
  */
 
 #include "drv_common.h"
@@ -101,14 +102,13 @@ void apm32_usart_init(void)
     GPIO_ConfigPinAF(GPIOA,GPIO_PIN_SOURCE_9,GPIO_AF_USART1);
     GPIO_ConfigPinAF(GPIOA,GPIO_PIN_SOURCE_10,GPIO_AF_USART1);
 
+    GPIO_ConfigStruct.pin = GPIO_PIN_9;
     GPIO_ConfigStruct.mode = GPIO_MODE_AF;
     GPIO_ConfigStruct.otype = GPIO_OTYPE_PP;
-    GPIO_ConfigStruct.pin = GPIO_PIN_9;
+    GPIO_ConfigStruct.pupd = GPIO_PUPD_UP;
     GPIO_ConfigStruct.speed = GPIO_SPEED_50MHz;
     GPIO_Config(GPIOA, &GPIO_ConfigStruct);
 
-    GPIO_ConfigStruct.mode = GPIO_MODE_IN;
-    GPIO_ConfigStruct.otype = GPIO_PUPD_UP;
     GPIO_ConfigStruct.pin = GPIO_PIN_10;
     GPIO_Config(GPIOA, &GPIO_ConfigStruct);
 #endif
@@ -120,14 +120,13 @@ void apm32_usart_init(void)
     GPIO_ConfigPinAF(GPIOA,GPIO_PIN_SOURCE_2,GPIO_AF_USART2);
     GPIO_ConfigPinAF(GPIOA,GPIO_PIN_SOURCE_3,GPIO_AF_USART2);
 
+    GPIO_ConfigStruct.pin = GPIO_PIN_2;
     GPIO_ConfigStruct.mode = GPIO_MODE_AF;
     GPIO_ConfigStruct.otype = GPIO_OTYPE_PP;
-    GPIO_ConfigStruct.pin = GPIO_PIN_2;
+    GPIO_ConfigStruct.pupd = GPIO_PUPD_UP;
     GPIO_ConfigStruct.speed = GPIO_SPEED_50MHz;
     GPIO_Config(GPIOA, &GPIO_ConfigStruct);
 
-    GPIO_ConfigStruct.mode = GPIO_MODE_IN;
-    GPIO_ConfigStruct.otype = GPIO_PUPD_UP;
     GPIO_ConfigStruct.pin = GPIO_PIN_3;
     GPIO_Config(GPIOA, &GPIO_ConfigStruct);
 #endif
@@ -152,15 +151,4 @@ void hw_board_init(char *clock_src, int32_t clock_src_freq, int32_t clock_target
 #ifdef RT_USING_SERIAL
     rt_hw_usart_init();
 #endif
-
-    /* Set the shell console output device */
-#if defined(RT_USING_CONSOLE) && defined(RT_USING_DEVICE)
-    rt_console_set_device(RT_CONSOLE_DEVICE_NAME);
-#endif
-
-    /* Board underlying hardware initialization */
-#ifdef RT_USING_COMPONENTS_INIT
-    rt_components_board_init();
-#endif
 }
-

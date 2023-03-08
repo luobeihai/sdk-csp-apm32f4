@@ -13,49 +13,20 @@
 
 #include <rtthread.h>
 #include <rthw.h>
-#ifdef RT_USING_DEVICE
-    #include <rtdevice.h>
-#endif
-
-#include "apm32f4xx_gpio.h"
-#include "apm32f4xx_rcm.h"
-#include "apm32f4xx_misc.h"
-#include "apm32f4xx_rcm.h"
-#include "apm32f4xx_eint.h"
-#include "apm32f4xx_usart.h"
-
-#if defined(RT_USING_ADC)
-    #include "apm32f4xx_adc.h"
-#endif
-#if defined(RT_USING_DAC)
-    #include "apm32f4xx_dac.h"
-#endif
-#if defined(RT_USING_RTC)
-    #include "apm32f4xx_rtc.h"
-    #include "apm32f4xx_pmu.h"
-#endif
-#if defined(RT_USING_SPI)
-    #include "apm32f4xx_spi.h"
-#endif
-#if defined(RT_USING_HWTIMER) || defined(RT_USING_PWM)
-    #include "apm32f4xx_tmr.h"
-#endif
-#if defined(RT_USING_WDT)
-    #include "apm32f4xx_iwdt.h"
-    #include "apm32f4xx_wwdt.h"
-#endif
+#include <board.h>
+#include <apm32f4xx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define APM32_FLASH_START_ADRESS     ((uint32_t)0x08000000)
-#define APM32_FLASH_SIZE             (1024 * 1024)
-#define APM32_FLASH_END_ADDRESS      ((uint32_t)(APM32_FLASH_START_ADRESS + APM32_FLASH_SIZE))
+#define APM32_FLASH_START_ADRESS       ROM_START
+#define APM32_FLASH_SIZE               ROM_SIZE
+#define APM32_FLASH_END_ADDRESS        ROM_END
 
-/* Internal SRAM memory size[Kbytes] <6-128>, Default: 128 */
-#define APM32_SRAM_SIZE      128
-#define APM32_SRAM_END       (0x20000000 + APM32_SRAM_SIZE * 1024)
+#define APM32_SRAM_SIZE               RAM_SIZE
+#define APM32_SRAM_START              RAM_START
+#define APM32_SRAM_END                RAM_END
 
 #if defined(__ARMCC_VERSION)
 extern int Image$$RW_IRAM1$$ZI$$Limit;
