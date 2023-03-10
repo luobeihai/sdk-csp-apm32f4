@@ -7,7 +7,7 @@
  * Date           Author       Notes
  * 2020-08-20     Abbcc        first version
  * 2022-07-15     Aligagago    FINSH_FUNCTION_EXPORT_ALIAS change to MSH_CMD_EXPORT for reboot function.
- * 2022-03-07     luobeihai    fix uart gpio init bug
+ * 2022-03-07     luobeihai    fix uart gpio init bug and modified hw_board_init function
  */
 
 #include "drv_common.h"

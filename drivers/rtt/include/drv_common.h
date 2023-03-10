@@ -6,6 +6,7 @@
  * Change Logs:
  * Date           Author       Notes
  * 2022-07-15     Aligagago    first version
+ * 2023-03-08     luobeihai    modified FLASH and RAM micro definition
  */
 
 #ifndef __DRV_COMMON_H__
@@ -61,9 +62,9 @@ extern "C" {
 #define APM32_FLASH_SIZE               ROM_SIZE
 #define APM32_FLASH_END_ADDRESS        ROM_END
 
-#define APM32_SRAM_SIZE               RAM_SIZE
-#define APM32_SRAM_START              RAM_START
-#define APM32_SRAM_END                RAM_END
+#define APM32_SRAM_SIZE                RAM_SIZE
+#define APM32_SRAM_START               RAM_START
+#define APM32_SRAM_END                 RAM_END
 
 #if defined(__ARMCC_VERSION)
 extern int Image$$RW_IRAM1$$ZI$$Limit;
