@@ -23,8 +23,8 @@
  *  and limitations under the License.
  */
 
-#include "apm32f4Xx_sdio.h"
-#include "apm32f4Xx_rcm.h"
+#include "apm32f4xx_sdio.h"
+#include "apm32f4xx_rcm.h"
 
 /** @addtogroup APM32F4xx_StdPeriphDriver
   @{
