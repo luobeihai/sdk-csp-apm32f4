@@ -26,6 +26,9 @@
 #include "apm32f4xx_rcm.h"
 #include "apm32f4xx_eint.h"
 #include "apm32f4xx_usart.h"
+#include "apm32f4xx_dma.h"
+#include "apm32f4xx_fmc.h"
+#include "apm32f4xx_dmc.h"
 
 #if defined(RT_USING_ADC)
     #include "apm32f4xx_adc.h"
@@ -47,11 +50,16 @@
     #include "apm32f4xx_iwdt.h"
     #include "apm32f4xx_wwdt.h"
 #endif
+#if defined(RT_USING_SDIO)
+    #include "apm32f4xx_sdio.h"
+#endif
+#if defined(RT_USING_CAN)
+    #include "apm32f4xx_can.h"
+#endif
 #if defined(BSP_USING_ETH) || defined(RT_USING_LWIP)
     #include "apm32f4xx_eth.h"
 #endif
 
-#include "drv_common.h"
 #include "drv_gpio.h"
 
 #ifdef __cplusplus
@@ -78,8 +86,6 @@ extern int __bss_end;
 #endif
 
 #define HEAP_END        APM32_SRAM_END
-
-void apm32_usart_init(void);
 
 #ifdef __cplusplus
 }

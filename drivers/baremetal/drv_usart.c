@@ -87,7 +87,7 @@ int uart_init()
 
         GPIO_ConfigStruct.mode = GPIO_MODE_AF;
         GPIO_ConfigStruct.otype = GPIO_OTYPE_PP;
-        GPIO_ConfigStruct.otype = GPIO_PUPD_UP;
+        GPIO_ConfigStruct.pupd = GPIO_PUPD_UP;
         GPIO_ConfigStruct.pin = 1 << _uart_pin_get(usart_config[i].tx_pin_name);
         GPIO_ConfigStruct.speed = GPIO_SPEED_50MHz;
         GPIO_Config(gpio_port, &GPIO_ConfigStruct);

@@ -6,6 +6,7 @@
  * Change Logs:
  * Date           Author       Notes
  * 2023-03-08     luobeihai    first version
+ * 2023-04-07     luobeihai    add uart/can/sdio peripherals Init
  */
 
 #include <rtthread.h>
@@ -14,14 +15,61 @@
 #include "apm32_msp.h"
 
 /**
+ * @brief apm32 usart gpio init
+ *
+ * @note This function is only used as an example, please initialize
+ *       the peripherals according to the specific hardware board.
+ */
+void apm32_usart_init(void)
+{
+    GPIO_Config_T GPIO_ConfigStruct;
+
+#ifdef BSP_USING_UART1
+    RCM_EnableAHB1PeriphClock(RCM_AHB1_PERIPH_GPIOA);
+    RCM_EnableAPB2PeriphClock(RCM_APB2_PERIPH_USART1);
+
+    GPIO_ConfigPinAF(GPIOA,GPIO_PIN_SOURCE_9,GPIO_AF_USART1);
+    GPIO_ConfigPinAF(GPIOA,GPIO_PIN_SOURCE_10,GPIO_AF_USART1);
+
+    GPIO_ConfigStruct.pin = GPIO_PIN_9;
+    GPIO_ConfigStruct.mode = GPIO_MODE_AF;
+    GPIO_ConfigStruct.otype = GPIO_OTYPE_PP;
+    GPIO_ConfigStruct.pupd = GPIO_PUPD_UP;
+    GPIO_ConfigStruct.speed = GPIO_SPEED_50MHz;
+    GPIO_Config(GPIOA, &GPIO_ConfigStruct);
+
+    GPIO_ConfigStruct.pin = GPIO_PIN_10;
+    GPIO_Config(GPIOA, &GPIO_ConfigStruct);
+#endif
+
+#ifdef BSP_USING_UART2
+    RCM_EnableAHB1PeriphClock(RCM_AHB1_PERIPH_GPIOA);
+    RCM_EnableAPB1PeriphClock(RCM_APB1_PERIPH_USART2);
+
+    GPIO_ConfigPinAF(GPIOA,GPIO_PIN_SOURCE_2,GPIO_AF_USART2);
+    GPIO_ConfigPinAF(GPIOA,GPIO_PIN_SOURCE_3,GPIO_AF_USART2);
+
+    GPIO_ConfigStruct.pin = GPIO_PIN_2;
+    GPIO_ConfigStruct.mode = GPIO_MODE_AF;
+    GPIO_ConfigStruct.otype = GPIO_OTYPE_PP;
+    GPIO_ConfigStruct.pupd = GPIO_PUPD_UP;
+    GPIO_ConfigStruct.speed = GPIO_SPEED_50MHz;
+    GPIO_Config(GPIOA, &GPIO_ConfigStruct);
+
+    GPIO_ConfigStruct.pin = GPIO_PIN_3;
+    GPIO_Config(GPIOA, &GPIO_ConfigStruct);
+#endif
+}
+
+/**
  * @brief apm32 spi gpio init
  *
  * @note This function is only used as an example, please initialize
- *       the pins according to the specific hardware board.
+ *       the peripherals according to the specific hardware board.
  */
 void apm32_msp_spi_init(void *Instance)
 {
-#ifdef BSP_USING_SPI1
+#if defined (BSP_USING_SPI1) || defined (BSP_USING_SPI2) || defined (BSP_USING_SPI3)
     GPIO_Config_T gpioConfig;
     SPI_T *spi_x = (SPI_T *)Instance;
 
@@ -53,7 +101,7 @@ void apm32_msp_spi_init(void *Instance)
  * @brief apm32 timer gpio init
  *
  * @note This function is only used as an example, please initialize
- *       the pins according to the specific hardware board.
+ *       the peripherals according to the specific hardware board.
  */
 void apm32_msp_timer_init(void *Instance)
 {
@@ -93,10 +141,104 @@ void apm32_msp_timer_init(void *Instance)
 }
 
 /**
+ * @brief apm32 sdio gpio init
+ *
+ * @note This function is only used as an example, please initialize
+ *       the peripherals according to the specific hardware board.
+ */
+void apm32_msp_sdio_init(void *Instance)
+{
+#ifdef BSP_USING_SDIO
+    GPIO_Config_T  GPIO_InitStructure;
+
+    /* Enable the GPIO Clock */
+    RCM_EnableAHB1PeriphClock(RCM_AHB1_PERIPH_GPIOC | RCM_AHB1_PERIPH_GPIOD);
+
+    /* Enable the SDIO Clock */
+    RCM_EnableAPB2PeriphClock(RCM_APB2_PERIPH_SDIO);
+
+    /* Enable the SDIO peripheral reset */
+    RCM_EnableAPB2PeriphReset(RCM_APB2_PERIPH_SDIO);
+
+    /* Configure the GPIO pin */
+    GPIO_InitStructure.pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12;
+    GPIO_InitStructure.mode = GPIO_MODE_AF;
+    GPIO_InitStructure.speed = GPIO_SPEED_50MHz;
+    GPIO_InitStructure.otype = GPIO_OTYPE_PP;
+    GPIO_InitStructure.pupd = GPIO_PUPD_UP;
+    GPIO_Config(GPIOC, &GPIO_InitStructure);
+
+    GPIO_InitStructure.pin = GPIO_PIN_2;
+    GPIO_Config(GPIOD, &GPIO_InitStructure);
+
+    GPIO_ConfigPinAF(GPIOC,GPIO_PIN_SOURCE_8, GPIO_AF_SDIO);
+    GPIO_ConfigPinAF(GPIOC,GPIO_PIN_SOURCE_9, GPIO_AF_SDIO);
+    GPIO_ConfigPinAF(GPIOC,GPIO_PIN_SOURCE_10, GPIO_AF_SDIO);
+    GPIO_ConfigPinAF(GPIOC,GPIO_PIN_SOURCE_11, GPIO_AF_SDIO);
+    GPIO_ConfigPinAF(GPIOC,GPIO_PIN_SOURCE_12, GPIO_AF_SDIO);
+    GPIO_ConfigPinAF(GPIOD,GPIO_PIN_SOURCE_2, GPIO_AF_SDIO);
+
+    /* Disable the SDIO peripheral reset */
+    RCM_DisableAPB2PeriphReset(RCM_APB2_PERIPH_SDIO);
+#endif
+}
+
+/**
+ * @brief apm32 can gpio init
+ *
+ * @note This function is only used as an example, please initialize
+ *       the peripherals according to the specific hardware board.
+ */
+void apm32_msp_can_init(void *Instance)
+{
+#if defined(BSP_USING_CAN1) || defined(BSP_USING_CAN2)
+    GPIO_Config_T  GPIO_InitStructure;
+    CAN_T *CANx = (CAN_T *)Instance;
+
+    if (CAN1 == CANx)
+    {
+        RCM_EnableAPB1PeriphClock(RCM_APB1_PERIPH_CAN1);
+
+        RCM_EnableAHB1PeriphClock(RCM_AHB1_PERIPH_GPIOB);
+
+        /* PB8: CAN1_RX, PB9: CAN1_TX */
+        GPIO_InitStructure.pin = GPIO_PIN_8 | GPIO_PIN_9;
+        GPIO_InitStructure.mode = GPIO_MODE_AF;
+        GPIO_InitStructure.otype = GPIO_OTYPE_PP;
+        GPIO_InitStructure.speed = GPIO_SPEED_100MHz;
+        GPIO_InitStructure.pupd = GPIO_PUPD_UP;
+        GPIO_Config(GPIOB, &GPIO_InitStructure);
+
+        GPIO_ConfigPinAF(GPIOB, GPIO_PIN_SOURCE_8, GPIO_AF_CAN1);
+        GPIO_ConfigPinAF(GPIOB, GPIO_PIN_SOURCE_9, GPIO_AF_CAN1);
+    }
+    else if (CAN2 == CANx)
+    {
+        /* When using the CAN2 peripheral, the CAN1 clock must be turned on */
+        RCM_EnableAPB1PeriphClock(RCM_APB1_PERIPH_CAN1);
+        RCM_EnableAPB1PeriphClock(RCM_APB1_PERIPH_CAN2);
+
+        RCM_EnableAHB1PeriphClock(RCM_AHB1_PERIPH_GPIOB);
+
+        /* PB12: CAN2_RX, PB13: CAN2_TX */
+        GPIO_InitStructure.pin = GPIO_PIN_12 | GPIO_PIN_13;
+        GPIO_InitStructure.mode = GPIO_MODE_AF;
+        GPIO_InitStructure.otype = GPIO_OTYPE_PP;
+        GPIO_InitStructure.speed = GPIO_SPEED_100MHz;
+        GPIO_InitStructure.pupd = GPIO_PUPD_UP;
+        GPIO_Config(GPIOB, &GPIO_InitStructure);
+
+        GPIO_ConfigPinAF(GPIOB, GPIO_PIN_SOURCE_12, GPIO_AF_CAN2);
+        GPIO_ConfigPinAF(GPIOB, GPIO_PIN_SOURCE_13, GPIO_AF_CAN2);
+    }
+#endif
+}
+
+/**
  * @brief apm32 eth gpio init
  *
  * @note This function is only used as an example, please initialize
- *       the pins according to the specific hardware board.
+ *       the peripherals according to the specific hardware board.
  */
 void apm32_msp_eth_init(void *Instance)
 {

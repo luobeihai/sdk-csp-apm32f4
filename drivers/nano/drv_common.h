@@ -24,6 +24,7 @@
 #include "apm32f4xx_rcm.h"
 #include "apm32f4xx_eint.h"
 #include "apm32f4xx_usart.h"
+#include "apm32f4xx_dma.h"
 
 #ifdef __cplusplus
 extern "C" {

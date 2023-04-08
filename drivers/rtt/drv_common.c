@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2022, RT-Thread Development Team
+ * Copyright (c) 2006-2023, RT-Thread Development Team
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -12,14 +12,6 @@
 
 #include "drv_common.h"
 #include "board.h"
-
-#ifdef RT_USING_SERIAL
-    #ifdef RT_USING_SERIAL_V2
-        #include "drv_usart_v2.h"
-    #else
-        #include "drv_usart.h"
-    #endif
-#endif
 
 #ifdef RT_USING_FINSH
 #include <finsh.h>
@@ -91,47 +83,6 @@ void rt_hw_us_delay(rt_uint32_t us)
     }
 }
 
-void apm32_usart_init(void)
-{
-    GPIO_Config_T GPIO_ConfigStruct;
-
-#ifdef BSP_USING_UART1
-    RCM_EnableAHB1PeriphClock(RCM_AHB1_PERIPH_GPIOA);
-    RCM_EnableAPB2PeriphClock(RCM_APB2_PERIPH_USART1);
-
-    GPIO_ConfigPinAF(GPIOA,GPIO_PIN_SOURCE_9,GPIO_AF_USART1);
-    GPIO_ConfigPinAF(GPIOA,GPIO_PIN_SOURCE_10,GPIO_AF_USART1);
-
-    GPIO_ConfigStruct.pin = GPIO_PIN_9;
-    GPIO_ConfigStruct.mode = GPIO_MODE_AF;
-    GPIO_ConfigStruct.otype = GPIO_OTYPE_PP;
-    GPIO_ConfigStruct.pupd = GPIO_PUPD_UP;
-    GPIO_ConfigStruct.speed = GPIO_SPEED_50MHz;
-    GPIO_Config(GPIOA, &GPIO_ConfigStruct);
-
-    GPIO_ConfigStruct.pin = GPIO_PIN_10;
-    GPIO_Config(GPIOA, &GPIO_ConfigStruct);
-#endif
-
-#ifdef BSP_USING_UART2
-    RCM_EnableAHB1PeriphClock(RCM_AHB1_PERIPH_GPIOA);
-    RCM_EnableAPB1PeriphClock(RCM_APB1_PERIPH_USART2);
-
-    GPIO_ConfigPinAF(GPIOA,GPIO_PIN_SOURCE_2,GPIO_AF_USART2);
-    GPIO_ConfigPinAF(GPIOA,GPIO_PIN_SOURCE_3,GPIO_AF_USART2);
-
-    GPIO_ConfigStruct.pin = GPIO_PIN_2;
-    GPIO_ConfigStruct.mode = GPIO_MODE_AF;
-    GPIO_ConfigStruct.otype = GPIO_OTYPE_PP;
-    GPIO_ConfigStruct.pupd = GPIO_PUPD_UP;
-    GPIO_ConfigStruct.speed = GPIO_SPEED_50MHz;
-    GPIO_Config(GPIOA, &GPIO_ConfigStruct);
-
-    GPIO_ConfigStruct.pin = GPIO_PIN_3;
-    GPIO_Config(GPIOA, &GPIO_ConfigStruct);
-#endif
-}
-
 /**
  * This function will initial APM32 board.
  */
@@ -144,11 +95,13 @@ void hw_board_init(char *clock_src, int32_t clock_src_freq, int32_t clock_target
 
     /* Pin driver initialization is open by default */
 #ifdef RT_USING_PIN
+    extern int rt_hw_pin_init(void);
     rt_hw_pin_init();
 #endif
 
     /* USART driver initialization is open by default */
 #ifdef RT_USING_SERIAL
+    extern int rt_hw_usart_init(void);
     rt_hw_usart_init();
 #endif
 }
