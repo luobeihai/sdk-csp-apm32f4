@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the FMC firmware functions
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -488,6 +488,35 @@ void FMC_OPT_DisableWriteProtect(FMC_OPT_WRP_T wrp)
         *(__IO uint16_t*)(OPTCTRL_BYTE2_ADDRESS) |= (uint16_t)wrp;
     }
 }
+
+/*!
+ * @brief     Enable PCROP
+ *
+ * @param     None
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void FMC_EnablePCROP(void)
+{
+    FMC->OPTCTRL_B.PCROPEN = ENABLE;
+}
+
+/*!
+ * @brief     Disable PCROP
+ *
+ * @param     None
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void FMC_DisablePCROP(void)
+{
+    FMC->OPTCTRL_B.PCROPEN = DISABLE;
+}
+
 /*!
  * @brief     Sets the read protection level.
  *

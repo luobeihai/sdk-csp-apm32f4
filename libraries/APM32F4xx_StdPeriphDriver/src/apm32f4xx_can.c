@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the CAN firmware functions
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -393,7 +393,7 @@ uint8_t CAN_TxMessageStatus(CAN_T* can, CAN_TX_MAILBIX_T TxMailbox)
     }
     switch (state)
     {
-        /** transmit pending  */
+        /* transmit pending  */
         case (0x0): state = 2;
         break;
         /* transmit failed  */
@@ -477,7 +477,7 @@ void CAN_RxMessage(CAN_T* can, CAN_RX_FIFO_T FIFONumber, CAN_RxMessage_T* RxMess
     RxMessage->remoteTxReq = can->sRxMailBox[FIFONumber].RXMID_B.RFTXREQ;
     RxMessage->dataLengthCode = can->sRxMailBox[FIFONumber].RXDLEN_B.DLCODE;
     RxMessage->filterMatchIndex = can->sRxMailBox[FIFONumber].RXDLEN_B.FMIDX;
-    /** Get the data field */
+    /* Get the data field */
     RxMessage->data[0] = can->sRxMailBox[FIFONumber].RXMDL_B.DATABYTE0;
     RxMessage->data[1] = can->sRxMailBox[FIFONumber].RXMDL_B.DATABYTE1;
     RxMessage->data[2] = can->sRxMailBox[FIFONumber].RXMDL_B.DATABYTE2;
@@ -567,7 +567,7 @@ uint8_t CAN_OperatingMode(CAN_T* can, CAN_OPERATING_MODE_T operatingMode)
 
     if(operatingMode == CAN_OPERATING_MODE_INIT)
     {
-        /** Request initialisation */
+        /* Request initialisation */
         can->MCTRL_B.SLEEPREQ = BIT_RESET;
         can->MCTRL_B.INITREQ = BIT_SET;
 
@@ -583,7 +583,7 @@ uint8_t CAN_OperatingMode(CAN_T* can, CAN_OPERATING_MODE_T operatingMode)
     }
     else if(operatingMode == CAN_OPERATING_MODE_NORMAL)
     {
-        /** Request leave initialisation and sleep mode  and enter Normal mode */
+        /* Request leave initialisation and sleep mode  and enter Normal mode */
         can->MCTRL_B.SLEEPREQ = BIT_RESET;
         can->MCTRL_B.INITREQ = BIT_RESET;
 
@@ -600,7 +600,7 @@ uint8_t CAN_OperatingMode(CAN_T* can, CAN_OPERATING_MODE_T operatingMode)
     }
     else if(operatingMode == CAN_OPERATING_MODE_SLEEP)
     {
-        /** Request Sleep mode */
+        /* Request Sleep mode */
         can->MCTRL_B.SLEEPREQ = BIT_SET;
         can->MCTRL_B.INITREQ = BIT_RESET;
 
@@ -629,7 +629,7 @@ uint8_t CAN_OperatingMode(CAN_T* can, CAN_OPERATING_MODE_T operatingMode)
  */
 uint8_t CAN_SleepMode(CAN_T* can)
 {
-    /** Request Sleep mode */
+    /* Request Sleep mode */
     can->MCTRL_B.SLEEPREQ = BIT_SET;
     can->MCTRL_B.INITREQ = BIT_RESET;
 
@@ -653,7 +653,7 @@ uint8_t CAN_WakeUpMode(CAN_T* can)
 {
     uint32_t time_out = 0x0000FFFF;
 
-    /** Wake up request */
+    /* Wake up request */
     can->MCTRL_B.SLEEPREQ = BIT_RESET;
     while((can->MSTS_B.SLEEPFLG == BIT_SET) && (time_out != 0))
     {
@@ -871,7 +871,7 @@ void CAN_ClearStatusFlag(CAN_T* can, CAN_FLAG_T flag)
 {
     uint32_t flagtmp = 0;
 
-    /** ERRSTS register */
+    /* ERRSTS register */
     if(flag == 0x30F00070)
     {
         can->ERRSTS = RESET;

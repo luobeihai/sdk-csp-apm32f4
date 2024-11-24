@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the RTC firmware functions
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -1422,7 +1422,7 @@ uint16_t RTC_ReadTimeStampSubSecond(void)
  * @param     tamper:  Selected tamper pin.
  *                     This parameter can be one of the following values:
  *                     @arg RTC_TAMPER_1 : Select Tamper 1.
- *                     @arg RTC_TAMPER_2 : Select Tamper 2.
+ *                     @arg RTC_TAMPER_2 : Select Tamper 2.(Not for APM32F411)
  *
  * @param     trigger: Specifies the trigger on the tamper pin that stimulates tamper event.
  *                     This parameter can be one of the following values:
@@ -1451,7 +1451,7 @@ void RTC_ConfigTamperTrigger(RTC_TAMPER_T tamper, RTC_TAMPER_TRIGGER_T trigger)
  * @param     tamper: Selected tamper pin.
  *                    This parameter can be one of the following values:
  *                    @arg RTC_TAMPER_1 : Select Tamper 1.
- *                    @arg RTC_TAMPER_2 : Select Tamper 2.
+ *                    @arg RTC_TAMPER_2 : Select Tamper 2.(Not for APM32F411)
  *
  * @retval    None
  */
@@ -1473,7 +1473,7 @@ void RTC_EnableTamper(RTC_TAMPER_T tamper)
  * @param     tamper: Selected tamper pin.
  *                    This parameter can be any combination of the following values:
  *                    @arg RTC_TAMPER_1 : Select Tamper 1.
- *                    @arg RTC_TAMPER_2 : Select Tamper 2.
+ *                    @arg RTC_TAMPER_2 : Select Tamper 2.(Not for APM32F411)
  *
  * @retval    None
  */
@@ -1775,7 +1775,7 @@ void RTC_DisableInterrupt(uint32_t interrupt)
  *                  @arg RTC_FLAG_TSF  : Time Stamp Flag
  *                  @arg RTC_FLAG_TSOF : Time Stamp Overflow Flag
  *                  @arg RTC_FLAG_TP1F : Tamper 1 event Detection Flag
- *                  @arg RTC_FLAG_TP2F : Tamper 2 event Detection Flag
+ *                  @arg RTC_FLAG_TP2F : Tamper 2 event Detection Flag(Not for APM32F411)
  *                  @arg RTC_FLAG_RPF  : Recalibration Pending Flag
  *
  * @retval    SET or RESET.
@@ -1796,7 +1796,7 @@ uint8_t RTC_ReadStatusFlag(RTC_FLAG_T flag)
  *                  @arg RTC_FLAG_TSF   : Time Stamp Flag
  *                  @arg RTC_FLAG_TSOF  : Time Stamp Overflow Flag
  *                  @arg RTC_FLAG_TP1F  : Tamper 1 event Detection Flag
- *                  @arg RTC_FLAG_TP2F  : Tamper 2 event Detection Flag
+ *                  @arg RTC_FLAG_TP2F  : Tamper 2 event Detection Flag(Not for APM32F411)
  */
 void RTC_ClearStatusFlag(uint32_t flag)
 {
@@ -1813,7 +1813,7 @@ void RTC_ClearStatusFlag(uint32_t flag)
  *                  @arg RTC_INT_FLAG_WT    : WakeUp Timer interrupt
  *                  @arg RTC_INT_FLAG_TS    : Time Stamp interrupt
  *                  @arg RTC_INT_FLAG_TAMP1 : Tamper1 event interrupt
- *                  @arg RTC_INT_FLAG_TAMP2 : Tamper2 event interrupt
+ *                  @arg RTC_INT_FLAG_TAMP2 : Tamper2 event interrupt(Not for APM32F411)
  *
  * @retval    The new state of flag (SET or RESET).
  */
@@ -1851,7 +1851,7 @@ uint8_t RTC_ReadIntFlag(RTC_INT_FLAG_T flag)
  *                  @arg RTC_INT_FLAG_TS    : Time Stamp interrupt
  *                  @arg RTC_INT_FLAG_WT    : WakeUp Timer interrupt
  *                  @arg RTC_INT_FLAG_TAMP1 : Tamper1 event interrupt
- *                  @arg RTC_INT_FLAG_TAMP2 : Tamper2 event interrupt
+ *                  @arg RTC_INT_FLAG_TAMP2 : Tamper2 event interrupt(Not for APM32F411)
  *
  * @retval    SET or RESET
  */

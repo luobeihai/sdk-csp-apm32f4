@@ -5,17 +5,17 @@
  *
  * @version     V1.0.2
  *
- * @date        2022-06-23
+ * @date        2023-03-01
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -46,16 +46,18 @@ __align(4)
 uint8_t Tx_Buff[ETH_TXBUFNB][ETH_TX_BUF_SIZE];  /*!< Ethernet Transmit Buffer */
 
 #elif defined ( __ICCARM__ )
+
 ETH_DMADescConfig_T  DMARxDscrTab[ETH_RXBUFNB]; /*!< Ethernet Rx MA Descriptor */
 ETH_DMADescConfig_T  DMATxDscrTab[ETH_TXBUFNB]; /*!< Ethernet Tx DMA Descriptor */
 uint8_t Rx_Buff[ETH_RXBUFNB][ETH_RX_BUF_SIZE];  /*!< Ethernet Receive Buffer */
 uint8_t Tx_Buff[ETH_TXBUFNB][ETH_TX_BUF_SIZE];  /*!< Ethernet Transmit Buffer */
 
-#elif defined (__GNUC__) /*!< GNU Compiler */
-ETH_DMADescConfig_T  DMARxDscrTab[ETH_RXBUFNB] __attribute__ ((aligned (4))); /*!< Ethernet Rx MA Descriptor */
-ETH_DMADescConfig_T  DMATxDscrTab[ETH_TXBUFNB] __attribute__ ((aligned (4))); /*!< Ethernet Tx DMA Descriptor */
-uint8_t Rx_Buff[ETH_RXBUFNB][ETH_RX_BUF_SIZE] __attribute__ ((aligned (4)));  /*!< Ethernet Receive Buffer */
-uint8_t Tx_Buff[ETH_TXBUFNB][ETH_TX_BUF_SIZE] __attribute__ ((aligned (4)));  /*!< Ethernet Transmit Buffer */
+#elif defined (__GNUC__)
+
+ETH_DMADescConfig_T DMARxDscrTab[ETH_RXBUFNB] __attribute__ ((aligned (4))); /*!< Ethernet Rx MA Descriptor */
+ETH_DMADescConfig_T DMATxDscrTab[ETH_TXBUFNB] __attribute__ ((aligned (4))); /*!< Ethernet Tx DMA Descriptor */
+uint8_t Rx_Buff[ETH_RXBUFNB][ETH_RX_BUF_SIZE] __attribute__ ((aligned (4))); /*!< Ethernet Receive Buffer */
+uint8_t Tx_Buff[ETH_TXBUFNB][ETH_TX_BUF_SIZE] __attribute__ ((aligned (4))); /*!< Ethernet Transmit Buffer */
 
 #endif
 
@@ -278,8 +280,8 @@ uint32_t ETH_Config(ETH_Config_T* ethConfig, uint16_t addr)
     }
     else
     {
-        if(!ETH_WritePHYRegister(addr, PHY_BCR,((uint16_t)(ethConfig->speed << 8) |
-                                                (uint16_t)(ethConfig->mode  << 13))))
+        if(!ETH_WritePHYRegister(addr, PHY_BCR,((uint16_t)(ethConfig->speed << 13) |
+                                                (uint16_t)(ethConfig->mode  << 8))))
         {
             err = ETH_ERROR;
         }
@@ -475,7 +477,7 @@ void ETH_DisableEnhancedDescriptor(void)
 {
      ETH->DMABMOD_B.EDFEN = RESET;
 }
-#endif /** USE_ENHANCED_DMA_DESCRIPTORS */
+#endif /* USE_ENHANCED_DMA_DESCRIPTORS */
 
 /** PHY functions */
 
@@ -1045,7 +1047,7 @@ uint32_t ETH_Transmit_Descriptors(u16 frameLength)
     uint32_t count=0, size=0, i=0;
     __IO ETH_DMADescConfig_T  *DMATxDesc;
 
-    if((DMATxDescToSet->Status & ETH_DMATXDESC_OWN) == SET)
+    if((DMATxDescToSet->Status & ETH_DMATXDESC_OWN) != RESET)
     {
         return ETH_ERROR;
     }
@@ -2216,7 +2218,7 @@ void ETH_ResetMMCCounters(void)
  */
 void ETH_EnableMMCInterrupt(uint32_t interrupt)
 {
-   if((interrupt & 0x10000000) == SET)
+   if((interrupt & 0x10000000) != RESET)
    {
         ETH->RXINTMASK &= (~(uint32_t)interrupt);
    }
@@ -2243,7 +2245,7 @@ void ETH_EnableMMCInterrupt(uint32_t interrupt)
  */
 void ETH_DisableMMCInterrupt(uint32_t interrupt)
 {
-   if((interrupt & 0x10000000) == SET)
+   if((interrupt & 0x10000000) != RESET)
    {
         ETH->RXINTMASK |= interrupt;
    }
@@ -2269,7 +2271,7 @@ void ETH_DisableMMCInterrupt(uint32_t interrupt)
  */
 uint8_t ETH_ReadMMCIntFlag(uint32_t flag)
 {
-    if((flag & 0x10000000) == SET)
+    if((flag & 0x10000000) != RESET)
     {
         return ((((ETH->RXINT & flag) != RESET)) && ((ETH->RXINTMASK & flag) == RESET));
     }

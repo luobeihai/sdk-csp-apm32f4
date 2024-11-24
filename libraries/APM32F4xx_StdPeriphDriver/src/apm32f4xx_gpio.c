@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the GPIO firmware functions
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -44,14 +44,15 @@
  *
  * @param  port: Select the GPIO port.
  *               This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral
- *               for APM32F405xx/407xx and APM32F415xx/417xx devices
+ *               for APM32F405xx/407xx and APM32F415xx/417xx devices(GPIOF,G,I,J,K is not
+ *               for APM32F411)
  * @retval None
  *
  * @note   By reset, The GPIO pins are configured in input floating mode (except the JTAG pins).
  */
 void GPIO_Reset(GPIO_T* port)
 {
-    RCM_AHB1_PERIPH_T AHB1Periph;
+    RCM_AHB1_PERIPH_T AHB1Periph = RCM_AHB1_PERIPH_GPIOA;
 
     if (port == GPIOA)
     {
@@ -107,7 +108,8 @@ void GPIO_Reset(GPIO_T* port)
  *
  * @param        port: Select the GPIO port.
  *                     This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral
- *                     for APM32F405xx/407xx and APM32F415xx/417xx devices
+ *                     for APM32F405xx/407xx and APM32F415xx/417xx devices(GPIOF,G,I,J,K is not
+ *                     for APM32F411)
  *
  * @param       gpioConfig: pointer to a GPIO_Config_T structure
  *
@@ -126,7 +128,7 @@ void GPIO_Config(GPIO_T* port, GPIO_Config_T* gpioConfig)
 
         if (temp == pos)
         {
-            port->MODE  &= ~(0x03 << (i * 2));
+            port->MODE  &= ((uint32_t)~(0x03 << (i * 2)));
             port->MODE |= (((uint32_t)gpioConfig->mode) << (i * 2));
 
             if ((gpioConfig->mode == GPIO_MODE_OUT) || (gpioConfig->mode == GPIO_MODE_AF))
@@ -165,7 +167,8 @@ void GPIO_ConfigStructInit(GPIO_Config_T* gpioConfig)
  *
  * @param        port: Select the GPIO port.
  *                     This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral
- *                     for APM32F405xx/407xx and APM32F415xx/417xx devices
+ *                     for APM32F405xx/407xx and APM32F415xx/417xx devices(GPIOF,G,I,J,K is not
+ *                     for APM32F411)
  *
  * @param        pin: specifies the pin bit to be locked.
  *                    This parameter can be any combination of GPIO_Pin_x where x can be (0..15).
@@ -197,7 +200,8 @@ void GPIO_ConfigPinLock(GPIO_T* port, uint16_t pin)
  *
  * @param        port :Select the GPIO port.
  *                     This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral
- *                     for APM32F405xx/407xx and APM32F415xx/417xx devices
+ *                     for APM32F405xx/407xx and APM32F415xx/417xx devices(GPIOF,G,I,J,K is not
+ *                     for APM32F411)
  *
  * @param        pin: specifies the port bit to read.
  *                    This parameter can be GPIO_Pin_x where x can be (0..15).
@@ -218,7 +222,8 @@ uint8_t GPIO_ReadInputBit(GPIO_T* port, uint16_t pin)
  *
  * @param        port :Select the GPIO port.
  *                     This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral
- *                     for APM32F405xx/407xx and APM32F415xx/417xx devices
+ *                     for APM32F405xx/407xx and APM32F415xx/417xx devices(GPIOF,G,I,J,K is not
+ *                     for APM32F411)
  *
  * @retval      GPIO input data port value.
  */
@@ -232,7 +237,8 @@ uint16_t GPIO_ReadInputPort(GPIO_T* port)
  *
  * @param        port :Select the GPIO port.
  *                     This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral
- *                     for APM32F405xx/407xx and APM32F415xx/417xx devices
+ *                     for APM32F405xx/407xx and APM32F415xx/417xx devices(GPIOF,G,I,J,K is not
+ *                     for APM32F411)
  *
  * @param        pin: specifies the port bit to read.
  *                    This parameter can be one of GPIO_Pin_x where x can be (0..15).
@@ -253,7 +259,8 @@ uint8_t GPIO_ReadOutputBit(GPIO_T* port, uint16_t pin)
  *
  * @param        port: Select the GPIO port.
  *                     This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral
- *                     for APM32F405xx/407xx and APM32F415xx/417xx devices
+ *                     for APM32F405xx/407xx and APM32F415xx/417xx devices(GPIOF,G,I,J,K is not
+ *                     for APM32F411)
  *
  * @retval       output data port value
  */
@@ -267,7 +274,8 @@ uint16_t GPIO_ReadOutputPort(GPIO_T* port)
  *
  * @param        port: Select the GPIO port.
  *                     This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral
- *                     for APM32F405xx/407xx and APM32F415xx/417xx devices
+ *                     for APM32F405xx/407xx and APM32F415xx/417xx devices(GPIOF,G,I,J,K is not
+ *                     for APM32F411)
  *
  * @param        pin : specifies pin to be written.
  *                  This parameter can be any combination of GPIO_PIN_x( x can be from 0 to 15).
@@ -284,7 +292,8 @@ void GPIO_SetBit(GPIO_T* port, uint16_t pin)
  *
  * @param        port: Select the GPIO port.
  *                     This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral
- *                     for APM32F405xx/407xx and APM32F415xx/417xx devices
+ *                     for APM32F405xx/407xx and APM32F415xx/417xx devices(GPIOF,G,I,J,K is not
+ *                     for APM32F411)
  *
  * @param     pin : specifies pin to be cleared.
  *                  This parameter can be any combination of GPIO_PIN_x( x can be from 0 to 15).
@@ -301,7 +310,8 @@ void GPIO_ResetBit(GPIO_T* port, uint16_t pin)
  *
  * @param        port: Select the GPIO port.
  *                     This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral
- *                     for APM32F405xx/407xx and APM32F415xx/417xx devices
+ *                     for APM32F405xx/407xx and APM32F415xx/417xx devices(GPIOF,G,I,J,K is not
+ *                     for APM32F411)
  *
  * @param        pin : Select specifies pin.
  *                  This parameter can be one of GPIO_PIN_x( x can be from 0 to 15).
@@ -330,7 +340,8 @@ void GPIO_WriteBitValue(GPIO_T* port, uint16_t pin, uint8_t bitVal)
  *
  * @param        port: Select the GPIO port.
  *                     This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral
- *                     for APM32F405xx/407xx and APM32F415xx/417xx devices
+ *                     for APM32F405xx/407xx and APM32F415xx/417xx devices(GPIOF,G,I,J,K is not
+ *                     for APM32F411)
  *
  * @param        portValue : specifies the value to be written to the port output data register.
  *
@@ -346,6 +357,7 @@ void GPIO_WriteOutputPort(GPIO_T* port, uint16_t portValue)
  *
  * @param       port: Select the GPIO port.
  *                    This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral.
+ *                    (GPIOF,G,I,J,K is not for APM32F411)
  *
  * @param       pin: Specifies the pins to be toggled.
  *
@@ -361,6 +373,7 @@ void GPIO_ToggleBit(GPIO_T* port, uint16_t pin)
  *
  * @param        port: Select the GPIO port.
  *                     This parameter can be one of GPIOx(x=A..K) to select the GPIO peripheral.
+ *                     (GPIOF,G,I,J,K is not for APM32F411)
  *
  * @param        gpioPinSource: specifies the pin for the Alternate function.
  *                              This parameter can be GPIO_PinSourcex where x can be (0..15).

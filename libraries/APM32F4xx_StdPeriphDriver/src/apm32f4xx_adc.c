@@ -3,19 +3,19 @@
  *
  * @brief       This file contains all the functions for the ADC peripheral
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -407,7 +407,7 @@ void ADC_ConfigRegularChannel(ADC_T* adc, uint8_t channel, uint8_t rank, uint8_t
  */
 void ADC_SoftwareStartConv(ADC_T* adc)
 {
-    adc->CTRL2_B.REGCHSC = BIT_SET;
+    adc->CTRL2_B.REGSWSC = BIT_SET;
 }
 
 /*!
@@ -419,7 +419,7 @@ void ADC_SoftwareStartConv(ADC_T* adc)
  */
 uint8_t ADC_ReadSoftwareStartConvStatus(ADC_T* adc)
 {
-    return (uint8_t)adc->CTRL2_B.REGCHSC;
+    return (uint8_t)adc->CTRL2_B.REGSWSC;
 }
 
 /**
@@ -798,7 +798,7 @@ void ADC_ConfigExternalTrigInjectedConvEdge(ADC_T* adc, ADC_EXT_TRIG_INJEC_EDGE_
  */
 void ADC_EnableSoftwareStartInjectedConv(ADC_T* adc)
 {
-    adc->CTRL2_B.INJCHSC = BIT_SET;
+    adc->CTRL2_B.INJSWSC = BIT_SET;
 }
 
 /*!
@@ -810,7 +810,7 @@ void ADC_EnableSoftwareStartInjectedConv(ADC_T* adc)
  */
 uint8_t ADC_ReadSoftwareStartInjectedConvStatus(ADC_T* adc)
 {
-    return (uint8_t)(adc->CTRL2_B.INJCHSC);
+    return (uint8_t)(adc->CTRL2_B.INJSWSC);
 }
 
 /*!

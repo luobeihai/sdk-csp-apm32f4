@@ -5,17 +5,17 @@
  *
  * @version     V1.0.2
  *
- * @date        2022-06-23
+ * @date        2023-03-01
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -1133,7 +1133,7 @@ typedef enum
  */
 typedef struct
 {
-    /** MAC Configuration */
+    /* MAC Configuration */
     ETH_AUTONEGOTIATION_T           autoNegotiation;            /*!< Selects or not the AutoNegotiation mode for the external PHY
                                                                     The AutoNegotiation allows an automatic setting of the Speed (10/100Mbps)
                                                                     and the mode (half/full-duplex) */
@@ -1212,7 +1212,7 @@ typedef struct
 
     uint32_t                        VLANTagIdentifier;          /*!< Holds the (value <=0xFFFF) VLAN tag identifier for receive frames */
 
-    /** DMA Configuration */
+    /* DMA Configuration */
     ETH_DROPTCPIPCHECKSUMERRORFRAME_T   dropTCPIPChecksumErrorFrame; /*!< Selects or not the Dropping of TCP/IP Checksum Error Frames */
 
     ETH_RECEIVESTOREFORWARD_T           receiveStoreForward;         /*!< Enables or disables the Receive store and forward mode */
@@ -1417,7 +1417,7 @@ uint32_t ETH_ReadMMCRegister(ETH_MMC_REG_T MMCReg);
 }
 #endif
 
-#endif /** __APM32F4xx_ETH_H */
+#endif /* __APM32F4xx_ETH_H */
 
 /**@} end of group ETH_Functions */
 /**@} end of group ETH_Driver */

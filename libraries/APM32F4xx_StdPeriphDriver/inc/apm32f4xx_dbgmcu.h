@@ -3,19 +3,19 @@
  *
  * @brief       This file contains all the functions prototypes for the DBUGMCU firmware library
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -54,7 +54,7 @@ typedef enum
     DBGMCU_SLEEP                 = ((uint32_t)0x00000001),  /*!< Keep debugger connection during SLEEP mode */
     DBGMCU_STOP                  = ((uint32_t)0x00000002),  /*!< Keep debugger connection during STOP mode */
     DBGMCU_STANDBY               = ((uint32_t)0x00000004),  /*!< Keep debugger connection during STANDBY mode */
-    /** APB1 Peripheral */
+    /* APB1 Peripheral */
     DBGMCU_TMR2_STOP             = ((uint32_t)0x00000001),  /*!< TMR2 counter stopped when Core is halted */
     DBGMCU_TMR3_STOP             = ((uint32_t)0x00000002),  /*!< TMR3 counter stopped when Core is halted */
     DBGMCU_TMR4_STOP             = ((uint32_t)0x00000004),  /*!< TMR4 counter stopped when Core is halted */
@@ -72,7 +72,7 @@ typedef enum
     DBGMCU_I2C3_SMBUS_TIMEOUT    = ((uint32_t)0x00800000),  /*!< I2C3 SMBUS timeout mode stopped when Core is halted */
     DBGMCU_CAN1_STOP             = ((uint32_t)0x02000000),  /*!< Debug CAN1 stopped when Core is halted */
     DBGMCU_CAN2_STOP             = ((uint32_t)0x04000000),  /*!< Debug CAN2 stopped when Core is halted */
-    /** APB2 Peripheral */
+    /* APB2 Peripheral */
     DBGMCU_TMR1_STOP             = ((uint32_t)0x00000001),  /*!< TMR1 counter stopped when Core is halted */
     DBGMCU_TMR8_STOP             = ((uint32_t)0x00000002),  /*!< TMR8 counter stopped when Core is halted */
     DBGMCU_TMR9_STOP             = ((uint32_t)0x00010000),  /*!< TMR9 counter stopped when Core is halted */

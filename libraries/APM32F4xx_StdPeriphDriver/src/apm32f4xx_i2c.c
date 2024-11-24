@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the I2C firmware functions
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -631,6 +631,50 @@ void I2C_DisableDMALastTransfer(I2C_T* i2c)
     i2c->CTRL2_B.LTCFG = RESET;
 }
 
+/*!
+ * @brief     Configure digital noise filter filtering capability
+ *
+ * @param     i2c: I2C selet 1 ,2 or 3
+ *
+ * @param     multiple:  The parameter specifies how many times Tpclk should
+ *                       be filter. It should be 1 to 15.
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411.
+ */
+void I2C_ConfigFilterCapability(I2C_T* i2c, uint8_t multiple)
+{
+    i2c->FILTER_B.DNFCFG = multiple;
+}
+
+/*!
+ * @brief     Enable the analog noise filter
+ *
+ * @param     i2c: I2C selet 1 ,2 or 3
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411.
+ */
+void I2C_EnableAnalogNoiseFilter(I2C_T* i2c)
+{
+    i2c->FILTER_B.ANFDIS = DISABLE;
+}
+
+/*!
+ * @brief     Disable the analog noise filter
+ *
+ * @param     i2c: I2C selet 1 ,2 or 3
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411.
+ */
+void I2C_DisableAnalogNoiseFilter(I2C_T* i2c)
+{
+    i2c->FILTER_B.ANFDIS = ENABLE;
+}
 /*!
  * @brief     Reads the I2C register and returns its value.
  *

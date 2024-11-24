@@ -4,19 +4,19 @@
  * @brief       This file provides all the miscellaneous firmware functions.
  *              Include NVIC,SystemTick and Power management.
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -87,10 +87,10 @@ void NVIC_EnableIRQRequest(IRQn_Type irq, uint8_t preemptionPriority, uint8_t su
     uint32_t tempPriority, tempPrePri, tempSubPri;
     uint32_t priorityGrp;
 
-    /** Get priority group */
+    /* Get priority group */
     priorityGrp = (SCB->AIRCR) & (uint32_t)0x700U;
 
-    /** get pre-emption priority and subpriority */
+    /* get pre-emption priority and subpriority */
     switch(priorityGrp)
     {
         case NVIC_PRIORITY_GROUP_0:
@@ -132,7 +132,7 @@ void NVIC_EnableIRQRequest(IRQn_Type irq, uint8_t preemptionPriority, uint8_t su
     tempPriority <<= 4;
     NVIC->IP[irq] = (uint8_t)tempPriority;
 
-    /** enable the selected IRQ */
+    /* enable the selected IRQ */
     NVIC->ISER[irq >> 0x05U] = (uint32_t)0x01U << (irq & (uint8_t)0x1FU);
 }
 
@@ -145,7 +145,7 @@ void NVIC_EnableIRQRequest(IRQn_Type irq, uint8_t preemptionPriority, uint8_t su
  */
 void NVIC_DisableIRQRequest(IRQn_Type irq)
 {
-    /** disable the selected IRQ.*/
+    /* disable the selected IRQ.*/
     NVIC->ICER[irq >> 0x05U] = (uint32_t)0x01U << (irq & (uint8_t)0x1FU);
 }
 

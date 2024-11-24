@@ -3,19 +3,19 @@
  *
  * @brief       This file contains all the functions prototypes for the RCM firmware library
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -65,6 +65,15 @@ typedef enum
     RCM_LSE_OPEN,   /*!< Open the LSE */
     RCM_LSE_BYPASS  /*!< LSE bypass */
 } RCM_LSE_T;
+
+/**
+ * @brief LSE Bypass Mode
+ */
+typedef enum
+{
+    RCM_LSE_LOWPOWER_MODE,  /*!< Close the LSE */
+    RCM_LSE_HIGHPOWER_MODE,   /*!< Open the LSE */
+} RCM_LSE_MODE_T;
 
 /**
  * @brief RCM PLL source select
@@ -229,6 +238,15 @@ typedef enum
 } RCM_I2S_CLK_T;
 
 /**
+ * @brief TMR Clock Select
+ */
+typedef enum
+{
+    RCM_TMR_HCLK_1_2, /*!< TMR Clock is HCLK or HCLK*2 */
+    RCM_TMR_HCLK_1_4  /*!< TMR Clock is HCLK or HCLK*4 */
+} RCM_TMR_CLK_T;
+
+/**
  * @brief RCM Interrupt Source
  */
 typedef enum
@@ -259,11 +277,10 @@ typedef enum
     RCM_AHB1_PERIPH_GPIOJ        = BIT9,    /*!< Select GPIOJ clock */
     RCM_AHB1_PERIPH_GPIOK        = BIT10,   /*!< Select GPIOK clock */
     RCM_AHB1_PERIPH_CRC          = BIT12,   /*!< Select CRC clock */
-    RCM_AHB1_PERIPH_FLITF        = BIT15,   /*!< Select FLITF clock */
+    RCM_AHB1_PERIPH_FMC          = BIT15,   /*!< Select FMC clock */
     RCM_AHB1_PERIPH_SRAM1        = BIT16,   /*!< Select SRAM1 clock */
     RCM_AHB1_PERIPH_SRAM2        = BIT17,   /*!< Select SRAM2 clock */
     RCM_AHB1_PERIPH_BKPSRAM      = BIT18,   /*!< Select BKPSRAM clock */
-    RCM_AHB1_PERIPH_SRAM3        = BIT19,   /*!< Select SRAM3 clock */
     RCM_AHB1_PERIPH_CCMDATARAMEN = BIT20,   /*!< Select CCMDATARAMEN clock */
     RCM_AHB1_PERIPH_DMA1         = BIT21,   /*!< Select DMA1 clock */
     RCM_AHB1_PERIPH_DMA2         = BIT22,   /*!< Select DMA2 clock */
@@ -282,13 +299,25 @@ typedef enum
 {
     RCM_AHB2_PERIPH_DCI    = BIT0,  /*!< Select DCI clock */
     RCM_AHB2_PERIPH_FPU    = BIT1,  /*!< Select FPU clock */
+#ifdef APM32F411
+    RCM_AHB2_PERIPH_QSPI   = BIT2,  /*!< Select QSPI clock */
+#else
     RCM_AHB2_PERIPH_BN     = BIT2,  /*!< Select BN clock */
+#endif
     RCM_AHB2_PERIPH_SM     = BIT3,  /*!< Select SM clock */
     RCM_AHB2_PERIPH_CRYP   = BIT4,  /*!< Select CRYP clock */
     RCM_AHB2_PERIPH_HASH   = BIT5,  /*!< Select HASH clock */
     RCM_AHB2_PERIPH_RNG    = BIT6,  /*!< Select RNG clock */
     RCM_AHB2_PERIPH_OTG_FS = BIT7   /*!< Select OTG FS clock */
 } RCM_AHB2_PERIPH_T;
+
+/**
+ * @brief AHB3 peripheral
+ */
+typedef enum
+{
+    RCM_AHB3_PERIPH_EMMC   = BIT0,
+} RCM_AHB3_PERIPH_T;
 
 /**
  * @brief APB1 peripheral
@@ -318,8 +347,6 @@ typedef enum
     RCM_APB1_PERIPH_CAN2   = BIT26,             /*!< Select CAN2 clock */
     RCM_APB1_PERIPH_PMU    = BIT28,             /*!< Select PMU clock */
     RCM_APB1_PERIPH_DAC    = BIT29,             /*!< Select DAC clock */
-    RCM_APB1_PERIPH_UART7  = BIT30,             /*!< Select UART7 clock */
-    RCM_APB1_PERIPH_UART8  = (int32_t)BIT31     /*!< Select UART8 clock */
 } RCM_APB1_PERIPH_T;
 
 /**
@@ -332,21 +359,17 @@ typedef enum
     RCM_APB2_PERIPH_USART1 = BIT4,      /*!< Select USART1 clock */
     RCM_APB2_PERIPH_USART6 = BIT5,      /*!< Select USART6 clock */
     RCM_APB2_PERIPH_ADC    = BIT8,      /*!< Select ADC clock */
-    RCM_APB2_PERIPH_ADC1   = BIT8,      /*!< Select ADC1 clock */
-    RCM_APB2_PERIPH_ADC2   = BIT9,      /*!< Select ADC2 clock */
-    RCM_APB2_PERIPH_ADC3   = BIT10,     /*!< Select ADC3 clock */
+    RCM_APB2_PERIPH_ADC1   = BIT8,      /*!< Select ADC clock */
+    RCM_APB2_PERIPH_ADC2   = BIT9,      /*!< Select ADC clock */
+    RCM_APB2_PERIPH_ADC3   = BIT10,      /*!< Select ADC clock */
     RCM_APB2_PERIPH_SDIO   = BIT11,     /*!< Select SDIO clock */
     RCM_APB2_PERIPH_SPI1   = BIT12,     /*!< Select SPI1 clock */
     RCM_APB2_PERIPH_SPI4   = BIT13,     /*!< Select SPI4 clock */
     RCM_APB2_PERIPH_SYSCFG = BIT14,     /*!< Select SYSCFG clock */
-    RCM_APB2_PERIPH_EXTIT  = BIT15,     /*!< Select EXTIT clock */
     RCM_APB2_PERIPH_TMR9   = BIT16,     /*!< Select TMR9 clock */
     RCM_APB2_PERIPH_TMR10  = BIT17,     /*!< Select TMR10 clock */
     RCM_APB2_PERIPH_TMR11  = BIT18,     /*!< Select TMR11 clock */
     RCM_APB2_PERIPH_SPI5   = BIT20,     /*!< Select SPI5 clock */
-    RCM_APB2_PERIPH_SPI6   = BIT21,     /*!< Select SPI6 clock */
-    RCM_APB2_PERIPH_SAI1   = BIT22,     /*!< Select SAI1 clock */
-    RCM_APB2_PERIPH_LTDC   = BIT26      /*!< Select LTDC clock */
 } RCM_APB2_PERIPH_T;
 
 /**
@@ -393,6 +416,7 @@ void RCM_DisableHSI(void);
 
 /* LSE and LSI clock */
 void RCM_ConfigLSE(RCM_LSE_T state);
+void RCM_LSESEL(RCM_LSE_MODE_T mode);
 void RCM_EnableLSI(void);
 void RCM_DisableLSI(void);
 
@@ -402,6 +426,7 @@ void RCM_ConfigPLL1(uint32_t pllSelect, uint32_t inputDiv, uint32_t vcoMul,
 void RCM_EnablePLL1(void);
 void RCM_DisablePLL1(void);
 void RCM_ConfigPLL2(uint32_t i2sVcoMul, uint32_t i2sDiv);
+void RCM_ConfigPLL2B(uint32_t vcoDiv);
 void RCM_EnablePLL2(void);
 void RCM_DisablePLL2(void);
 
@@ -435,12 +460,15 @@ void RCM_EnableBackupReset(void);
 void RCM_DisableBackupReset(void);
 
 void RCM_ConfigI2SCLK(RCM_I2S_CLK_T i2sClkSource);
+void RCM_ConfigTMRCLK(RCM_TMR_CLK_T tmrclksel);
 
 /* Enable or disable Periph Clock */
 void RCM_EnableAHB1PeriphClock(uint32_t AHB1Periph);
 void RCM_DisableAHB1PeriphClock(uint32_t AHB1Periph);
 void RCM_EnableAHB2PeriphClock(uint32_t AHB2Periph);
 void RCM_DisableAHB2PeriphClock(uint32_t AHB2Periph);
+void RCM_EnableAHB3PeriphClock(uint32_t AHB3Periph);
+void RCM_DisableAHB3PeriphClock(uint32_t AHB3Periph);
 void RCM_EnableAPB1PeriphClock(uint32_t APB1Periph);
 void RCM_DisableAPB1PeriphClock(uint32_t APB1Periph);
 void RCM_EnableAPB2PeriphClock(uint32_t APB2Periph);
@@ -451,6 +479,8 @@ void RCM_EnableAHB1PeriphReset(uint32_t AHB1Periph);
 void RCM_DisableAHB1PeriphReset(uint32_t AHB1Periph);
 void RCM_EnableAHB2PeriphReset(uint32_t AHB2Periph);
 void RCM_DisableAHB2PeriphReset(uint32_t AHB2Periph);
+void RCM_EnableAHB3PeriphReset(uint32_t AHB3Periph);
+void RCM_DisableAHB3PeriphReset(uint32_t AHB3Periph);
 void RCM_EnableAPB1PeriphReset(uint32_t APB1Periph);
 void RCM_DisableAPB1PeriphReset(uint32_t APB1Periph);
 void RCM_EnableAPB2PeriphReset(uint32_t APB2Periph);
@@ -461,6 +491,8 @@ void RCM_EnableAHB1PeriphClockLPMode(uint32_t AHB1Periph);
 void RCM_DisableAHB1PeriphClockLPMode(uint32_t AHB1Periph);
 void RCM_EnableAHB2PeriphClockLPMode(uint32_t AHB2Periph);
 void RCM_DisableAHB2PeriphClockLPMode(uint32_t AHB2Periph);
+void RCM_EnableAHB3PeriphClockLPMode(uint32_t AHB3Periph);
+void RCM_DisableAHB3PeriphClockLPMode(uint32_t AHB3Periph);
 void RCM_EnableAPB1PeriphClockLPMode(uint32_t APB1Periph);
 void RCM_DisableAPB1PeriphClockLPMode(uint32_t APB1Periph);
 void RCM_EnableAPB2PeriphClockLPMode(uint32_t APB2Periph);

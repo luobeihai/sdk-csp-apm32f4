@@ -1,11 +1,11 @@
 ;/*!
-; * @file        startup_apm32f41x.s
+; * @file        startup_apm32f411.s
 ; *
-; * @brief       CMSIS Cortex-M4 based Core Device Startup File for Device startup_apm32f41x
+; * @brief       CMSIS Cortex-M4 based Core Device Startup File for Device startup_apm32f411
 ; *
-; * @version     V1.0.2
+; * @version     V1.0.0
 ; *
-; * @date        2023-03-01
+; * @date        2023-07-31
 ; *
 ; * @attention
 ; *
@@ -103,21 +103,21 @@ __vector_table
                 DCD     TMR8_TRG_COM_TMR14_IRQHandler   ; TMR8 Trigger and Commutation and TMR14
                 DCD     TMR8_CC_IRQHandler              ; TMR8 Capture Compare
                 DCD     DMA1_STR7_IRQHandler            ; DMA1 Stream 7
-                DCD     EMMC_IRQHandler                 ; EMMC
+                DCD     SMC_IRQHandler                  ; SMC
                 DCD     SDIO_IRQHandler                 ; SDIO
                 DCD     TMR5_IRQHandler                 ; TMR5
                 DCD     SPI3_IRQHandler                 ; SPI3
                 DCD     UART4_IRQHandler                ; UART4
                 DCD     UART5_IRQHandler                ; UART5
-                DCD     TMR6_DAC_IRQHandler             ; TMR6 and DAC1&2 underrun errors
-                DCD     TMR7_IRQHandler                 ; TMR7
+                DCD     0                               ; Reserved
+                DCD     0                               ; Reserved
                 DCD     DMA2_STR0_IRQHandler            ; DMA2 Stream 0
                 DCD     DMA2_STR1_IRQHandler            ; DMA2 Stream 1
                 DCD     DMA2_STR2_IRQHandler            ; DMA2 Stream 2
                 DCD     DMA2_STR3_IRQHandler            ; DMA2 Stream 3
                 DCD     DMA2_STR4_IRQHandler            ; DMA2 Stream 4
-                DCD     ETH_IRQHandler                  ; Ethernet
-                DCD     ETH_WKUP_IRQHandler             ; Ethernet Wakeup through EINT line
+                DCD     0                               ; Reserved
+                DCD     0                               ; Reserved
                 DCD     CAN2_TX_IRQHandler              ; CAN2 TX
                 DCD     CAN2_RX0_IRQHandler             ; CAN2 RX0
                 DCD     CAN2_RX1_IRQHandler             ; CAN2 RX1
@@ -129,17 +129,18 @@ __vector_table
                 DCD     USART6_IRQHandler               ; USART6
                 DCD     I2C3_EV_IRQHandler              ; I2C3 event
                 DCD     I2C3_ER_IRQHandler              ; I2C3 error
-                DCD     OTG_HS1_EP1_OUT_IRQHandler      ; OTG_HS1 End Point 1 Out
-                DCD     OTG_HS1_EP1_IN_IRQHandler       ; OTG_HS1 End Point 1 In
-                DCD     OTG_HS1_WKUP_IRQHandler         ; OTG_HS1 Wakeup through EINT
-                DCD     OTG_HS1_IRQHandler              ; OTG_HS1
-                DCD     DCI_IRQHandler                  ; DCI
-                DCD     CRYP_IRQHandler                 ; CRYP crypto
-                DCD     HASH_RNG_IRQHandler             ; Hash and Rng
+                DCD     0                               ; Reserved
+                DCD     0                               ; Reserved
+                DCD     0                               ; Reserved
+                DCD     0                               ; Reserved
+                DCD     0                               ; Reserved
+                DCD     0                               ; Reserved
+                DCD     RNG_IRQHandler                  ; Rng
                 DCD     FPU_IRQHandler                  ; FPU
-                DCD     SM3_IRQHandler                  ; SM3
-                DCD     SM4_IRQHandler                  ; SM4
-                DCD     BN_IRQHandler                   ; BN
+                DCD     0                               ; Reserved
+                DCD     QSPI_IRQHandler                 ; QSPI
+                DCD     SPI4_IRQHandler                 ; SPI4
+                DCD     SPI5_IRQHandler                 ; SPI5
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -440,10 +441,10 @@ TMR8_CC_IRQHandler
 DMA1_STR7_IRQHandler
         B DMA1_STR7_IRQHandler
 
-        PUBWEAK EMMC_IRQHandler
+        PUBWEAK SMC_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-EMMC_IRQHandler
-        B EMMC_IRQHandler
+SMC_IRQHandler
+        B SMC_IRQHandler
 
         PUBWEAK SDIO_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
@@ -470,16 +471,6 @@ UART4_IRQHandler
 UART5_IRQHandler
         B UART5_IRQHandler
 
-        PUBWEAK TMR6_DAC_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-TMR6_DAC_IRQHandler
-        B TMR6_DAC_IRQHandler
-
-        PUBWEAK TMR7_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-TMR7_IRQHandler
-        B TMR7_IRQHandler
-
         PUBWEAK DMA2_STR0_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 DMA2_STR0_IRQHandler
@@ -504,16 +495,6 @@ DMA2_STR3_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 DMA2_STR4_IRQHandler
         B DMA2_STR4_IRQHandler
-
-        PUBWEAK ETH_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-ETH_IRQHandler
-        B ETH_IRQHandler
-
-        PUBWEAK ETH_WKUP_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-ETH_WKUP_IRQHandler
-        B ETH_WKUP_IRQHandler
 
         PUBWEAK CAN2_TX_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
@@ -570,59 +551,29 @@ I2C3_EV_IRQHandler
 I2C3_ER_IRQHandler
         B I2C3_ER_IRQHandler
 
-        PUBWEAK OTG_HS1_EP1_OUT_IRQHandler
+        PUBWEAK RNG_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-OTG_HS1_EP1_OUT_IRQHandler
-        B OTG_HS1_EP1_OUT_IRQHandler
-
-        PUBWEAK OTG_HS1_EP1_IN_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-OTG_HS1_EP1_IN_IRQHandler
-        B OTG_HS1_EP1_IN_IRQHandler
-
-        PUBWEAK OTG_HS1_WKUP_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-OTG_HS1_WKUP_IRQHandler
-        B OTG_HS1_WKUP_IRQHandler
-
-        PUBWEAK OTG_HS1_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-OTG_HS1_IRQHandler
-        B OTG_HS1_IRQHandler
-
-        PUBWEAK DCI_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-DCI_IRQHandler
-        B DCI_IRQHandler
-
-        PUBWEAK CRYP_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-CRYP_IRQHandler
-        B CRYP_IRQHandler
-
-        PUBWEAK HASH_RNG_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-HASH_RNG_IRQHandler
-        B HASH_RNG_IRQHandler
+RNG_IRQHandler
+        B RNG_IRQHandler
 
         PUBWEAK FPU_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 FPU_IRQHandler
         B FPU_IRQHandler
 
-        PUBWEAK SM3_IRQHandler
+        PUBWEAK QSPI_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-SM3_IRQHandler
-        B SM3_IRQHandler
+QSPI_IRQHandler
+        B QSPI_IRQHandler
 
-        PUBWEAK SM4_IRQHandler
+        PUBWEAK SPI4_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-SM4_IRQHandler
-        B SM4_IRQHandler
+SPI4_IRQHandler
+        B SPI4_IRQHandler
 
-        PUBWEAK BN_IRQHandler
+        PUBWEAK SPI5_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-BN_IRQHandler
-        B BN_IRQHandler
+SPI5_IRQHandler
+        B SPI5_IRQHandler
 
         END

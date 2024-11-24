@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the SDIO firmware functions
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,8 +23,8 @@
  *  and limitations under the License.
  */
 
-#include "apm32f4xx_sdio.h"
-#include "apm32f4xx_rcm.h"
+#include "apm32f4Xx_sdio.h"
+#include "apm32f4Xx_rcm.h"
 
 /** @addtogroup APM32F4xx_StdPeriphDriver
   @{
@@ -61,12 +61,14 @@ void SDIO_Reset(void)
  */
 void SDIO_Config(SDIO_Config_T* sdioConfig)
 {
-    SDIO->CLKCTRL_B.CLKDIV   = sdioConfig->clockDiv;
-    SDIO->CLKCTRL_B.PWRSAV   = sdioConfig->clockPowerSave;
-    SDIO->CLKCTRL_B.BYPASSEN = sdioConfig->clockBypass;
-    SDIO->CLKCTRL_B.WBSEL    = sdioConfig->busWide;
-    SDIO->CLKCTRL_B.DEPSEL   = sdioConfig->clockEdge;
-    SDIO->CLKCTRL_B.HFCEN    = sdioConfig->hardwareFlowControl;
+    uint32_t reg = 0x0;
+
+    reg = SDIO->CLKCTRL;
+
+    reg = (sdioConfig->clockDiv)|(reg & 0x100)|(sdioConfig->clockPowerSave<<9)|(sdioConfig->clockBypass<<10)|
+          (sdioConfig->busWide<<11)|(sdioConfig->clockEdge<<13)|(sdioConfig->hardwareFlowControl<<14);
+
+    SDIO->CLKCTRL = reg;
 }
 
 /*!

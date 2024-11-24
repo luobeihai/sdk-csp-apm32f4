@@ -3,19 +3,19 @@
  *
  * @brief      This file contains all the functions prototypes for the FMC firmware library
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -333,6 +333,8 @@ void FMC_UnlockOptionByte(void);
 void FMC_LockOptionByte(void);
 void FMC_OPT_EnableWriteProtect(FMC_OPT_WRP_T wrp);
 void FMC_OPT_DisableWriteProtect(FMC_OPT_WRP_T wrp);
+void FMC_EnablePCROP(void);
+void FMC_DisablePCROP(void);
 void FMC_OPT_ConfigReadProtect(FMC_OPT_RDP_T rdp);
 void FMC_OPT_ConfigUser(FMC_OPT_IWDT_T iwdt, FMC_OPT_STOP_T stop, FMC_OPT_STDBY_T stdby);
 void FMC_OPT_ConfigBrownoutReset(FMC_OPT_BOR_T bor);

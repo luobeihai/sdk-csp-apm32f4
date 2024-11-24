@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <device xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.1" xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
-    <name>APM32F40x</name>
+    <name>APM32F465</name>
     <version>1.0</version>
-    <description>APM32F40x</description>
+    <description>APM32F465</description>
     <!-- details about the cpu embedded in the device -->
     <cpu>
         <name>CM4</name>
@@ -5209,12 +5209,36 @@
                     <resetValue>0x24003010</resetValue>
                     <fields>
                         <field>
-                            <name>PLLD</name>
+                            <name>PLLD3</name>
+                            <description>Main PLL (PLL) division factor for USB
+              OTG FS, SDIO and random number generator
+              clocks</description>
+                            <bitOffset>27</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLLD2</name>
+                            <description>Main PLL (PLL) division factor for USB
+              OTG FS, SDIO and random number generator
+              clocks</description>
+                            <bitOffset>26</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLLD1</name>
+                            <description>Main PLL (PLL) division factor for USB
+              OTG FS, SDIO and random number generator
+              clocks</description>
+                            <bitOffset>25</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLLD0</name>
                             <description>Main PLL (PLL) division factor for USB
               OTG FS, SDIO and random number generator
               clocks</description>
                             <bitOffset>24</bitOffset>
-                            <bitWidth>4</bitWidth>
+                            <bitWidth>1</bitWidth>
                         </field>
                         <field>
                             <name>PLL1CLKS</name>
@@ -5224,25 +5248,123 @@
                             <bitWidth>1</bitWidth>
                         </field>
                         <field>
-                            <name>PLL1C</name>
+                            <name>PLL1C1</name>
+                            <description>Main PLL (PLL) division factor for main
+              system clock</description>
+                            <bitOffset>17</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLL1C0</name>
                             <description>Main PLL (PLL) division factor for main
               system clock</description>
                             <bitOffset>16</bitOffset>
-                            <bitWidth>2</bitWidth>
+                            <bitWidth>1</bitWidth>
                         </field>
                         <field>
-                            <name>PLL1A</name>
+                            <name>PLL1A8</name>
+                            <description>Main PLL (PLL) multiplication factor for
+              VCO</description>
+                            <bitOffset>14</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLL1A7</name>
+                            <description>Main PLL (PLL) multiplication factor for
+              VCO</description>
+                            <bitOffset>13</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLL1A6</name>
+                            <description>Main PLL (PLL) multiplication factor for
+              VCO</description>
+                            <bitOffset>12</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLL1A5</name>
+                            <description>Main PLL (PLL) multiplication factor for
+              VCO</description>
+                            <bitOffset>11</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLL1A4</name>
+                            <description>Main PLL (PLL) multiplication factor for
+              VCO</description>
+                            <bitOffset>10</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLL1A3</name>
+                            <description>Main PLL (PLL) multiplication factor for
+              VCO</description>
+                            <bitOffset>9</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLL1A2</name>
+                            <description>Main PLL (PLL) multiplication factor for
+              VCO</description>
+                            <bitOffset>8</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLL1A1</name>
+                            <description>Main PLL (PLL) multiplication factor for
+              VCO</description>
+                            <bitOffset>7</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLL1A0</name>
                             <description>Main PLL (PLL) multiplication factor for
               VCO</description>
                             <bitOffset>6</bitOffset>
-                            <bitWidth>8</bitWidth>
+                            <bitWidth>1</bitWidth>
                         </field>
                         <field>
-                            <name>PLLB</name>
+                            <name>PLLB5</name>
+                            <description>Division factor for the main PLL (PLL)
+              and audio PLL (PLLI2S) input clock</description>
+                            <bitOffset>5</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLLB4</name>
+                            <description>Division factor for the main PLL (PLL)
+              and audio PLL (PLLI2S) input clock</description>
+                            <bitOffset>4</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLLB3</name>
+                            <description>Division factor for the main PLL (PLL)
+              and audio PLL (PLLI2S) input clock</description>
+                            <bitOffset>3</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLLB2</name>
+                            <description>Division factor for the main PLL (PLL)
+              and audio PLL (PLLI2S) input clock</description>
+                            <bitOffset>2</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLLB1</name>
+                            <description>Division factor for the main PLL (PLL)
+              and audio PLL (PLLI2S) input clock</description>
+                            <bitOffset>1</bitOffset>
+                            <bitWidth>1</bitWidth>
+                        </field>
+                        <field>
+                            <name>PLLB0</name>
                             <description>Division factor for the main PLL (PLL)
               and audio PLL (PLLI2S) input clock</description>
                             <bitOffset>0</bitOffset>
-                            <bitWidth>6</bitWidth>
+                            <bitWidth>1</bitWidth>
                         </field>
                     </fields>
                 </register>
@@ -12474,14 +12596,14 @@ enable</description>
                             <bitWidth>1</bitWidth>
                         </field>
                         <field>
-                            <name>DBCE</name>
-                            <description>DBDR flag clear bit</description>
+                            <name>CRCE</name>
+                            <description>CRCE flag clear bit</description>
                             <bitOffset>1</bitOffset>
                             <bitWidth>1</bitWidth>
                         </field>
                         <field>
-                            <name>CRCE</name>
-                            <description>COMRESP flag clear bit</description>
+                            <name>DBCE</name>
+                            <description>DBCE flag clear bit</description>
                             <bitOffset>0</bitOffset>
                             <bitWidth>1</bitWidth>
                         </field>
@@ -14494,7 +14616,7 @@ error interrupt</description>
                     <addressOffset>0x0</addressOffset>
                     <size>0x20</size>
                     <access>read-write</access>
-                    <resetValue>0x00004000</resetValue>
+                    <resetValue>0x00000000</resetValue>
                     <fields>
                         <field>
                             <name>VOSSEL</name>
@@ -16969,7 +17091,6 @@ update</description>
                 <description>UART5 global interrupt</description>
                 <value>53</value>
             </interrupt>
-            
         </peripheral>
         <peripheral>
             <name>ADC_CCTRL</name>
@@ -20817,7 +20938,7 @@ update</description>
                             <name>CNT</name>
                             <description>Counter value</description>
                             <bitOffset>0</bitOffset>
-                            <bitWidth>16</bitWidth>
+                            <bitWidth>32</bitWidth>
                         </field>
                     </fields>
                 </register>
@@ -20851,7 +20972,7 @@ update</description>
                             <name>AUTORLD</name>
                             <description>Auto-reload value</description>
                             <bitOffset>0</bitOffset>
-                            <bitWidth>16</bitWidth>
+                            <bitWidth>32</bitWidth>
                         </field>
                     </fields>
                 </register>
@@ -21072,6 +21193,23 @@ update</description>
                             <description>Counter enable</description>
                             <bitOffset>0</bitOffset>
                             <bitWidth>1</bitWidth>
+                        </field>
+                    </fields>
+                </register>
+                <register>
+                    <name>CTRL2</name>
+                    <displayName>CTRL2</displayName>
+                    <description>control register 2</description>
+                    <addressOffset>0x4</addressOffset>
+                    <size>0x20</size>
+                    <access>read-write</access>
+                    <resetValue>0x0000</resetValue>
+                    <fields>
+                        <field>
+                            <name>MMSEL</name>
+                            <description>Master mode selection</description>
+                            <bitOffset>4</bitOffset>
+                            <bitWidth>3</bitWidth>
                         </field>
                     </fields>
                 </register>
@@ -37757,2044 +37895,6 @@ EINT line</description>
                             <description>IPR_N3</description>
                             <bitOffset>24</bitOffset>
                             <bitWidth>8</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-            </registers>
-        </peripheral>
-        <peripheral>
-            <name>Ethernet_MAC</name>
-            <description>Ethernet: media access control (MAC)</description>
-            <groupName>Ethernet</groupName>
-            <baseAddress>0x40028000</baseAddress>
-            <addressBlock>
-                <offset>0x0</offset>
-                <size>0x61</size>
-                <usage>registers</usage>
-            </addressBlock>
-            <interrupt>
-                <name>ETH</name>
-                <description>Ethernet global interrupt</description>
-                <value>61</value>
-            </interrupt>
-            <interrupt>
-                <name>ETH_WKUP</name>
-                <description>Ethernet Wakeup through EINT line
-        interrupt</description>
-                <value>62</value>
-            </interrupt>
-            <registers>
-                <register>
-                    <name>MACCFG</name>
-                    <displayName>MACCFG</displayName>
-                    <description>Ethernet MAC configuration
-          register</description>
-                    <addressOffset>0x0</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x0008000</resetValue>
-                    <fields>
-                        <field>
-                            <name>RXEN</name>
-                            <description>Receiver Enable</description>
-                            <bitOffset>2</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXEN</name>
-                            <description>Transmitter Enable</description>
-                            <bitOffset>3</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>DC</name>
-                            <description>Deferral Check</description>
-                            <bitOffset>4</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>BL</name>
-                            <description>Back off Limit</description>
-                            <bitOffset>5</bitOffset>
-                            <bitWidth>2</bitWidth>
-                        </field>
-                        <field>
-                            <name>ACS</name>
-                            <description>Automatic Pad or CRC Stripping</description>
-                            <bitOffset>7</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>DISR</name>
-                            <description>Disable Retry</description>
-                            <bitOffset>9</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>IPC</name>
-                            <description>IPv4 Checksum offload</description>
-                            <bitOffset>10</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>DM</name>
-                            <description>Duplex Mode</description>
-                            <bitOffset>11</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>LBM</name>
-                            <description>Loopback Mode</description>
-                            <bitOffset>12</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>DISRXO</name>
-                            <description>Disable Receive Own</description>
-                            <bitOffset>13</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>SSEL</name>
-                            <description>Speed</description>
-                            <bitOffset>14</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>DISCRS</name>
-                            <description>Disable Carrier Sense During Transmission</description>
-                            <bitOffset>16</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>IFG</name>
-                            <description>Inter-Frame Gap</description>
-                            <bitOffset>17</bitOffset>
-                            <bitWidth>3</bitWidth>
-                        </field>
-                        <field>
-                            <name>JDIS</name>
-                            <description>Jabber Disable</description>
-                            <bitOffset>22</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>WDTDIS</name>
-                            <description>Watchdog Disable</description>
-                            <bitOffset>23</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>CST</name>
-                            <description>CRC Stripping for Type Frames</description>
-                            <bitOffset>25</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACFRAF</name>
-                    <displayName>MACFRAF</displayName>
-                    <description>Ethernet MAC frame filter
-          register</description>
-                    <addressOffset>0x4</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>PR</name>
-                            <description>Promiscuous Mode</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>HUC</name>
-                            <description>Hash Unicast</description>
-                            <bitOffset>1</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>HMC</name>
-                            <description>Hash Multicast</description>
-                            <bitOffset>2</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>DAIF</name>
-                            <description>DA Inverse Filtering</description>
-                            <bitOffset>3</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>PM</name>
-                            <description>Pass All Multicast</description>
-                            <bitOffset>4</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>DISBF</name>
-                            <description>Disable Broadcast Frames</description>
-                            <bitOffset>5</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>PCTRLF</name>
-                            <description>Pass Control Frames</description>
-                            <bitOffset>6</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>SAIF</name>
-                            <description>SA Inverse Filtering</description>
-                            <bitOffset>7</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>SAFEN</name>
-                            <description>Source Address Filter Enable</description>
-                            <bitOffset>8</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>HPF</name>
-                            <description>Hash or Perfect Filter</description>
-                            <bitOffset>9</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXA</name>
-                            <description>Receive All</description>
-                            <bitOffset>31</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACHTH</name>
-                    <displayName>MACHTH</displayName>
-                    <description>Ethernet MAC hash table high
-          register</description>
-                    <addressOffset>0x8</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>HTH</name>
-                            <description>Hash Table High</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACHTL</name>
-                    <displayName>MACHTL</displayName>
-                    <description>Ethernet MAC hash table low
-          register</description>
-                    <addressOffset>0xC</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>HTL</name>
-                            <description>Hash Table Low</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACADDR</name>
-                    <displayName>MACADDR</displayName>
-                    <description>Ethernet MAC MII address
-          register</description>
-                    <addressOffset>0x10</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>MB</name>
-                            <description>MII Busy</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>MW</name>
-                            <description>MII Write</description>
-                            <bitOffset>1</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>CR</name>
-                            <description>Clock Range</description>
-                            <bitOffset>2</bitOffset>
-                            <bitWidth>3</bitWidth>
-                        </field>
-                        <field>
-                            <name>MR</name>
-                            <description>MII Register</description>
-                            <bitOffset>6</bitOffset>
-                            <bitWidth>5</bitWidth>
-                        </field>
-                        <field>
-                            <name>PA</name>
-                            <description>Physical Layer Address</description>
-                            <bitOffset>11</bitOffset>
-                            <bitWidth>5</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACDATA</name>
-                    <displayName>MACDATA</displayName>
-                    <description>Ethernet MAC MII data register</description>
-                    <addressOffset>0x14</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>MD</name>
-                            <description>MII Data</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>16</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACFCTRL</name>
-                    <displayName>MACFCTRL</displayName>
-                    <description>Ethernet MAC flow control
-          register</description>
-                    <addressOffset>0x18</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>FCTRLB_BPA</name>
-                            <description>Flow Control Busy/Back Pressure Activate</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXFCTRLEN</name>
-                            <description>Transmit Flow Control Enable</description>
-                            <bitOffset>1</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXFCTRLEN</name>
-                            <description>Receive Flow Control Enable</description>
-                            <bitOffset>2</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>UNPFDETE</name>
-                            <description>Unicast Pause Frame Detect</description>
-                            <bitOffset>3</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>PTSEL</name>
-                            <description>Pause Threshold Select</description>
-                            <bitOffset>4</bitOffset>
-                            <bitWidth>2</bitWidth>
-                        </field>
-                        <field>
-                            <name>ZQPDIS</name>
-                            <description>Zero-quanta Pause Disable</description>
-                            <bitOffset>7</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>PT</name>
-                            <description>Pause Time</description>
-                            <bitOffset>16</bitOffset>
-                            <bitWidth>16</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACVLANT</name>
-                    <displayName>MACVLANT</displayName>
-                    <description>Ethernet MAC VLAN tag register</description>
-                    <addressOffset>0x1C</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>VLANTID</name>
-                            <description>VLAN Tag Identifier</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>16</bitWidth>
-                        </field>
-                        <field>
-                            <name>VLANTCOMP</name>
-                            <description>12-bit VLAN Tag Comparison</description>
-                            <bitOffset>16</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACPMTCTRLSTS</name>
-                    <displayName>MACPMTCTRLSTS</displayName>
-                    <description>Ethernet MAC PMT control and status
-          register</description>
-                    <addressOffset>0x2C</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>PD</name>
-                            <description>Power Down</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>MPEN</name>
-                            <description>Magic Packet Enable</description>
-                            <bitOffset>1</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>WKUPFEN</name>
-                            <description>Wakeup Frame Enable</description>
-                            <bitOffset>2</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>MPRX</name>
-                            <description>Magic Packet Received</description>
-                            <bitOffset>5</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>WKUPFRX</name>
-                            <description>Wakeup Frame Received</description>
-                            <bitOffset>6</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>GUN</name>
-                            <description>Global Unicast</description>
-                            <bitOffset>9</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>WKUPFRST</name>
-                            <description>Wakeup Frame Filter Register Pointer Reset</description>
-                            <bitOffset>31</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACDBG</name>
-                    <displayName>MACDBG</displayName>
-                    <description>Ethernet MAC debug register</description>
-                    <addressOffset>0x34</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>RPESTS</name>
-                            <description>MAC MII Receive Protocol Engine Status</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RFCFCSTS</name>
-                            <description>MAC Receive Frame FIFO Controller Status</description>
-                            <bitOffset>1</bitOffset>
-                            <bitWidth>2</bitWidth>
-                        </field>
-                        <field>
-                            <name>RWCSTS</name>
-                            <description>RX FIFO Write Controller Active Status</description>
-                            <bitOffset>4</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RRCSTS</name>
-                            <description>RX FIFO Read Controller State</description>
-                            <bitOffset>5</bitOffset>
-                            <bitWidth>2</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXFSTS</name>
-                            <description>RX FIFO full - level Status</description>
-                            <bitOffset>8</bitOffset>
-                            <bitWidth>2</bitWidth>
-                        </field>
-                        <field>
-                            <name>TPESTS</name>
-                            <description>MAC MII Transmit Protocol Engine Status</description>
-                            <bitOffset>16</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TFCSTS</name>
-                            <description>MAC Transmit Frame Controller Status</description>
-                            <bitOffset>17</bitOffset>
-                            <bitWidth>2</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXPAUSED</name>
-                            <description>MAC Transmitter in Pause</description>
-                            <bitOffset>19</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TRCSTS</name>
-                            <description>TX FIFO Read Controller Status</description>
-                            <bitOffset>20</bitOffset>
-                            <bitWidth>2</bitWidth>
-                        </field>
-                        <field>
-                            <name>TWCSTS</name>
-                            <description>TX FIFO Write Controller Status</description>
-                            <bitOffset>22</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXFSTS</name>
-                            <description>TX FIFO Not Empty Status</description>
-                            <bitOffset>24</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXSTSFSTS</name>
-                            <description>TX Status FIFO Full Status</description>
-                            <bitOffset>25</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACISTS</name>
-                    <displayName>MACISTS</displayName>
-                    <description>Ethernet MAC interrupt status
-          register</description>
-                    <addressOffset>0x38</addressOffset>
-                    <size>0x20</size>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>PMTIS</name>
-                            <description>PMT Interrupt Status</description>
-                            <bitOffset>3</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-only</access>
-                        </field>
-                        <field>
-                            <name>MMCIS</name>
-                            <description>MMC Interrupt Status</description>
-                            <bitOffset>4</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-only</access>
-                        </field>
-                        <field>
-                            <name>MMCRXIS</name>
-                            <description>MMC Receive Interrupt Status</description>
-                            <bitOffset>5</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-only</access>
-                        </field>
-                        <field>
-                            <name>MMCTXIS</name>
-                            <description>MMC Transmit Interrupt Status</description>
-                            <bitOffset>6</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-only</access>
-                        </field>
-                        <field>
-                            <name>TSIS</name>
-                            <description>Timestamp Interrupt Status</description>
-                            <bitOffset>9</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACIMASK</name>
-                    <displayName>MACIMASK</displayName>
-                    <description>Ethernet MAC interrupt mask
-          register</description>
-                    <addressOffset>0x3C</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>PMTIM</name>
-                            <description>PMT Interrupt Mask</description>
-                            <bitOffset>3</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSTIM</name>
-                            <description>Time Stamp Trigger Interrupt Mask</description>
-                            <bitOffset>9</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACADDR0L</name>
-                    <displayName>MACADDR0L</displayName>
-                    <description>Ethernet MAC address 0 high
-          register</description>
-                    <addressOffset>0x40</addressOffset>
-                    <size>0x20</size>
-                    <resetValue>0x0010FFFF</resetValue>
-                    <fields>
-                        <field>
-                            <name>ADDR0H</name>
-                            <description>MAC address0 high</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>16</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>AL1</name>
-                            <description>Always 1</description>
-                            <bitOffset>31</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-only</access>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACMACA0LR</name>
-                    <displayName>MACMACA0LR</displayName>
-                    <description>Ethernet MAC address 0 low
-          register</description>
-                    <addressOffset>0x44</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0xFFFFFFFF</resetValue>
-                    <fields>
-                        <field>
-                            <name>ADDR0L</name>
-                            <description>MAC Address 0</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACADDR1H</name>
-                    <displayName>MACADDR1H</displayName>
-                    <description>Ethernet MAC address 1 high
-          register</description>
-                    <addressOffset>0x48</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x0000FFFF</resetValue>
-                    <fields>
-                        <field>
-                            <name>ADDR1H</name>
-                            <description>MAC Address 1</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>16</bitWidth>
-                        </field>
-                        <field>
-                            <name>MASKBCTRL</name>
-                            <description>Mask Byte Control</description>
-                            <bitOffset>24</bitOffset>
-                            <bitWidth>6</bitWidth>
-                        </field>
-                        <field>
-                            <name>ADDRSEL</name>
-                            <description>Address Select</description>
-                            <bitOffset>30</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>ADDREN</name>
-                            <description>Address Enable</description>
-                            <bitOffset>31</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACADDR1L</name>
-                    <displayName>MACADDR1L</displayName>
-                    <description>Ethernet MAC address1 low
-          register</description>
-                    <addressOffset>0x4C</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0xFFFFFFFF</resetValue>
-                    <fields>
-                        <field>
-                            <name>ADDR1L</name>
-                            <description>MAC Address 1</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACADDR2H</name>
-                    <displayName>MACADDR2H</displayName>
-                    <description>Ethernet MAC address 2 high
-          register</description>
-                    <addressOffset>0x50</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x0000FFFF</resetValue>
-                    <fields>
-                        <field>
-                            <name>ADDR2H</name>
-                            <description>MAC Address 2</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>16</bitWidth>
-                        </field>
-                        <field>
-                            <name>MASKBCTRL</name>
-                            <description>Mask Byte Control</description>
-                            <bitOffset>24</bitOffset>
-                            <bitWidth>6</bitWidth>
-                        </field>
-                        <field>
-                            <name>ADDRSEL</name>
-                            <description>Address Select</description>
-                            <bitOffset>30</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>ADDREN</name>
-                            <description>Address Enable</description>
-                            <bitOffset>31</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACADDR2L</name>
-                    <displayName>MACADDR2L</displayName>
-                    <description>Ethernet MAC address 2 low
-          register</description>
-                    <addressOffset>0x54</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0xFFFFFFFF</resetValue>
-                    <fields>
-                        <field>
-                            <name>ADDR2L</name>
-                            <description>MAC Address 2</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>31</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACADDR3H</name>
-                    <displayName>MACADDR3H</displayName>
-                    <description>Ethernet MAC address 3 high
-          register</description>
-                    <addressOffset>0x58</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x0000FFFF</resetValue>
-                    <fields>
-                        <field>
-                            <name>ADDR3H</name>
-                            <description>MAC Address 3</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>16</bitWidth>
-                        </field>
-                        <field>
-                            <name>MASKBCTRL</name>
-                            <description>Mask Byte Control</description>
-                            <bitOffset>24</bitOffset>
-                            <bitWidth>6</bitWidth>
-                        </field>
-                        <field>
-                            <name>ADDRSEL</name>
-                            <description>Address Select</description>
-                            <bitOffset>30</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>ADDREN</name>
-                            <description>Address Enable</description>
-                            <bitOffset>31</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>MACADDR3L</name>
-                    <displayName>MACADDR3L</displayName>
-                    <description>Ethernet MAC address 3 low
-          register</description>
-                    <addressOffset>0x5C</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0xFFFFFFFF</resetValue>
-                    <fields>
-                        <field>
-                            <name>ADDR3L</name>
-                            <description>MAC Address 3</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-            </registers>
-        </peripheral>
-        <peripheral>
-            <name>Ethernet_MMC</name>
-            <description>Ethernet: MAC management counters</description>
-            <groupName>Ethernet</groupName>
-            <baseAddress>0x40028100</baseAddress>
-            <addressBlock>
-                <offset>0x0</offset>
-                <size>0x400</size>
-                <usage>registers</usage>
-            </addressBlock>
-            <registers>
-                <register>
-                    <name>CTRL</name>
-                    <displayName>CTRL</displayName>
-                    <description>Ethernet MMC control register</description>
-                    <addressOffset>0x0</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>CNTRST</name>
-                            <description>Counter Reset</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>CNTSTOPRO</name>
-                            <description>Counter Stop Rollover</description>
-                            <bitOffset>1</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RSTOR</name>
-                            <description>Reset on read</description>
-                            <bitOffset>2</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>MCNTF</name>
-                            <description>MMC Counter Freeze</description>
-                            <bitOffset>3</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>MCNTP</name>
-                            <description>MMC Counter Preset</description>
-                            <bitOffset>4</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>MCNTVALP</name>
-                            <description>MMC Counter Value Preset</description>
-                            <bitOffset>5</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>RXINT</name>
-                    <displayName>RXINT</displayName>
-                    <description>Ethernet MMC receive interrupt
-          register</description>
-                    <addressOffset>0x4</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>RXFCE</name>
-                            <description>Received Frames CRC Error</description>
-                            <bitOffset>5</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXFAE</name>
-                            <description>Received Frames Alignment Error</description>
-                            <bitOffset>6</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXGUNF</name>
-                            <description>Received Good Unicast Frames</description>
-                            <bitOffset>17</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TXINT</name>
-                    <displayName>TXINT</displayName>
-                    <description>Ethernet MMC transmit interrupt
-          register</description>
-                    <addressOffset>0x8</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TXGFSCOL</name>
-                            <description>Transmitted Good Frames Single Collision</description>
-                            <bitOffset>14</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXGFMCOL</name>
-                            <description>Transmitted Good Frames More Single Collision</description>
-                            <bitOffset>15</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXGF</name>
-                            <description>Transmitted Good Frames</description>
-                            <bitOffset>21</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>RXINTMASK</name>
-                    <displayName>RXINTMASK</displayName>
-                    <description>Ethernet MMC receive interrupt mask
-          register</description>
-                    <addressOffset>0xC</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>RXFCEM</name>
-                            <description>Received Frames CRC Error Mask</description>
-                            <bitOffset>5</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXFAEM</name>
-                            <description>Received Frames Alignment Error Mask</description>
-                            <bitOffset>6</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXGUNFM</name>
-                            <description>Received Good Unicast Frames Mask</description>
-                            <bitOffset>17</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TXINTMASK</name>
-                    <displayName>TXINTMASK</displayName>
-                    <description>Ethernet MMC transmit interrupt mask
-          register</description>
-                    <addressOffset>0x10</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TXGFSCOLM</name>
-                            <description>Transmitted Good Frames Single Collision Mask</description>
-                            <bitOffset>14</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXGFMCOLM</name>
-                            <description>ransmitted Good Frames More Single Collision Mask</description>
-                            <bitOffset>15</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXGFM</name>
-                            <description>Transmitted Good Frames Mask</description>
-                            <bitOffset>16</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TXGFSCCNT</name>
-                    <displayName>TXGFSCCNT</displayName>
-                    <description>Ethernet MMC transmitted good frames after a
-          single collision counter</description>
-                    <addressOffset>0x4C</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TXGFSCCNT</name>
-                            <description>Transmitted Good Frames Single Collision Counter</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TXGFMCCNT</name>
-                    <displayName>TXGFMCCNT</displayName>
-                    <description>Ethernet MMC transmitted good frames after
-          more than a single collision</description>
-                    <addressOffset>0x50</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TXGFMCCNT</name>
-                            <description>Transmitted Good Frames More Collision Counter</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TXGFCNT</name>
-                    <displayName>TXGFCNT</displayName>
-                    <description>Ethernet MMC transmitted good frames counter
-          register</description>
-                    <addressOffset>0x68</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TXGFCNT</name>
-                            <description>Transmitted Good Frames Counter</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>RXFCECNT</name>
-                    <displayName>RXFCECNT</displayName>
-                    <description>Ethernet MMC received frames with CRC error
-          counter register</description>
-                    <addressOffset>0x94</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>RXFCECNT</name>
-                            <description>Received Frames CRC Error Counter</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>RXFAECNT</name>
-                    <displayName>RXFAECNT</displayName>
-                    <description>Ethernet MMC received frames with alignment
-          error counter register</description>
-                    <addressOffset>0x98</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>RXFAECNT</name>
-                            <description>Received Frames Alignment Error Counter</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>RXGUNCNT</name>
-                    <displayName>RXGUNCNT</displayName>
-                    <description>MMC received good unicast frames counter
-          register</description>
-                    <addressOffset>0xC4</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>RXFCECNT</name>
-                            <description>Received Good Unicast Frames Counter</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-            </registers>
-        </peripheral>
-        <peripheral>
-            <name>Ethernet_PTP</name>
-            <description>Ethernet: Precision time protocol</description>
-            <groupName>Ethernet</groupName>
-            <baseAddress>0x40028700</baseAddress>
-            <addressBlock>
-                <offset>0x0</offset>
-                <size>0x400</size>
-                <usage>registers</usage>
-            </addressBlock>
-            <registers>
-                <register>
-                    <name>TSCTRL</name>
-                    <displayName>TSCTRL</displayName>
-                    <description>Ethernet PTP time stamp control
-          register</description>
-                    <addressOffset>0x0</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00002000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TSEN</name>
-                            <description>Time Stamp Enable</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSUDSEL</name>
-                            <description>Time Stamp Update Mode Select</description>
-                            <bitOffset>1</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSSTINIT</name>
-                            <description>Time Stamp System Time Initialize</description>
-                            <bitOffset>2</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSSTUD</name>
-                            <description>Time Stamp System Time Update</description>
-                            <bitOffset>3</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSTRGIEN</name>
-                            <description>Time Stamp Trigger Interrupt Enable</description>
-                            <bitOffset>4</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSADDUD</name>
-                            <description>Time Stamp Addend Register Update</description>
-                            <bitOffset>5</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSSNEN</name>
-                            <description>Time Stamp Snapshot for Received Frames Enable</description>
-                            <bitOffset>8</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSSUBRO</name>
-                            <description>Time Stamp Subsecond Rollover</description>
-                            <bitOffset>9</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>LISTVSEL</name>
-                            <description>Listening Version Select</description>
-                            <bitOffset>10</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSSPTPEN</name>
-                            <description>Time Stamp Snapshot for PTP Ethernet Frames Enable</description>
-                            <bitOffset>11</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSS6EN</name>
-                            <description>Time stamp snapshot for IPv6 frames Enable</description>
-                            <bitOffset>12</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSS4EN</name>
-                            <description>Time Stamp Snapshot for IPv4 Frames Enable</description>
-                            <bitOffset>13</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSSMESEL</name>
-                            <description>Time Stamp Snapshot for Message Select</description>
-                            <bitOffset>14</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSSMNSEL</name>
-                            <description>Time Stamp Snapshot for Master Node Select</description>
-                            <bitOffset>15</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSCLKNSEL</name>
-                            <description>Time stamp Clock Node Select</description>
-                            <bitOffset>16</bitOffset>
-                            <bitWidth>2</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSSPTPFMACEN</name>
-                            <description>Time Stamp PTP Frame Filtering MAC Address Enable</description>
-                            <bitOffset>18</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>SUBSECI</name>
-                    <displayName>SUBSECI</displayName>
-                    <description>Ethernet PTP subsecond increment
-          register</description>
-                    <addressOffset>0x4</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>STSUBSECI</name>
-                            <description>System Time Subseconds Incremen</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>8</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TSH</name>
-                    <displayName>TSH</displayName>
-                    <description>Ethernet PTP time stamp high
-          register</description>
-                    <addressOffset>0x8</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>STSEC</name>
-                            <description>System Time Second Value</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TSL</name>
-                    <displayName>TSL</displayName>
-                    <description>Ethernet PTP time stamp low
-          register</description>
-                    <addressOffset>0xC</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>STSUBSEC</name>
-                            <description>System Time Subseconds Value</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>31</bitWidth>
-                        </field>
-                        <field>
-                            <name>STSEL</name>
-                            <description>System Time Select</description>
-                            <bitOffset>31</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TSHUD</name>
-                    <displayName>TSHUD</displayName>
-                    <description>Ethernet PTP time stamp high update
-          register</description>
-                    <addressOffset>0x10</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TSUDSEC</name>
-                            <description>Time Stamp Update Second Value</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TSLUD</name>
-                    <displayName>TSLUD</displayName>
-                    <description>Ethernet PTP time stamp low update
-          register</description>
-                    <addressOffset>0x14</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TSUDSUBSEC</name>
-                            <description>Time Stamp Update Subseconds Value</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>31</bitWidth>
-                        </field>
-                        <field>
-                            <name>TSUDSEL</name>
-                            <description>Time Stamp Update Select</description>
-                            <bitOffset>31</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TSA</name>
-                    <displayName>TSA</displayName>
-                    <description>Ethernet PTP time stamp addend
-          register</description>
-                    <addressOffset>0x18</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TSA</name>
-                            <description>Time Stamp Addend Value</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TTSH</name>
-                    <displayName>TTSH</displayName>
-                    <description>Ethernet PTP target time high
-          register</description>
-                    <addressOffset>0x1C</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TTSH</name>
-                            <description>Target Time Stamp High Value</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TTSL</name>
-                    <displayName>TTSL</displayName>
-                    <description>Ethernet PTP target time low
-          register</description>
-                    <addressOffset>0x20</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TTSL</name>
-                            <description>Target Time Stamp Low Value</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>TSSTS</name>
-                    <displayName>TSSTS</displayName>
-                    <description>Ethernet PTP time stamp status
-          register</description>
-                    <addressOffset>0x28</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TSSECOVR</name>
-                            <description>Time Stamp Second Value Overflow</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TTSRD</name>
-                            <description>Target Time Stamp Value Reached</description>
-                            <bitOffset>1</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>PPSCTRL</name>
-                    <displayName>PPSCTRL</displayName>
-                    <description>Ethernet PTP PPS control
-          register</description>
-                    <addressOffset>0x2C</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>PPSFSEL</name>
-                            <description>PPS Frequency Selection</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>3</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-            </registers>
-        </peripheral>
-        <peripheral>
-            <name>Ethernet_DMA</name>
-            <description>Ethernet: DMA controller operation</description>
-            <groupName>Ethernet</groupName>
-            <baseAddress>0x40029000</baseAddress>
-            <addressBlock>
-                <offset>0x0</offset>
-                <size>0x400</size>
-                <usage>registers</usage>
-            </addressBlock>
-            <registers>
-                <register>
-                    <name>DMABMOD</name>
-                    <displayName>DMABMOD</displayName>
-                    <description>Ethernet DMA bus mode register</description>
-                    <addressOffset>0x0</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00002101</resetValue>
-                    <fields>
-                        <field>
-                            <name>SWR</name>
-                            <description>Software Reset</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>DAS</name>
-                            <description>DMA Arbitration Scheme</description>
-                            <bitOffset>1</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>DSL</name>
-                            <description>Descriptor Skip Length</description>
-                            <bitOffset>2</bitOffset>
-                            <bitWidth>5</bitWidth>
-                        </field>
-                        <field>
-                            <name>EDFEN</name>
-                            <description>Enhanced Descriptor Format Enable</description>
-                            <bitOffset>7</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>PBL</name>
-                            <description>Programmable Burst Length</description>
-                            <bitOffset>8</bitOffset>
-                            <bitWidth>6</bitWidth>
-                        </field>
-                        <field>
-                            <name>PR</name>
-                            <description>Priority Ratio</description>
-                            <bitOffset>14</bitOffset>
-                            <bitWidth>2</bitWidth>
-                        </field>
-                        <field>
-                            <name>FB</name>
-                            <description>Fixed Burst</description>
-                            <bitOffset>16</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RPBL</name>
-                            <description>Rx DMA PBL</description>
-                            <bitOffset>17</bitOffset>
-                            <bitWidth>6</bitWidth>
-                        </field>
-                        <field>
-                            <name>USP</name>
-                            <description>Use Separate PBL</description>
-                            <bitOffset>23</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>PBLx4</name>
-                            <description>PBLx4 Mode</description>
-                            <bitOffset>24</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>AAL</name>
-                            <description>Address-Aligned Beats</description>
-                            <bitOffset>25</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>MB</name>
-                            <description>Mixed Burst</description>
-                            <bitOffset>26</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMATXPD</name>
-                    <displayName>DMATXPD</displayName>
-                    <description>Ethernet DMA transmit poll demand
-          register</description>
-                    <addressOffset>0x4</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TXPD</name>
-                            <description>Transmit Poll Demand</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMARXPD</name>
-                    <displayName>DMARXPD</displayName>
-                    <description>EHERNET DMA receive poll demand
-          register</description>
-                    <addressOffset>0x8</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>RXPD</name>
-                            <description>Receive Poll Demand</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMARXDLADDR</name>
-                    <displayName>DMARXDLADDR</displayName>
-                    <description>Ethernet DMA receive descriptor list address
-          register</description>
-                    <addressOffset>0xC</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>RXSTA</name>
-                            <description>Start of Receive List</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMATXDLADDR</name>
-                    <displayName>DMATXDLADDR</displayName>
-                    <description>Ethernet DMA transmit descriptor list
-          address register</description>
-                    <addressOffset>0x10</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TXSTA</name>
-                            <description>Start of Transmit List</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMASTS</name>
-                    <displayName>DMASTS</displayName>
-                    <description>Ethernet DMA status register</description>
-                    <addressOffset>0x14</addressOffset>
-                    <size>0x20</size>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TXFLG</name>
-                            <description>Transmit Flag</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>TXSFLG</name>
-                            <description>Transmit Stopped Flag</description>
-                            <bitOffset>1</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>TXBU</name>
-                            <description>Transmit Buffer Unavailable</description>
-                            <bitOffset>2</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>TXJTO</name>
-                            <description>Transmit Jabber Timeout</description>
-                            <bitOffset>3</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>RXOVF</name>
-                            <description>Receive Overflow</description>
-                            <bitOffset>4</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>TXUNF</name>
-                            <description>Transmit Underflow</description>
-                            <bitOffset>5</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>RXFLG</name>
-                            <description>Receive Flag</description>
-                            <bitOffset>6</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>RXBU</name>
-                            <description>Receive Buffer Unavailable</description>
-                            <bitOffset>7</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>RXSFLG</name>
-                            <description>Receive Stopped Flag</description>
-                            <bitOffset>8</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>RXWTOFLG</name>
-                            <description>Receive Watchdog Timeout Flag</description>
-                            <bitOffset>9</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>ETXFLG</name>
-                            <description>Early Transmit Flag</description>
-                            <bitOffset>10</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>FBERRFLG</name>
-                            <description>Fatal Bus Error Flag</description>
-                            <bitOffset>13</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>ERXFLG</name>
-                            <description>Early Receive Flag</description>
-                            <bitOffset>14</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>AINTS</name>
-                            <description>Abnormal Interrupt Summary</description>
-                            <bitOffset>15</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>NINTS</name>
-                            <description>Normal Interrupt Summary</description>
-                            <bitOffset>16</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>RXSTS</name>
-                            <description>Receive Process State</description>
-                            <bitOffset>17</bitOffset>
-                            <bitWidth>3</bitWidth>
-                            <access>read-only</access>
-                        </field>
-                        <field>
-                            <name>TXSTS</name>
-                            <description>Transmit Process State</description>
-                            <bitOffset>20</bitOffset>
-                            <bitWidth>3</bitWidth>
-                            <access>read-only</access>
-                        </field>
-                        <field>
-                            <name>ERRB</name>
-                            <description>Error Bits</description>
-                            <bitOffset>23</bitOffset>
-                            <bitWidth>3</bitWidth>
-                            <access>read-only</access>
-                        </field>
-                        <field>
-                            <name>MMCFLG</name>
-                            <description>MMC Flag</description>
-                            <bitOffset>27</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-only</access>
-                        </field>
-                        <field>
-                            <name>PMTFLG</name>
-                            <description>PMT Flag</description>
-                            <bitOffset>28</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-only</access>
-                        </field>
-                        <field>
-                            <name>TSTFLG</name>
-                            <description>Timestamp Trigger Flag</description>
-                            <bitOffset>29</bitOffset>
-                            <bitWidth>1</bitWidth>
-                            <access>read-only</access>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMAOPMOD</name>
-                    <displayName>DMAOPMOD</displayName>
-                    <description>Ethernet DMA operation mode
-          register</description>
-                    <addressOffset>0x18</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>STRX</name>
-                            <description>Start or Stop Receive</description>
-                            <bitOffset>1</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>OSECF</name>
-                            <description>Operate on Second Frame</description>
-                            <bitOffset>2</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXTHCTRL</name>
-                            <description>Receive Threshold Control</description>
-                            <bitOffset>3</bitOffset>
-                            <bitWidth>2</bitWidth>
-                        </field>
-                        <field>
-                            <name>FUF</name>
-                            <description>Forward Undersized Good Frames</description>
-                            <bitOffset>6</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>FERRF</name>
-                            <description>Forward Error Frames</description>
-                            <bitOffset>7</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>STTX</name>
-                            <description>Start or Stop Transmission Command</description>
-                            <bitOffset>13</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXTHCTRL</name>
-                            <description>Transmit Threshold Control</description>
-                            <bitOffset>14</bitOffset>
-                            <bitWidth>3</bitWidth>
-                        </field>
-                        <field>
-                            <name>FTXF</name>
-                            <description>Flush Transmit FIFO</description>
-                            <bitOffset>20</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXSF</name>
-                            <description>Transmit Store and Forward</description>
-                            <bitOffset>21</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>DISFRXF</name>
-                            <description>Disable Flushing of Received Frames</description>
-                            <bitOffset>24</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXSF</name>
-                            <description>Receive Store and Forward</description>
-                            <bitOffset>25</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>DISDT</name>
-                            <description>Disable Dropping of TCP/IP Checksum Error Frames</description>
-                            <bitOffset>26</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMAINTEN</name>
-                    <displayName>DMAINTEN</displayName>
-                    <description>Ethernet DMA interrupt enable
-          register</description>
-                    <addressOffset>0x1C</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>TXIEN</name>
-                            <description>Transmit Interrupt Enable</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXSEN</name>
-                            <description>Transmit Stopped Enable</description>
-                            <bitOffset>1</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXBUEN</name>
-                            <description>Transmit Buffer Unavailable Enable</description>
-                            <bitOffset>2</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXJTOEN</name>
-                            <description>Transmit Jabber Timeout Enable</description>
-                            <bitOffset>3</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXOVFEN</name>
-                            <description>Receive Overflow Interrupt Enable</description>
-                            <bitOffset>4</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>TXUNFEN</name>
-                            <description>Transmit Underflow Interrupt Enable</description>
-                            <bitOffset>5</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXIEN</name>
-                            <description>Receive Interrupt Enable</description>
-                            <bitOffset>6</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXBUEN</name>
-                            <description>Receive Buffer Unavailable Enable</description>
-                            <bitOffset>7</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXSEN</name>
-                            <description>Receive Stopped Enable</description>
-                            <bitOffset>8</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>RXWTOEN</name>
-                            <description>Receive Watchdog Timeout Enable</description>
-                            <bitOffset>9</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>ETXIEN</name>
-                            <description>Early Transmit Interrupt Enable</description>
-                            <bitOffset>10</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>FBERREN</name>
-                            <description>Fatal Bus Error Enable</description>
-                            <bitOffset>13</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>ERXIEN</name>
-                            <description>Early Receive Interrupt Enable</description>
-                            <bitOffset>14</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>AINTSEN</name>
-                            <description>Abnormal Interrupt Summary Enable</description>
-                            <bitOffset>15</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>NINTSEN</name>
-                            <description>Normal Interrupt Summary Enable</description>
-                            <bitOffset>16</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMAMFABOCNT</name>
-                    <displayName>DMAMFABOCNT</displayName>
-                    <description>Ethernet DMA missed frame and buffer
-          overflow counter register</description>
-                    <addressOffset>0x20</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>MISFCNT0</name>
-                            <description>Missed Frame Counter</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>16</bitWidth>
-                        </field>
-                        <field>
-                            <name>MISFCNTOVF</name>
-                            <description>Overflow Bit for Missed Frame Counter</description>
-                            <bitOffset>16</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                        <field>
-                            <name>AMISFCNT</name>
-                            <description>Application Missed Frame Counter</description>
-                            <bitOffset>17</bitOffset>
-                            <bitWidth>11</bitWidth>
-                        </field>
-                        <field>
-                            <name>OVFCNTOVF</name>
-                            <description>Overflow Bit for FIFO Overflow Counter</description>
-                            <bitOffset>28</bitOffset>
-                            <bitWidth>1</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMARXFLGWDT</name>
-                    <displayName>DMARXFLGWDT</displayName>
-                    <description>Ethernet DMA receive status watchdog timer
-          register</description>
-                    <addressOffset>0x24</addressOffset>
-                    <size>0x20</size>
-                    <access>read-write</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>RXWDTCNT</name>
-                            <description>RXFLG Watchdog Timer Count</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>8</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMAHTXD</name>
-                    <displayName>DMAHTXD</displayName>
-                    <description>Ethernet DMA current host transmit
-          descriptor register</description>
-                    <addressOffset>0x48</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>HTXDADDRP</name>
-                            <description>Host Transmit Descriptor Address Pointer</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMAHRXD</name>
-                    <displayName>DMAHRXD</displayName>
-                    <description>Ethernet DMA current host receive descriptor
-          register</description>
-                    <addressOffset>0x4C</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>HRXDADDRP</name>
-                            <description>Host Receive Descriptor Address Pointer</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMAHTXBADDR</name>
-                    <displayName>DMAHTXBADDR</displayName>
-                    <description>Ethernet DMA current host transmit buffer
-          address register</description>
-                    <addressOffset>0x50</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>HTXBADDRP</name>
-                            <description>Host Transmit Buffer Address Pointer</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
-                        </field>
-                    </fields>
-                </register>
-                <register>
-                    <name>DMAHRXBADDR</name>
-                    <displayName>DMAHRXBADDR</displayName>
-                    <description>Ethernet DMA current host receive buffer
-          address register</description>
-                    <addressOffset>0x54</addressOffset>
-                    <size>0x20</size>
-                    <access>read-only</access>
-                    <resetValue>0x00000000</resetValue>
-                    <fields>
-                        <field>
-                            <name>HRXBADDRP</name>
-                            <description>Host Receive Buffer Address Pointer</description>
-                            <bitOffset>0</bitOffset>
-                            <bitWidth>32</bitWidth>
                         </field>
                     </fields>
                 </register>

@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the USART firmware functions
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -78,16 +78,6 @@ void USART_Reset(USART_T* usart)
     {
         RCM_EnableAPB2PeriphReset(RCM_APB2_PERIPH_USART6);
         RCM_DisableAPB2PeriphReset(RCM_APB2_PERIPH_USART6);
-    }
-    else if (UART7 == usart)
-    {
-        RCM_EnableAPB1PeriphReset(RCM_APB1_PERIPH_UART7);
-        RCM_DisableAPB1PeriphReset(RCM_APB1_PERIPH_UART7);
-    }
-    else if (UART8 == usart)
-    {
-        RCM_EnableAPB1PeriphReset((uint32_t)RCM_APB1_PERIPH_UART8);
-        RCM_DisableAPB1PeriphReset((uint32_t)RCM_APB1_PERIPH_UART8);
     }
 }
 

@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the GPIO firmware functions
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -137,6 +137,71 @@ typedef enum
 /**
  * @brief GPIO Alternat function selection
  */
+#ifdef APM32F411
+typedef enum
+{
+    GPIO_AF_RTC_50Hz            = 0x00, /*!< RTC_50Hz Alternate Function mapping */
+    GPIO_AF_MCO                 = 0x00, /*!< MCO (MCO1 and MCO2) Alternate Function mapping */
+    GPIO_AF_TAMPER              = 0x00, /*!< TAMPER (TAMPER_1 and TAMPER_2) Alternate Function mapping */
+    GPIO_AF_SWJ                 = 0x00, /*!< SWJ (SWD and JTAG) Alternate Function mapping */
+    GPIO_AF_TRACE               = 0x00, /*!< TRACE Alternate Function mapping */
+
+    GPIO_AF_TMR1                = 0x01, /*!< TMR1 Alternate Function mapping */
+    GPIO_AF_TMR2                = 0x01, /*!< TMR2 Alternate Function mapping */
+    GPIO_AF_LPTMR               = 0x01, /*!< LPTMR Alternate Function mapping */
+
+    GPIO_AF_TMR3                = 0x02, /*!< TMR3 Alternate Function mapping */
+    GPIO_AF_TMR4                = 0x02, /*!< TMR4 Alternate Function mapping */
+    GPIO_AF_TMR5                = 0x02, /*!< TMR5 Alternate Function mapping */
+
+    GPIO_AF_TMR8                = 0x03, /*!< TMR8 Alternate Function mapping */
+    GPIO_AF_TMR9                = 0x03, /*!< TMR9 Alternate Function mapping */
+    GPIO_AF_TMR10               = 0x03, /*!< TMR10 Alternate Function mapping */
+    GPIO_AF_TMR11               = 0x03, /*!< TMR11 Alternate Function mapping */
+
+    GPIO_AF_I2C1                = 0x04, /*!< I2C1 Alternate Function mapping */
+    GPIO_AF_I2C2                = 0x04, /*!< I2C2 Alternate Function mapping */
+    GPIO_AF_I2C3                = 0x04, /*!< I2C3 Alternate Function mapping */
+
+    GPIO_AF_SPI1                = 0x05, /*!< SPI1/I2S1 Alternate Function mapping */
+    GPIO_AF_SPI2                = 0x05, /*!< SPI2/I2S2 Alternate Function mapping */
+    GPIO_AF5_SPI3               = 0x05, /*!< SPI3/I2S3 Alternate Function mapping */
+    GPIO_AF_SPI4                = 0x05, /*!< SPI4/I2S4 Alternate Function mapping */
+
+    GPIO_AF_SPI3                = 0x06, /*!< SPI3/I2S3 Alternate Function mapping */
+    GPIO_AF6_SPI4               = 0x06, /*!< SPI4 Alternate Function mapping */
+    GPIO_AF6_SPI5               = 0x06, /*!< SPI5 Alternate Function mapping */
+
+    GPIO_AF_USART1              = 0x07, /*!< USART1 Alternate Function mapping */
+    GPIO_AF_USART2              = 0x07, /*!< USART2 Alternate Function mapping */
+    GPIO_AF_USART3              = 0x07, /*!< USART3 Alternate Function mapping */
+    GPIO_AF7_SPI3               = 0x07, /*!< SPI3/I2S3ext Alternate Function mapping */
+    GPIO_AF_COMP                = 0x07, /*!< COMP1/COMP2 Alternate Function mapping*/
+
+    GPIO_AF_UART4               = 0x08, /*!< UART4 Alternate Function mapping */
+    GPIO_AF_UART5               = 0x08, /*!< UART5 Alternate Function mapping */
+    GPIO_AF_USART6              = 0x08, /*!< USART6 Alternate Function mapping */
+    GPIO_AF8_USART3             = 0x08, /*!< USART3 Alternate Function mapping */
+    GPIO_AF8_CAN1               = 0x08, /*!< CAN1 Alternate Function mapping */
+
+    GPIO_AF_CAN1                = 0x09, /*!< CAN1 Alternate Function mapping */
+    GPIO_AF_CAN2                = 0x09, /*!< CAN2 Alternate Function mapping */
+    GPIO_AF_TMR12               = 0x09, /*!< TMR12 Alternate Function mapping */
+    GPIO_AF_TMR13               = 0x09, /*!< TMR13 Alternate Function mapping */
+    GPIO_AF_TMR14               = 0x09, /*!< TMR14 Alternate Function mapping */
+    GPIO_AF9_I2C2               = 0x09, /*!< I2C2 Alternate Function mapping */
+    GPIO_AF9_I2C3               = 0x09, /*!< I2C3 Alternate Function mapping */
+    GPIO_AF_QSPI                = 0x09, /*!< QSPI Alternate Function mapping */
+
+
+    GPIO_AF_OTG_FS              = 0x0A, /*!< OTG_FS Alternate Function mapping */
+    GPIO_AF10_QSPI              = 0x0A, /*!< QSPI Alternate Function mapping */
+    GPIO_AF_SMC                 = 0x0A, /*!< QSPI Alternate Function mapping */
+
+    GPIO_AF11_SMC               = 0x0B, /*!< ETHERNET Alternate Function mapping */
+    GPIO_AF_SDIO                = 0x0B, /*!< ETHERNET Alternate Function mapping */
+} GPIO_AF_T;
+#else
 typedef enum
 {
     GPIO_AF_RTC_50Hz            = 0x00, /*!< RTC_50Hz Alternate Function mapping */
@@ -214,7 +279,7 @@ typedef enum
 
     GPIO_AF_EVENTOUT            = 0x0F, /*!< EVENTOUT Alternate Function mapping */
 } GPIO_AF_T;
-
+#endif /*  */
 /**@} end of group GPIO_Enumerations*/
 
 /** @addtogroup GPIO_Macros Macros

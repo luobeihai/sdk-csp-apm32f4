@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the EINT firmware functions
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -136,8 +136,8 @@ void EINT_ConfigStructInit(EINT_Config_T* eintConfig)
  *              @arg EINT_LINE_16   : External interrupt line 16
  *              @arg EINT_LINE_17   : External interrupt line 17
  *              @arg EINT_LINE_18   : External interrupt line 18
- *              @arg EINT_LINE_19   : External interrupt line 19
- *              @arg EINT_LINE_20   : External interrupt line 20
+ *              @arg EINT_LINE_19   : External interrupt line 19(Not for APM32F411)
+ *              @arg EINT_LINE_20   : External interrupt line 20(Not for APM32F411)
  *              @arg EINT_LINE_21   : External interrupt line 21
  *              @arg EINT_LINE_22   : External interrupt line 22
  *
@@ -173,8 +173,8 @@ void EINT_SelectSWInterrupt(uint32_t line)
  *              @arg EINT_LINE_16   : External interrupt line 16
  *              @arg EINT_LINE_17   : External interrupt line 17
  *              @arg EINT_LINE_18   : External interrupt line 18
- *              @arg EINT_LINE_19   : External interrupt line 19
- *              @arg EINT_LINE_20   : External interrupt line 20
+ *              @arg EINT_LINE_19   : External interrupt line 19(Not for APM32F411)
+ *              @arg EINT_LINE_20   : External interrupt line 20(Not for APM32F411)
  *              @arg EINT_LINE_21   : External interrupt line 21
  *              @arg EINT_LINE_22   : External interrupt line 22
  *
@@ -220,8 +220,8 @@ uint8_t EINT_ReadStatusFlag(EINT_LINE_T line)
  *              @arg EINT_LINE_16   : External interrupt line 16
  *              @arg EINT_LINE_17   : External interrupt line 17
  *              @arg EINT_LINE_18   : External interrupt line 18
- *              @arg EINT_LINE_19   : External interrupt line 19
- *              @arg EINT_LINE_20   : External interrupt line 20
+ *              @arg EINT_LINE_19   : External interrupt line 19(Not for APM32F411)
+ *              @arg EINT_LINE_20   : External interrupt line 20(Not for APM32F411)
  *              @arg EINT_LINE_21   : External interrupt line 21
  *              @arg EINT_LINE_22   : External interrupt line 22
  *
@@ -257,8 +257,8 @@ void EINT_ClearStatusFlag(uint32_t line)
  *              @arg EINT_LINE_16   : External interrupt line 16
  *              @arg EINT_LINE_17   : External interrupt line 17
  *              @arg EINT_LINE_18   : External interrupt line 18
- *              @arg EINT_LINE_19   : External interrupt line 19
- *              @arg EINT_LINE_20   : External interrupt line 20
+ *              @arg EINT_LINE_19   : External interrupt line 19(Not for APM32F411)
+ *              @arg EINT_LINE_20   : External interrupt line 20(Not for APM32F411)
  *              @arg EINT_LINE_21   : External interrupt line 21
  *              @arg EINT_LINE_22   : External interrupt line 22
  *
@@ -307,8 +307,8 @@ uint8_t EINT_ReadIntFlag(EINT_LINE_T line)
  *              @arg EINT_LINE_16   : External interrupt line 16
  *              @arg EINT_LINE_17   : External interrupt line 17
  *              @arg EINT_LINE_18   : External interrupt line 18
- *              @arg EINT_LINE_19   : External interrupt line 19
- *              @arg EINT_LINE_20   : External interrupt line 20
+ *              @arg EINT_LINE_19   : External interrupt line 19(Not for APM32F411)
+ *              @arg EINT_LINE_20   : External interrupt line 20(Not for APM32F411)
  *              @arg EINT_LINE_21   : External interrupt line 21
  *              @arg EINT_LINE_22   : External interrupt line 22
  *

@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the DMA firmware functions
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -476,7 +476,7 @@ void DMA_ClearStatusFlag(DMA_Stream_T* stream, uint32_t flag)
         dma = DMA2;
     }
 
-    if ((flag & 0x10000000) == SET)
+    if ((flag & 0x10000000) != RESET)
     {
         dma->LIFCLR = (flag & 0x0F7D0F7D);
     }
@@ -571,18 +571,18 @@ uint8_t DMA_ReadIntFlag(DMA_Stream_T* stream, DMA_INT_FLAG_T flag)
         dma = DMA2;
     }
 
-    /** Check if the interrupt enable bit is in the FCTRL or SCFG register */
+    /* Check if the interrupt enable bit is in the FCTRL or SCFG register */
     if ((flag & 0x60000000) != RESET)
     {
-        /** Check the enable bit in FEIEN register */
+        /* Check the enable bit in FEIEN register */
         enablestatus = stream->FCTRL_B.FEIEN;
     }
     else
     {
-        /** Get the interrupt enable position mask in SCFG register */
+        /* Get the interrupt enable position mask in SCFG register */
         tmpreg = ((flag & 0xE000)>> 11) ;
 
-        /** Check the enable bit in SCFG register */
+        /* Check the enable bit in SCFG register */
         enablestatus = (stream->SCFG & tmpreg);
     }
 

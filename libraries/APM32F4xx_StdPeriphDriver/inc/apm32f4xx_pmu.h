@@ -3,19 +3,19 @@
  *
  * @brief       This file contains all the functions prototypes for the PMU firmware library.
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -102,6 +102,15 @@ typedef enum
                             scaling output selection is ready */
 } PMU_FLAG_T;
 
+/**
+ * @brief Flash Sleep Mode
+ */
+typedef enum
+{
+    PMU_FLASH_Std_SLEEP_MODE,    /*!< Standard mode */
+    PMU_FLASH_DEEP_SLEEP_MODE    /*!< Stop mode or deep sleep mode */
+} PMU_FLASH_SLEEP_MODE_T;
+
 /**@} end of group PMU_Enumerations*/
 
 /** @defgroup PMU_Functions
@@ -126,6 +135,16 @@ void PMU_EnableFlashPowerDown(void);
 void PMU_DisableFlashPowerDown(void);
 void PMU_EnterSTOPMode(PMU_REGULATOR_T regulator, PMU_STOP_ENTRY_T entry);
 void PMU_EnterSTANDBYMode(void);
+
+void PMU_EnableLowPowerRegulatorLowVoltage(void);
+void PMU_DisableLowPowerRegulatorLowVoltage(void);
+void PMU_EnableMainRegulatorLowVoltage(void);
+void PMU_DisableMainRegulatorLowVoltage(void);
+void PMU_EnableADCOption1(void);
+void PMU_DisableADCOption1(void);
+void PMU_ConfigFlashSleepMode(PMU_FLASH_SLEEP_MODE_T sleepmode);
+void PMU_EnableFlashInterface(void);
+void PMU_DisableFlashInterface(void);
 
 /* flags */
 uint8_t PMU_ReadStatusFlag(PMU_FLAG_T flag);

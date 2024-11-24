@@ -5,19 +5,19 @@
  *
  * @details     This file contains all the peripheral register's definitions, bits definitions and memory mapping
  *
- * @version     V1.0.2
+ * @version     V1.0.4
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -71,7 +71,7 @@
  */
 #define __APM32F4XX_STDPERIPH_VERSION_MAIN   (0x01) /*!< [31:24] main version */
 #define __APM32F4XX_STDPERIPH_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
-#define __APM32F4XX_STDPERIPH_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
+#define __APM32F4XX_STDPERIPH_VERSION_SUB2   (0x03) /*!< [15:8]  sub2 version */
 #define __APM32F4XX_STDPERIPH_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 #define __APM32F4XX_STDPERIPH_VERSION        ((__APM32F4XX_STDPERIPH_VERSION_MAIN << 24)\
                                              |(__APM32F4XX_STDPERIPH_VERSION_SUB1 << 16)\
@@ -96,6 +96,22 @@
 #define __Vendor_SysTickConfig         0
 /** APM32 devices provides an FPU */
 #define __FPU_PRESENT                  1
+
+#if defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050) /* ARM Compiler V6 */
+  #ifndef __weak
+    #define __weak  __attribute__((weak))
+  #endif
+  #ifndef __packed
+    #define __packed  __attribute__((packed))
+  #endif
+#elif defined ( __GNUC__ ) && !defined (__CC_ARM) /* GNU Compiler */
+  #ifndef __weak
+    #define __weak   __attribute__((weak))
+  #endif /* __weak */
+  #ifndef __packed
+    #define __packed __attribute__((__packed__))
+  #endif /* __packed */
+#endif /* __GNUC__ */
 
 /**
  * @brief APM32F4xx Interrupt Number Definition, according to the selected device
@@ -272,6 +288,66 @@ typedef enum IRQn
     BN_IRQn                     = 84      /*!< BN global interrupt                                               */
 #endif /* APM32F41x */
 
+#if defined(APM32F411)
+    ADC_IRQn                    = 18,     /*!< ADC Interrupt                                                     */
+    CAN1_TX_IRQn                = 19,     /*!< CAN1 TX Interrupt                                                 */
+    CAN1_RX0_IRQn               = 20,     /*!< CAN1 RX0 Interrupt                                                */
+    CAN1_RX1_IRQn               = 21,     /*!< CAN1 RX1 Interrupt                                                */
+    CAN1_SCE_IRQn               = 22,     /*!< CAN1 SCE Interrupt                                                */
+    EINT9_5_IRQn                = 23,     /*!< External Line[9:5] Interrupts                                     */
+    TMR1_BRK_TMR9_IRQn          = 24,     /*!< TMR1 Break interrupt and TMR9 global interrupt                    */
+    TMR1_UP_TMR10_IRQn          = 25,     /*!< TMR1 Update Interrupt and TMR10 global interrupt                  */
+    TMR1_TRG_COM_TMR11_IRQn     = 26,     /*!< TMR1 Trigger and Commutation Interrupt and TMR11 global interrupt */
+    TMR1_CC_IRQn                = 27,     /*!< TMR1 Capture Compare Interrupt                                    */
+    TMR2_IRQn                   = 28,     /*!< TMR2 global Interrupt                                             */
+    TMR3_IRQn                   = 29,     /*!< TMR3 global Interrupt                                             */
+    TMR4_IRQn                   = 30,     /*!< TMR4 global Interrupt                                             */
+    I2C1_EV_IRQn                = 31,     /*!< I2C1 Event Interrupt                                              */
+    I2C1_ER_IRQn                = 32,     /*!< I2C1 Error Interrupt                                              */
+    I2C2_EV_IRQn                = 33,     /*!< I2C2 Event Interrupt                                              */
+    I2C2_ER_IRQn                = 34,     /*!< I2C2 Error Interrupt                                              */
+    SPI1_IRQn                   = 35,     /*!< SPI1 global Interrupt                                             */
+    SPI2_IRQn                   = 36,     /*!< SPI2 global Interrupt                                             */
+    USART1_IRQn                 = 37,     /*!< USART1 global Interrupt                                           */
+    USART2_IRQn                 = 38,     /*!< USART2 global Interrupt                                           */
+    USART3_IRQn                 = 39,     /*!< USART3 global Interrupt                                           */
+    EINT15_10_IRQn              = 40,     /*!< External Line[15:10] Interrupts                                   */
+    RTC_Alarm_IRQn              = 41,     /*!< RTC Alarm (A and B) through EINT Line Interrupt                   */
+    OTG_FS_WKUP_IRQn            = 42,     /*!< OTG_FS Wakeup through EINT line interrupt                          */
+    TMR8_BRK_TMR12_IRQn         = 43,     /*!< TMR8 Break Interrupt and TMR12 global interrupt                   */
+    TMR8_UP_TMR13_IRQn          = 44,     /*!< TMR8 Update Interrupt and TMR13 global interrupt                  */
+    TMR8_TRG_COM_TMR14_IRQn     = 45,     /*!< TMR8 Trigger and Commutation Interrupt and TMR14 global interrupt */
+    TMR8_CC_IRQn                = 46,     /*!< TMR8 Capture Compare Interrupt                                    */
+    DMA1_STR7_IRQn              = 47,     /*!< DMA1 Stream 7 Interrupt                                           */
+    EMMC_IRQn                   = 48,     /*!< FSMC global Interrupt                                             */
+    SDIO_IRQn                   = 49,     /*!< SDIO global Interrupt                                             */
+    TMR5_IRQn                   = 50,     /*!< TMR5 global Interrupt                                             */
+    SPI3_IRQn                   = 51,     /*!< SPI3 global Interrupt                                             */
+    UART4_IRQn                  = 52,     /*!< UART4 global Interrupt                                            */
+    UART5_IRQn                  = 53,     /*!< UART5 global Interrupt                                            */
+    DMA2_STR0_IRQn              = 56,     /*!< DMA2 Stream 0 global Interrupt                                    */
+    DMA2_STR1_IRQn              = 57,     /*!< DMA2 Stream 1 global Interrupt                                    */
+    DMA2_STR2_IRQn              = 58,     /*!< DMA2 Stream 2 global Interrupt                                    */
+    DMA2_STR3_IRQn              = 59,     /*!< DMA2 Stream 3 global Interrupt                                    */
+    DMA2_STR4_IRQn              = 60,     /*!< DMA2 Stream 4 global Interrupt                                    */
+    CAN2_TX_IRQn                = 63,     /*!< CAN2 TX Interrupt                                                 */
+    CAN2_RX0_IRQn               = 64,     /*!< CAN2 RX0 Interrupt                                                */
+    CAN2_RX1_IRQn               = 65,     /*!< CAN2 RX1 Interrupt                                                */
+    CAN2_SCE_IRQn               = 66,     /*!< CAN2 SCE Interrupt                                                */
+    OTG_FS_IRQn                 = 67,     /*!< OTG_FS global Interrupt                                           */
+    DMA2_STR5_IRQn              = 68,     /*!< DMA2 Stream 5 global interrupt                                    */
+    DMA2_STR6_IRQn              = 69,     /*!< DMA2 Stream 6 global interrupt                                    */
+    DMA2_STR7_IRQn              = 70,     /*!< DMA2 Stream 7 global interrupt                                    */
+    USART6_IRQn                 = 71,     /*!< USART6 global interrupt                                           */
+    I2C3_EV_IRQn                = 72,     /*!< I2C3 event interrupt                                              */
+    I2C3_ER_IRQn                = 73,     /*!< I2C3 error interrupt                                              */
+    RNG_IRQn                    = 80,     /*!< Rng global interrupt                                              */
+    FPU_IRQn                    = 81,     /*!< FPU global interrupt                                              */
+    QSPI_IRQn                   = 83,     /*!< QSPI global interrupt                                             */
+    SPI4_IRQn                   = 84,     /*!< SPI4 global interrupt                                             */
+    SPI5_IRQn                   = 85,     /*!< SPI5 global interrupt                                             */
+#endif /* APM32F411 */
+
 } IRQn_Type;
 
 /**
@@ -348,6 +424,1167 @@ enum {ERROR, SUCCESS};
 /** @defgroup Peripheral_registers_structures
   @{
 */
+
+/**
+  * @brief USB on-the-go full-speed and high-speed Global regs(OTG_FS_GLOBAL/OTG_HS_GLOBAL)
+  */
+typedef struct
+{
+    union
+    {
+        __IOM uint32_t word;
+
+
+        struct
+        {
+            __IOM uint32_t INEPTXFRSA : 16;
+            __IOM uint32_t INEPTXFDEP : 16;
+        } bit;
+    } ;
+} REG_DTXFIFO1_T;
+
+
+typedef struct
+{
+
+    union
+    {
+        __IOM uint32_t GCTRLSTS;
+
+        struct
+        {
+            __IM  uint32_t SREQSUC    : 1;
+            __IOM uint32_t SREQ       : 1;
+            __IM  uint32_t            : 6;
+            __IM  uint32_t HNSUC      : 1;
+            __IOM uint32_t HNPREQ     : 1;
+            __IOM uint32_t HHNPEN     : 1;
+            __IOM uint32_t DHNPEN     : 1;
+            __IM  uint32_t            : 4;
+            __IM  uint32_t CIDSTS     : 1;
+            __IM  uint32_t LSDEBT     : 1;
+            __IM  uint32_t ASVD       : 1;
+            __IM  uint32_t BSVD       : 1;
+        } GCTRLSTS_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t GINT;
+
+        struct
+        {
+            __IM  uint32_t            : 2;
+            __IOM uint32_t SEFLG      : 1;
+            __IM  uint32_t            : 5;
+            __IOM uint32_t SREQSUCCHG : 1;
+            __IOM uint32_t HNSUCCHG   : 1;
+            __IM  uint32_t            : 7;
+            __IOM uint32_t HNFLG      : 1;
+            __IOM uint32_t ADTOFLG    : 1;
+            __IOM uint32_t DEBDFLG    : 1;
+        } GINT_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t GAHBCFG;
+
+        struct
+        {
+            __IOM uint32_t GINTMASK   : 1;
+            __IOM uint32_t BLT        : 4;
+            __IOM uint32_t DMAEN      : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t TXFEL      : 1;
+            __IOM uint32_t PTXFEL     : 1;
+        } GAHBCFG_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t GUSBCFG;
+
+        struct
+        {
+            __IOM uint32_t SEFLG      : 3;
+            __IM  uint32_t            : 3;
+            __OM  uint32_t FSSTSEL    : 1;
+
+            __IM  uint32_t            : 1;
+            __IOM uint32_t SRPEN      : 1;
+            __IOM uint32_t HNPEN      : 1;
+            __IOM uint32_t TRTIM      : 4;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t PHYLPSEL   : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t ULPISEL    : 1;
+            __IOM uint32_t ULPIAR     : 1;
+            __IOM uint32_t ULPICLKP   : 1;
+            __IOM uint32_t ULPIEVDSEL : 1;
+            __IOM uint32_t ULPIEVC    : 1;
+            __IOM uint32_t DPSEL      : 1;
+            __IOM uint32_t SINI       : 1;
+            __IOM uint32_t NPTHQ      : 1;
+            __IOM uint32_t ULPIIPCDIS : 1;
+            __IM  uint32_t            : 3;
+            __IOM uint32_t FHMODE     : 1;
+            __IOM uint32_t FDMODE     : 1;
+            __IOM uint32_t CTXP       : 1;
+        } GUSBCFG_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t GRSTCTRL;
+
+        struct
+        {
+            __IOM uint32_t CSRST      : 1;
+            __IOM uint32_t HSRST      : 1;
+            __IOM uint32_t HFCNTRST   : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t RXFFLU     : 1;
+            __IOM uint32_t TXFFLU     : 1;
+            __IOM uint32_t TXFNUM     : 5;
+            __IM  uint32_t            : 19;
+            __IM  uint32_t DMAREQ     : 1;
+            __IM  uint32_t AHBMIDL    : 1;
+        } GRSTCTRL_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t GCINT;
+
+        struct
+        {
+            __IM  uint32_t CURMOSEL   : 1;
+            __IOM uint32_t MMIS       : 1;
+            __IM  uint32_t OTG        : 1;
+            __IOM uint32_t SOF        : 1;
+            __IM  uint32_t RXFNONE    : 1;
+            __IM  uint32_t NPTXFEM    : 1;
+            __IM  uint32_t GINNPNAKE  : 1;
+            __IM  uint32_t GONAKE     : 1;
+            __IM  uint32_t            : 2;
+            __IOM uint32_t ESUS       : 1;
+            __IOM uint32_t USBSUS     : 1;
+            __IOM uint32_t USBRST     : 1;
+            __IOM uint32_t ENUMD      : 1;
+            __IOM uint32_t ISOPD      : 1;
+            __IOM uint32_t EOPF       : 1;
+            __IM  uint32_t            : 2;
+            __IM  uint32_t INEP       : 1;
+            __IM  uint32_t ONEP       : 1;
+            __IOM uint32_t IIINTX     : 1;
+            __IOM uint32_t IP_OUTTX   : 1;
+            __IOM uint32_t DFSUS      : 1;
+            __IM  uint32_t            : 1;
+            __IM  uint32_t HPORT      : 1;
+            __IM  uint32_t HCHAN      : 1;
+            __IM  uint32_t PTXFE      : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t CINSTSCHG  : 1;
+            __IOM uint32_t DEDIS      : 1;
+            __IOM uint32_t SREQ       : 1;
+            __IOM uint32_t RWAKE      : 1;
+        } GCINT_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t GINTMASK;
+
+        struct
+        {
+            __IM  uint32_t            : 1;
+            __IOM uint32_t MMISM      : 1;
+            __IOM uint32_t OTGM       : 1;
+            __IOM uint32_t SOFM       : 1;
+            __IOM uint32_t RXFNONEM   : 1;
+            __IOM uint32_t NPTXFEMM   : 1;
+            __IOM uint32_t GINNPNAKEM : 1;
+            __IOM uint32_t GONAKEM    : 1;
+            __IM  uint32_t            : 2;
+            __IOM uint32_t ESUSM      : 1;
+            __IOM uint32_t USBSUSM    : 1;
+            __IOM uint32_t USBRSTM    : 1;
+            __IOM uint32_t ENUMDM     : 1;
+            __IOM uint32_t ISOPDM     : 1;
+            __IOM uint32_t EOPFM      : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t EPMISM     : 1;
+            __IOM uint32_t INEPM      : 1;
+            __IOM uint32_t OUTEPM     : 1;
+            __IOM uint32_t IIINTXM    : 1;
+            __IOM uint32_t IP_OUTTXM  : 1;
+            __IOM uint32_t DFSUSM     : 1;
+            __IM  uint32_t            : 1;
+            __IM  uint32_t HPORTM     : 1;
+            __IOM uint32_t HCHM       : 1;
+            __IOM uint32_t PTXFEM     : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t CIDSTSTCM  : 1;
+            __IOM uint32_t DEDISM     : 1;
+            __IOM uint32_t SREQM      : 1;
+            __IOM uint32_t RWAKEM     : 1;
+        } GINTMASK_B;
+    } ;
+
+    union
+    {
+        __IM  uint32_t GRXSTS;
+
+        struct
+        {
+            __IM  uint32_t CHNUM    : 4;
+            __IM  uint32_t BCNT     : 11;
+            __IM  uint32_t DPID     : 2;
+            __IM  uint32_t PSTS     : 4;
+        } GRXSTSR_H_B;
+
+        struct
+        {
+            __IM  uint32_t EPNUM    : 4;
+            __IM  uint32_t BCNT     : 11;
+            __IM  uint32_t DPID     : 2;
+            __IM  uint32_t PSTS     : 4;
+            __IM  uint32_t FNUM     : 4;
+        } GRXSTS_D_B;
+    } ;
+
+    union
+    {
+
+        __IM  uint32_t GRXSTSP;
+
+        struct
+        {
+            __IM  uint32_t CHNUM    : 4;
+            __IM  uint32_t BCNT     : 11;
+            __IM  uint32_t DPID     : 2;
+            __IM  uint32_t PSTS     : 4;
+        } GRXSTSP_H_B;
+
+        struct
+        {
+            __IM  uint32_t EPNUM    : 4;
+            __IM  uint32_t BCNT     : 11;
+            __IM  uint32_t DPID     : 2;
+            __IM  uint32_t PSTS     : 4;
+            __IM  uint32_t FNUM     : 4;
+        } GRXSTSP_D_B;
+
+    };
+
+    union
+    {
+        __IOM uint32_t GRXFIFO;
+
+        struct
+        {
+            __IOM uint32_t RXFDEP     : 16;
+        } GRXFIFO_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t GTXFCFG;
+
+        struct
+        {
+            __IOM uint32_t NPTXSA   : 16;
+            __IOM uint32_t NPTXFDEP : 16;
+        } GTXFCFG_H_B;
+
+        struct
+        {
+            __IOM uint32_t EPTXSA   : 16;
+            __IOM uint32_t EPTXFDEP : 16;
+        } GTXFCFG_D_B;
+    };
+
+    union
+    {
+        __IM  uint32_t GNPTXFQSTS;
+
+
+        struct
+        {
+            __IM  uint32_t NPTXFSA    : 16;
+            __IM  uint32_t NPTXRSA    : 8;
+            __IM  uint32_t NPTXRQ     : 7;
+        } GNPTXFQSTS_B;
+    } ;
+    __IM  uint32_t  RESERVED[2];
+
+    union
+    {
+        __IOM uint32_t GGCCFG;
+
+        struct
+        {
+            __IM  uint32_t            : 16;
+            __IOM uint32_t PWEN       : 1;
+            __IOM uint32_t I2CBEN     : 1;
+            __IOM uint32_t ADVBSEN    : 1;
+            __IOM uint32_t BDVBSEN    : 1;
+            __IOM uint32_t SOFPOUT    : 1;
+            __IOM uint32_t VBSDIS     : 1;
+        } GGCCFG_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t GCID;
+
+        struct
+        {
+            __IOM uint32_t PID        : 32;
+        } GCID_B;
+    } ;
+    __IM  uint32_t  RESERVED1[48];
+
+    union
+    {
+        __IOM uint32_t GHPTXFSIZE;
+
+        struct
+        {
+            __IOM uint32_t HPDTXFSA   : 16;
+            __IOM uint32_t HPDTXFDEP  : 16;
+        } GHPTXFSIZE_B;
+    } ;
+
+    REG_DTXFIFO1_T DTXFIFO[15];
+} USB_OTG_GLOBAL_T;
+
+
+/**
+  * @brief USB on the go high speed (OTG_HS2)
+  */
+
+typedef struct
+{
+
+    union
+    {
+        __IOM uint32_t USB_SWITCH;
+
+        struct
+        {
+            __IOM uint32_t usb_switch : 1;
+        } USB_SWITCH_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t POWERON_CORE;
+
+        struct
+        {
+            __IOM uint32_t poweron_core : 1;
+        } POWERON_CORE_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t USB_PLL_EN;
+
+        struct
+        {
+            __IOM uint32_t usb_pll_en : 1;
+        } USB_PLL_EN_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t SHORT_5V_ENABLE;
+
+        struct
+        {
+            __IOM uint32_t short_5v_enable : 1;
+        } SHORT_5V_ENABLE_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t OTG_SUSPENDM;
+
+        struct
+        {
+            __IOM uint32_t otg_suspendm : 1;
+        } OTG_SUSPENDM_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t TXBITSTUFFENABLE;
+
+        struct
+        {
+            __IOM uint32_t txbitstuffenable : 1;
+        } TXBITSTUFFENABLE_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t PLLICP_SEL_I2C;
+
+        struct
+        {
+            __IOM uint32_t pllicp_sel_i2c : 1;
+        } PLLICP_SEL_I2C_B;
+    } ;
+
+    union
+    {
+        __IOM  uint32_t HSZR_CNTL_I2C;
+
+        struct
+        {
+            __IOM  uint32_t hszr_cntl_i2c : 3;
+        } HSZR_CNTL_I2C_B;
+    } ;
+
+    union
+    {
+        __IOM  uint32_t SQVTH_CNTL_I2C;
+
+        struct
+        {
+            __IOM  uint32_t sqvth_cntl_i2c : 2;
+        } SQVTH_CNTL_I2C_B;
+    } ;
+
+    union
+    {
+        __IOM  uint32_t SW_RREF_I2C;
+
+        struct
+        {
+            __IOM  uint32_t sw_rref_i2c : 3;
+        } SW_RREF_I2C_B;
+    } ;
+
+    union
+    {
+        __IOM  uint32_t SW_BUF_I2C;
+
+        struct
+        {
+            __IOM  uint32_t sw_buf_i2c : 1;
+        } SW_BUF_I2C_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t TX2RX_T_CFG_I2C;
+
+        struct
+        {
+            __IOM uint32_t tx2rx_t_cfg_i2c : 2;
+        } TX2RX_T_CFG_I2C_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t TEST_ANA_FAST_I2C;
+
+        struct
+        {
+            __IOM uint32_t test_ana_fast_i2c : 3;
+        } TEST_ANA_FAST_I2C_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t CLK_MODE_I2C;
+
+        struct
+        {
+            __IOM uint32_t clk_mode_i2c : 3;
+        } CLK_MODE_I2C_B;
+    } ;
+
+    union
+    {
+        __IOM  uint32_t USB_DBNCE_FLTR_BYPASS;
+
+
+        struct
+        {
+            __IOM  uint32_t usb_dbnce_fltr_bypass : 1;
+
+        } USB_DBNCE_FLTR_BYPASS_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t USB_SS_SCALEDOWN_MODE;
+
+        struct
+        {
+            __IOM uint32_t usb_ss_scaledown_mode : 2;
+        } USB_SS_SCALEDOWN_MODE_B;
+    } ;
+} USB_OTG_HS2_T;
+
+
+
+typedef struct
+{
+    union
+    {
+        __IOM uint32_t HCH;
+
+        struct
+        {
+            __IOM uint32_t MAXPSIZE   : 11;
+            __IOM uint32_t EDPNUM     : 4;
+            __IOM uint32_t EDPDRT     : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t LSDV       : 1;
+            __IOM uint32_t EDPTYP     : 2;
+            __IOM uint32_t CNTSEL     : 2;
+            __IOM uint32_t DVADDR     : 7;
+            __IOM uint32_t ODDF       : 1;
+            __IOM uint32_t CHINT      : 1;
+            __IOM uint32_t CHEN       : 1;
+        } HCH_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t HCHSCTRL;
+
+        struct
+        {
+            __IOM uint32_t PADDR      : 7;
+            __IOM uint32_t HADDR      : 7;
+            __IOM uint32_t TPOST      : 2;
+            __IOM uint32_t DO_CMP_SPL : 1;
+            __IM  uint32_t            : 14;
+            __IOM uint32_t SPLEN      : 1;
+        } HCHSCTRL_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t HCHINT;
+
+        struct
+        {
+            __IOM uint32_t TSFCMPN    : 1;
+            __IOM uint32_t TSFCMPAN   : 1;
+            __IOM uint32_t AHBERR     : 1;
+            __IOM uint32_t RXSTALL    : 1;
+            __IOM uint32_t RXNAK      : 1;
+            __IOM uint32_t RXTXACK    : 1;
+            __IOM uint32_t RXNYET     : 1;
+            __IOM uint32_t TERR       : 1;
+            __IOM uint32_t BABBLE     : 1;
+            __IOM uint32_t FOVR       : 1;
+            __IOM uint32_t DTOG       : 1;
+        } HCHINT_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t HCHIMASK;
+
+        struct
+        {
+            __IOM uint32_t TSFCMPNM   : 1;
+            __IOM uint32_t TSFCMPANM  : 1;
+            __IOM uint32_t AHBERRM    : 1;
+            __IOM uint32_t RXSTALLM   : 1;
+            __IOM uint32_t RXNAKM     : 1;
+            __IOM uint32_t RXTXACKM   : 1;
+            __IOM uint32_t RXNYETM    : 1;
+            __IOM uint32_t TERRM      : 1;
+            __IOM uint32_t BABBLEM    : 1;
+            __IOM uint32_t FOVRM      : 1;
+            __IOM uint32_t DTOGM      : 1;
+        } HCHIMASK_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t HCHTSIZE;
+
+        struct
+        {
+            __IOM uint32_t TSFSIZE    : 19;
+            __IOM uint32_t PCKTCNT    : 10;
+            __IOM uint32_t DATAPID    : 2;
+            __IOM uint32_t DO_PING    : 1;
+        } HCHTSIZE_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t HCHDMA;
+
+        struct
+        {
+            __IOM uint32_t ADDR       : 32;
+        } HCHDMA_B;
+    } ;
+    __IM  uint32_t  RESERVED[2];
+} HCH_REGS_T;
+
+
+
+/**
+  * @brief USB on-the-go full-speed and high-speed (OTG_FS_HOST/OTG_HS_HOST)
+  */
+
+typedef struct
+{
+
+    union
+    {
+        __IOM uint32_t HCFG;
+
+        struct
+        {
+            __IOM uint32_t PHYCLKSEL  : 2;
+            __IM  uint32_t FSSPT      : 1;
+        } HCFG_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t HFIVL;
+
+        struct
+        {
+            __IOM uint32_t FIVL       : 16;
+        } HFIVL_B;
+    } ;
+
+    union
+    {
+        __IM  uint32_t HFIFM;
+
+
+        struct
+        {
+            __IM  uint32_t FNUM       : 16;
+            __IM  uint32_t FRTIME     : 16;
+        } HFIFM_B;
+    } ;
+    __IM  uint32_t  RESERVED;
+
+    union
+    {
+        __IOM uint32_t HPTXSTS;
+
+
+        struct
+        {
+            __IOM uint32_t FSPACE     : 16;
+            __IM  uint32_t QSPACE     : 8;
+            __IM  uint32_t QTOP       : 8;
+        } HPTXSTS_B;
+    } ;
+
+    union
+    {
+        __IM  uint32_t HACHINT;
+
+        struct
+        {
+            __IM  uint32_t ACHINT     : 16;
+        } HACHINT_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t HACHIMASK;
+
+        struct
+        {
+            __IOM uint32_t ACHIMASK   : 16;
+        } HACHIMASK_B;
+    } ;
+    __IM  uint32_t  RESERVED1[9];
+
+    union
+    {
+        __IOM uint32_t HPORTCSTS;
+
+        struct
+        {
+            __IM  uint32_t PCNNTFLG   : 1;
+            __IOM uint32_t PCINTFLG   : 1;
+            __IOM uint32_t PEN        : 1;
+            __IOM uint32_t PENCHG     : 1;
+            __IM  uint32_t POVC       : 1;
+            __IOM uint32_t POVCCHG    : 1;
+            __IOM uint32_t PRS        : 1;
+            __IOM uint32_t PSUS       : 1;
+            __IOM uint32_t PRST       : 1;
+            __IM  uint32_t            : 1;
+            __IM  uint32_t PDLSTS     : 2;
+            __IOM uint32_t PP         : 1;
+            __IOM uint32_t PTSEL      : 4;
+            __IM  uint32_t PSPDSEL    : 2;
+        } HPORTCSTS_B;
+    } ;
+    __IM  uint32_t  RESERVED2[47];
+
+    HCH_REGS_T REGS_HCH[12];
+
+} USB_OTG_HOST_T;
+
+
+/**
+  * @brief IN endpoint type define
+  */
+typedef struct
+{
+    /*!< (offset Add: 0x100 + 0x20 * m; m = 0~3) OTG_FS device control IN endpoint x control register (OTG_FS_DIEPCTLx)*/
+    union
+    {
+        __IOM uint32_t DIEPCTRL;
+
+        struct
+        {
+            __IOM uint32_t MAXPS      : 11;
+            __IM  uint32_t            : 4;
+            __IOM uint32_t USBAEP     : 1;
+            __IM  uint32_t EOF        : 1;
+            __IM  uint32_t NAKSTS     : 1;
+            __IOM uint32_t EPTYPE     : 2;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t STALLH     : 1;
+            __IOM uint32_t TXFNUM     : 4;
+            __OM  uint32_t NAKCLR     : 1;
+            __OM  uint32_t NAKSET     : 1;
+            __OM  uint32_t DPIDSET    : 1;
+            __OM  uint32_t OFSET      : 1;
+            __IOM uint32_t EPDIS      : 1;
+            __IOM uint32_t EPEN       : 1;
+        } DIEPCTRL_B;
+    } ;
+
+    __IM  uint32_t  RESERVED1;
+
+    /*!< (offset Add: 0x108 + 0x20 * m; m = 0~3) device endpoint-x interrupt register */
+    union
+    {
+        __IOM uint32_t DIEPINT;
+
+        struct
+        {
+            __IOM uint32_t TSFCMP     : 1;
+            __IOM uint32_t EPDIS      : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t TO         : 1;
+            __IOM uint32_t ITXEMP     : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t IEPNAKE    : 1;
+            __IM  uint32_t TXFE       : 1;
+        } DIEPINT_B;
+    } ;
+
+    __IM  uint32_t  RESERVED2;
+
+    /*!< (offset Add: 0x110 + 0x20 * m; m = 0~3) device endpoint-0 transfer size register */
+    union
+    {
+        __IOM uint32_t DIEPTRS;
+
+        struct
+        {
+            __IOM uint32_t EPTRS      : 19;
+            __IOM uint32_t EPPCNT     : 10;
+            __IOM uint32_t TXDCNT     : 2;
+        } DIEPTRS_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t DIEPDMA;
+
+        struct
+        {
+            __IOM uint32_t DMAADDR    : 32;
+        } DIEPDMA_B;
+    } ;
+
+    /*!< (offset Add: 0x118 + 0x20 * m; m = 0~3) OTG_FS device IN endpoint transmit FIFO status
+                        register                                                   */
+    union
+    {
+        __IM  uint32_t DITXFSTS;
+
+        struct
+        {
+            __IM  uint32_t INEPTXFSA : 16;
+        } DITXFSTS_B;
+    } ;
+
+    __IM  uint32_t  RESERVED4;
+
+} IN_EP_T;
+
+/**
+  * @brief OUT endpoint type define
+  */
+typedef struct
+{
+    /*!< (offset Add: 0x300 + 0x20 * m; m = 0~3) device endpoint control register */
+    union
+    {
+        __IOM uint32_t DOEPCTRL;
+
+        struct
+        {
+            __IOM uint32_t MAXPS          : 11;
+            __IM  uint32_t                : 4;
+            __IOM uint32_t USBAEP         : 1;
+            __IM  uint32_t EOF            : 1;
+            __IM  uint32_t NAKSTS         : 1;
+            __IOM uint32_t EPTYPE         : 2;
+            __IOM uint32_t SNMEN          : 1;
+            __IOM uint32_t STALLH         : 1;
+            __IM  uint32_t                : 4;
+            __OM  uint32_t NAKCLR         : 1;
+            __OM  uint32_t NAKSET         : 1;
+            __OM  uint32_t DPIDSET        : 1;
+            __OM  uint32_t OFSET          : 1;
+            __IOM uint32_t EPDIS          : 1;
+            __IOM uint32_t EPEN           : 1;
+        } DOEPCTRL_B;
+    } ;
+
+    __IM  uint32_t  RESERVED1;
+
+    /*!< (offset Add: 0x308 + 0x20 * m; m = 0~3) device endpoint interrupt register */
+    union
+    {
+        __IOM uint32_t DOEPINT;
+
+        struct
+        {
+            __IOM uint32_t TSFCMP     : 1;
+            __IOM uint32_t EPDIS      : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t SETPCMP    : 1;
+            __IOM uint32_t RXOTDIS    : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t RXBSP      : 1;
+            __IM  uint32_t            : 7;
+            __IOM uint32_t NYET       : 1;
+        } DOEPINT_B;
+    } ;
+
+    __IM  uint32_t  RESERVED2;
+
+    /*!< (offset Add: 0x310 + 0x20 * m; m = 1~3) device OUT endpoint transfer size register */
+    union
+    {
+        __IOM uint32_t DOEPTRS;
+
+        struct
+        {
+            __IOM uint32_t EPTRS        : 19;
+            __IOM uint32_t EPPCNT       : 10;
+            __IOM uint32_t PID_SPCNT    : 2;
+        } DOEPTRS_B;
+
+    } ;
+
+    union
+    {
+        __IOM uint32_t DOEPDMA;
+
+        struct
+        {
+            __IOM uint32_t DMAADDR    : 32;
+        } DOEPDMA_B;
+    } ;
+    __IM  uint32_t  RESERVED3[2];
+
+} OUT_EP_T;
+
+/**
+  * @brief USB on-the-go full-speed and high-speed (OTG_FS_DEVICE/OTG_HS_DEVICE)
+  */
+
+typedef struct
+{
+
+    union
+    {
+        __IOM uint32_t DCFG;
+
+        struct
+        {
+            __IOM uint32_t DSPDSEL    : 2;
+            __IOM uint32_t SENDOUT    : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t DADDR      : 7;
+            __IOM uint32_t PFITV      : 2;
+        } DCFG_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t DCTRL;
+
+        struct
+        {
+            __IOM uint32_t RWKUPS     : 1;
+            __IOM uint32_t SDCNNT     : 1;
+            __IM  uint32_t GINAKSTS   : 1;
+            __IM  uint32_t GONAKSTS   : 1;
+            __IOM uint32_t TESTSEL    : 3;
+            __OM  uint32_t GINAKSET   : 1;
+            __OM  uint32_t GINAKCLR   : 1;
+            __OM  uint32_t GONAKSET   : 1;
+            __OM  uint32_t GONAKCLR   : 1;
+            __IOM uint32_t POPROGCMP  : 1;
+        } DCTRL_B;
+    } ;
+
+    union
+    {
+        __IM  uint32_t DSTS;
+
+        struct
+        {
+            __IM  uint32_t SUSSTS     : 1;
+            __IM  uint32_t ENUMSPD    : 2;
+            __IM  uint32_t ERTERR     : 1;
+            __IM  uint32_t            : 4;
+            __IM  uint32_t SOFNUM     : 14;
+        } DSTS_B;
+    } ;
+    __IM  uint32_t  RESERVED;
+
+    union
+    {
+        __IOM uint32_t DINIMASK;
+
+
+        struct
+        {
+            __IOM uint32_t TSFCMPM    : 1;
+            __IOM uint32_t EPDISM     : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t TOM        : 1;
+            __IOM uint32_t ITXEMPM    : 1;
+            __IOM uint32_t IEPMMM     : 1;
+            __IOM uint32_t IEPNAKEM   : 1;
+        } DINIMASK_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t DOUTIMASK;
+
+
+        struct
+        {
+            __IOM uint32_t TSFCMPM    : 1;
+            __IOM uint32_t EPDISM     : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t SETPCMPM   : 1;
+            __IOM uint32_t OTXEMPM    : 1;
+        } DOUTIMASK_B;
+    } ;
+
+    union
+    {
+        __IM  uint32_t DAEPINT;
+
+        struct
+        {
+            __IM  uint32_t INEPINT    : 16;
+            __IM  uint32_t OUTEPINT   : 16;
+        } DAEPINT_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t DAEPIMASK;
+
+        struct
+        {
+            __IOM uint32_t AINM       : 16;
+            __IOM uint32_t AOUTM      : 16;
+        } DAEPIMASK_B;
+    } ;
+    __IM  uint32_t  RESERVED1[2];
+
+    union
+    {
+        __IOM uint32_t DVBUSDTIM;
+
+        struct
+        {
+            __IOM uint32_t VBUSDTIM   : 16;
+        } DVBUSDTIM_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t DVBUSPTIM;
+
+        struct
+        {
+            __IOM uint32_t VBUSPTIM   : 12;
+        } DVBUSPTIM_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t DTHCTRL;
+
+        struct
+        {
+            __IOM uint32_t NSINTHEN   : 1;
+            __IOM uint32_t SINTHEN    : 1;
+            __IOM uint32_t TXTHLTH    : 9;
+            __IM  uint32_t            : 5;
+            __IOM uint32_t RXTHEN     : 1;
+            __IOM uint32_t RXTHLTH    : 9;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t APARKEN    : 1;
+        } DTHCTRL_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t DIEIMASK;
+
+
+        struct
+        {
+            __IOM uint32_t INEM       : 16;
+        } DIEIMASK_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t DEPINT;
+
+        struct
+        {
+            __IM  uint32_t            : 1;
+            __IOM uint32_t IN1INT     : 1;
+            __IM  uint32_t            : 15;
+            __IOM uint32_t OUT1INT    : 1;
+        } DEPINT_B;
+    } ;
+
+    union
+    {
+        __IOM uint32_t DEPIMASK;
+
+
+        struct
+        {
+            __IM  uint32_t            : 1;
+            __IOM uint32_t IN1M       : 1;
+            __IM  uint32_t            : 15;
+            __IOM uint32_t OUT1M      : 1;
+        } DEPIMASK_B;
+    } ;
+    __IM  uint32_t  RESERVED2;
+
+    union
+    {
+        __IOM uint32_t DIN1IMASK;
+
+        struct
+        {
+            __IOM uint32_t TSFCMPM    : 1;
+            __IOM uint32_t EPDISM     : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t TOM        : 1;
+            __IOM uint32_t ITXEMPM    : 1;
+            __IOM uint32_t IEPMMM     : 1;
+            __IOM uint32_t IEPNAKEM   : 1;
+            __IM  uint32_t            : 1;
+            __IOM uint32_t TXFUDRM    : 1;
+            __IOM uint32_t BNAM       : 1;
+            __IM  uint32_t            : 3;
+            __IOM uint32_t NAKM       : 1;
+        } DIN1IMASK_B;
+    } ;
+    __IM  uint32_t  RESERVED3[15];
+
+    union
+    {
+        __IOM uint32_t DOUT1MASK;
+
+        struct
+        {
+            __IOM uint32_t TSFCMPM    : 1;
+            __IOM uint32_t EPDISM     : 1;
+            __IOM uint32_t AHBERRIM   : 1;
+            __IM  uint32_t            : 5;
+            __IOM uint32_t OPERRM     : 1;
+            __IOM uint32_t BNAM       : 1;
+            __IM  uint32_t            : 2;
+            __IOM uint32_t BERRM      : 1;
+            __IOM uint32_t NAKM       : 1;
+            __IOM uint32_t NYETM      : 1;
+        } DOUT1MASK_B;
+    } ;
+    __IM  uint32_t  RESERVED4[30];
+
+    IN_EP_T EP_IN[8];
+
+    __IM  uint32_t  RESERVED5[64];
+
+    OUT_EP_T EP_OUT[8];
+
+} USB_OTG_DEVICE_T;
+
+
+/**
+  * @brief USB on-the-go full-speed and high-speed (OTG_FS_PWRCLK/OTG_HS_PWRCLK)
+  */
+
+typedef struct
+{
+
+    union
+    {
+        __IOM uint32_t PCGCTRL;
+
+        struct
+        {
+            __IOM uint32_t PCLKSTOP   : 1;
+            __IOM uint32_t GCLK       : 1;
+            __IM  uint32_t            : 2;
+            __IOM uint32_t PHYSUS     : 1;
+        } PCGCTRL_B;
+    } ;
+} USB_OTG_PWRCLK_T;
+
+/**
+  * @brief USB on-the-go full-speed and high-speed (OTG_FS_FIFO/OTG_HS_FIFO)
+  */
+typedef struct
+{
+    __IOM uint32_t DATA;
+
+    __IM uint32_t RESERVED[1023];
+} USB_OTG_FIFO_DATA_T;
+
+typedef struct
+{
+    USB_OTG_FIFO_DATA_T FIFO[11];
+
+} USB_OTG_FIFO_T;
 
 /**
 * @brief General purpose I/O (GPIO)
@@ -694,8 +1931,8 @@ typedef struct
             __IOM uint32_t RTCPSC          : 5;
             __IOM uint32_t MCO1SEL         : 2;
             __IOM uint32_t I2SSEL          : 1;
-            __IOM uint32_t MCO1PRE         : 3;
-            __IOM uint32_t MCO2PRE         : 3;
+            __IOM uint32_t MCO1PSC         : 3;
+            __IOM uint32_t MCO2PSC         : 3;
             __IOM uint32_t MCO2SEL         : 2;
         } CFG_B;
     } ;
@@ -758,7 +1995,7 @@ typedef struct
             __IM  uint32_t RESERVED3       : 2;
             __IOM uint32_t ETHRST          : 1;
             __IM  uint32_t RESERVED4       : 3;
-            __IOM uint32_t OTG_HS1RST        : 1;
+            __IOM uint32_t OTG_HS1RST      : 1;
             __IM  uint32_t RESERVED5       : 2;
         } AHB1RST_B;
     } ;
@@ -771,11 +2008,17 @@ typedef struct
         struct
         {
             __IOM uint32_t DCIRST          : 1;
-            __IM  uint32_t RESERVED1       : 3;
+            __IOM uint32_t FPURST          : 1;
+#ifdef APM32F411
+            __IOM uint32_t QSPIRST         : 1;
+#else
+            __IOM uint32_t BNRST           : 1;
+#endif
+            __IOM uint32_t SMRST           : 1;
             __IOM uint32_t CRYPRST         : 1;
             __IOM uint32_t HASHP           : 1;
             __IOM uint32_t RNGRST          : 1;
-            __IOM uint32_t OTG_FSRST        : 1;
+            __IOM uint32_t OTG_FSRST       : 1;
             __IM  uint32_t RESERVED2       : 24;
         } AHB2RST_B;
     } ;
@@ -787,7 +2030,11 @@ typedef struct
 
         struct
         {
+#ifdef APM32F411
+            __IOM uint32_t SMCRST          : 1;
+#else
             __IOM uint32_t EMMCRST         : 1;
+#endif
             __IM  uint32_t RESERVED        : 31;
         } AHB3RST_B;
     } ;
@@ -850,13 +2097,15 @@ typedef struct
             __IM  uint32_t RESERVED3       : 2;
             __IOM uint32_t SDIORST         : 1;
             __IOM uint32_t SPI1RST         : 1;
-            __IM  uint32_t RESERVED4       : 1;
+            __IOM uint32_t SPI4RST         : 1;
             __IOM uint32_t SYSCFGRST       : 1;
             __IM  uint32_t RESERVED5       : 1;
             __IOM uint32_t TMR9RST         : 1;
             __IOM uint32_t TMR10RST        : 1;
             __IOM uint32_t TMR11RST        : 1;
-            __IM  uint32_t RESERVED6       : 13;
+            __IM  uint32_t RESERVED6       : 1;
+            __IOM uint32_t SPI5RST         : 1;
+            __IM  uint32_t RESERVED7       : 11;
         } APB2RST_B;
     } ;
 
@@ -905,7 +2154,13 @@ typedef struct
         struct
         {
             __IOM uint32_t DCIEN           : 1;
-            __IM  uint32_t RESERVED1       : 3;
+            __IOM uint32_t FPUEN           : 1;
+#ifdef APM32F411
+            __IOM uint32_t QSPIEN          : 1;
+#else
+            __IOM uint32_t BNEN            : 1;
+#endif
+            __IOM uint32_t SMEN            : 1;
             __IOM uint32_t CRYPEN          : 1;
             __IOM uint32_t HASHP           : 1;
             __IOM uint32_t RNGEN           : 1;
@@ -921,7 +2176,11 @@ typedef struct
 
         struct
         {
-            __IOM uint32_t EMMCEN          : 1;
+#ifdef APM32F411
+            __IOM uint32_t SMCRST          : 1;
+#else
+            __IOM uint32_t EMMCRST         : 1;
+#endif
             __IM  uint32_t RESERVED        : 31;
         } AHB3CLKEN_B;
     } ;
@@ -985,13 +2244,15 @@ typedef struct
             __IOM uint32_t ADC3EN          : 1;
             __IOM uint32_t SDIOEN          : 1;
             __IOM uint32_t SPI1EN          : 1;
-            __IM  uint32_t RESERVED3       : 1;
+            __IM  uint32_t SPI4EN          : 1;
             __IOM uint32_t SYSCFGEN        : 1;
             __IM  uint32_t RESERVED4       : 1;
             __IOM uint32_t TMR9EN          : 1;
             __IOM uint32_t TMR10EN         : 1;
             __IOM uint32_t TMR11EN         : 1;
-            __IM  uint32_t RESERVED5       : 13;
+            __IM  uint32_t RESERVED5       : 1;
+            __IOM uint32_t SPI5EN          : 1;
+            __IM  uint32_t RESERVED6       : 11;
         } APB2CLKEN_B;
     } ;
 
@@ -1042,7 +2303,13 @@ typedef struct
         struct
         {
             __IOM uint32_t DCIEN           : 1;
-            __IM  uint32_t RESERVED1       : 3;
+            __IOM uint32_t FPUEN           : 1;
+#ifdef APM32F411
+            __IOM uint32_t QSPIEN          : 1;
+#else
+            __IOM uint32_t BNEN            : 1;
+#endif /* APM32F411 */
+            __IOM uint32_t SMEN            : 1;
             __IOM uint32_t CRYPEN          : 1;
             __IOM uint32_t HASHPEN         : 1;
             __IOM uint32_t RNGEN           : 1;
@@ -1122,13 +2389,15 @@ typedef struct
             __IOM uint32_t ADC3EN          : 1;
             __IOM uint32_t SDIOEN          : 1;
             __IOM uint32_t SPI1EN          : 1;
-            __IM  uint32_t RESERVED3       : 1;
+            __IM  uint32_t SPI4EN          : 1;
             __IOM uint32_t SYSCFGEN        : 1;
             __IM  uint32_t RESERVED4       : 1;
             __IOM uint32_t TMR9EN          : 1;
             __IOM uint32_t TMR10EN         : 1;
             __IOM uint32_t TMR11EN         : 1;
-            __IM  uint32_t RESERVED5       : 13;
+            __IM  uint32_t RESERVED5       : 1;
+            __IOM uint32_t SPI5EN          : 1;
+            __IOM uint32_t RESERVED6       : 11;
         } LPAPB2CLKEN_B;
     } ;
 
@@ -1144,7 +2413,8 @@ typedef struct
             __IOM uint32_t LSEEN           : 1;
             __IM  uint32_t LSERDYFLG       : 1;
             __IOM uint32_t LSEBCFG         : 1;
-            __IM  uint32_t RESERVED1       : 5;
+            __IOM uint32_t LSESEL          : 1;
+            __IM  uint32_t RESERVED1       : 4;
             __IOM uint32_t RTCSRCSEL       : 2;
             __IM  uint32_t RESERVED2       : 5;
             __IOM uint32_t RTCCLKEN        : 1;
@@ -1198,12 +2468,27 @@ typedef struct
 
         struct
         {
-            __IM  uint32_t RESERVED1       : 6;
+            __IOM uint32_t PLL2B           : 6;
             __IOM uint32_t PLL2A           : 9;
             __IM  uint32_t RESERVED2       : 13;
             __IOM uint32_t PLL2C           : 3;
             __IM  uint32_t RESERVED3       : 1;
         } PLL2CFG_B;
+    } ;
+
+    __IM  uint32_t  RESERVED7;
+
+    /** Clock configuration select register */
+    union
+    {
+        __IOM uint32_t CFGSEL;
+
+        struct
+        {
+            __IM  uint32_t RESERVED1       : 24;
+            __IOM uint32_t CLKPSEL         : 1;
+            __IM  uint32_t RESERVED2       : 7;
+        } CFGSEL_B;
     } ;
 } RCM_T;
 
@@ -1358,8 +2643,13 @@ typedef struct
 
         struct
         {
+#ifdef APM32F411
+            __IOM uint32_t WAITP      : 4;
+            __IM  uint32_t RESERVED1  : 4;
+#else
             __IOM uint32_t WAITP      : 3;
             __IM  uint32_t RESERVED1  : 5;
+#endif/* APM32F411 */
             __IOM uint32_t PREFEN     : 1;
             __IOM uint32_t ICACHEEN   : 1;
             __IOM uint32_t DCACHEEN   : 1;
@@ -1449,8 +2739,14 @@ typedef struct
             __IOM uint32_t RSTSTOP    : 1;
             __IOM uint32_t RSTSTDB    : 1;
             __IOM uint32_t RPROT      : 8;
+#ifdef APM32F411
+            __IOM uint32_t NWPROT     : 8;
+            __IM  uint32_t RESERVED2  : 7;
+#else
             __IOM uint32_t NWPROT     : 12;
-            __IM  uint32_t RESERVED2  : 4;
+            __IM  uint32_t RESERVED2  : 3;
+#endif/* APM32F411 */
+            __IOM uint32_t PCROPEN    : 1;
         } OPTCTRL_B;
     } ;
 } FMC_T;
@@ -1871,9 +3167,15 @@ typedef struct
             __IOM uint32_t PLSEL           : 3;
             __IOM uint32_t BPWEN           : 1;
             __IOM uint32_t FPDSM           : 1;
-            __IM  uint32_t RESERVED1       : 4;
-            __IOM uint32_t VOSSEL          : 1;
-            __IM  uint32_t RESERVED2       : 17;
+            __IOM uint32_t LPRLV           : 1;
+            __IOM uint32_t MRLV            : 1;
+            __IM  uint32_t RESERVED1       : 1;
+            __IOM uint32_t ADCO1EN         : 1;
+            __IOM uint32_t VOSSEL          : 2;
+            __IM  uint32_t RESERVED2       : 4;
+            __IOM uint32_t FSMODE          : 1;
+            __IOM uint32_t FLASHEN         : 1;
+            __IM  uint32_t RESERVED3       : 10;
         } CTRL_B;
     };
 
@@ -1954,14 +3256,14 @@ typedef struct
         struct
         {
             __IOM uint32_t SMFSEL     : 3;
-            __IOM uint32_t OCCSEL     : 1;
+            __IM  uint32_t RESERVED1  : 1;
             __IOM uint32_t TRGSEL     : 3;
             __IOM uint32_t MSMEN      : 1;
             __IOM uint32_t ETFCFG     : 4;
             __IOM uint32_t ETPCFG     : 2;
             __IOM uint32_t ECEN       : 1;
             __IOM uint32_t ETPOL      : 1;
-            __IM  uint32_t RESERVED   : 16;
+            __IM  uint32_t RESERVED2  : 16;
         } SMCTRL_B;
     } ;
 
@@ -3258,6 +4560,19 @@ typedef struct
             __IM  uint32_t RESERVED        : 26;
         } RISETMAX_B;
     };
+
+    /** @brief  Filter control register */
+    union
+    {
+        __IOM uint32_t FILTER;
+
+        struct
+        {
+            __IOM uint32_t DNFCFG          : 4;
+            __IOM uint32_t ANFDIS          : 1;
+            __IM  uint32_t RESERVED        : 27;
+        } FILTER_B;
+    };
 } I2C_T;
 
 /**
@@ -3325,11 +4640,11 @@ typedef struct
             __IM  uint32_t RESERVED2       : 4;
             __IOM uint32_t INJGEXTTRGSEL   : 4;
             __IOM uint32_t INJEXTTRGEN     : 2;
-            __IOM uint32_t INJCHSC         : 1;
+            __IOM uint32_t INJSWSC         : 1;
             __IM  uint32_t RESERVED3       : 1;
             __IOM uint32_t REGEXTTRGSEL    : 4;
             __IOM uint32_t REGEXTTRGEN     : 2;
-            __IOM uint32_t REGCHSC         : 1;
+            __IOM uint32_t REGSWSC         : 1;
             __IM  uint32_t RESERVED4       : 1;
         } CTRL2_B;
     } ;
@@ -3572,6 +4887,7 @@ typedef struct
             __IM  uint32_t RESERVED        : 16;
         } REGDATA_B;
     };
+
 } ADC_T;
 
 typedef struct
@@ -4309,8 +5625,8 @@ typedef struct
 
         struct
         {
-            __IOM uint32_t DBCE            : 1;
             __IOM uint32_t CRCE            : 1;
+            __IOM uint32_t DBCE            : 1;
             __IOM uint32_t CRTO            : 1;
             __IOM uint32_t DTO             : 1;
             __IOM uint32_t TXFUE           : 1;
@@ -5511,9 +6827,11 @@ typedef struct
 
         struct
         {
-            __IM uint32_t RESERVED1        : 23;
-            __IOM uint32_t ENETSEL         : 1;
-            __IM uint32_t RESERVED2        : 8;
+            __IM  uint32_t RESERVED1        : 16;
+            __IOM uint32_t ADCxO2EN         : 1;
+            __IM  uint32_t RESERVED2        : 6;
+            __IOM uint32_t ENETSEL          : 1;
+            __IM  uint32_t RESERVED3        : 8;
         } PMC_B;
     };
 
@@ -7142,12 +8460,402 @@ typedef struct
 } SM4_T;
 
 /**
+ * @brief    COMP
+ */
+typedef struct
+{
+    /** COMP1 control status register */
+    union
+    {
+        __IOM uint32_t CSTS1;
+
+        struct
+        {
+            __IOM   uint32_t EN1           : 1;
+            __IM    uint32_t RESERVED1     : 3;
+            __IOM   uint32_t INMCCFG1      : 2;
+            __IM    uint32_t RESERVED2     : 2;
+            __IOM   uint32_t WMODESEL1     : 1;
+            __IM    uint32_t RESERVED3     : 2;
+            __IOM   uint32_t OUTSEL1       : 4;
+            __IOM   uint32_t POLCFG1       : 1;
+            __IM    uint32_t RESERVED4     : 14;
+            __OM    uint32_t OUTVAL1       : 1;
+            __IOM   uint32_t LOCK1         : 1;
+        } CSTS1_B;
+    };
+    /** COMP2 control status register */
+    union
+    {
+        __IOM uint32_t CSTS2;
+
+        struct
+        {
+            __IOM   uint32_t EN2           : 1;
+            __IM    uint32_t RESERVED1     : 2;
+            __IOM   uint32_t SPEEDM2       : 1;
+            __IOM   uint32_t INMCCFG2      : 3;
+            __IM    uint32_t RESERVED2     : 1;
+            __IOM   uint32_t INPCCFG2      : 3;
+            __IOM   uint32_t OUTSEL2       : 4;
+            __IOM   uint32_t POLCFG2       : 1;
+            __IM    uint32_t RESERVED3     : 14;
+            __OM    uint32_t OUTVAL2       : 1;
+            __IOM   uint32_t LOCK2         : 1;
+        } CSTS2_B;
+    };
+} COMP_T;
+
+/**
+ * @brief Queued serial peripheral interface(QSPI)
+ */
+typedef struct
+{
+    /* @brief Control register 1 */
+    union
+    {
+        __IOM uint32_t CTRL1;
+        struct
+        {
+            __IOM uint32_t DFS             : 5;
+            __IM  uint32_t RESERVED1       : 3;
+            __IOM uint32_t CPHA            : 1;
+            __IOM uint32_t CPOL            : 1;
+            __IOM uint32_t TXMODE          : 2;
+            __IM  uint32_t RESERVED2       : 2;
+            __IOM uint32_t SSTEN           : 1;
+            __IM  uint32_t RESERVED3       : 7;
+            __IOM uint32_t FRF             : 2;
+            __IM  uint32_t RESERVED4       : 8;
+        } CTRL1_B;
+    };
+
+    /* @brief Control register 2 */
+    union
+    {
+        __IOM uint32_t CTRL2;
+        struct
+        {
+            __IOM uint32_t NDF             : 16;
+            __IM  uint32_t RESERVED        : 16;
+        } CTRL2_B;
+    };
+
+    /* @brief QSPI Enable register */
+    union
+    {
+        __IOM uint32_t SSIEN;
+        struct
+        {
+            __IOM uint32_t EN              : 1;
+            __IM  uint32_t RESERVED        : 31;
+        } SSIEN_B;
+    };
+
+    __IM  uint32_t RESERVED;
+
+    /* @brief QSPI Slave enable register */
+    union
+    {
+        __IOM uint32_t SLAEN;
+        struct
+        {
+            __IOM uint32_t SLAEN           : 1;
+            __IM  uint32_t RESERVED        : 31;
+        } SLAEN_B;
+    };
+
+    /* @brief Baudrate register */
+    union
+    {
+        __IOM uint32_t BR;
+        struct
+        {
+            __IOM uint32_t CLKDIV          : 16;
+            __IM  uint32_t RESERVED        : 16;
+        } BR_B;
+    };
+
+    /* @brief Transmission FIFO threshhold level register */
+    union
+    {
+        __IOM uint32_t TFTL;
+        struct
+        {
+            __IOM uint32_t TFT             : 3;
+            __IM  uint32_t RESERVED1       : 13;
+            __IOM uint32_t TFTH            : 3;
+            __IM  uint32_t RESERVED2       : 13;
+        } TFTL_B;
+    };
+
+    /* @brief Reception FIFO threshhold level register */
+    union
+    {
+        __IOM uint32_t RFTL;
+        struct
+        {
+            __IOM uint32_t RFT             : 3;
+            __IM  uint32_t RESERVED        : 29;
+        } RFTL_B;
+    };
+
+    /* @brief Transmission FIFO level register */
+    union
+    {
+        __IOM uint32_t TFL;
+        struct
+        {
+            __IOM uint32_t TFL             : 3;
+            __IM  uint32_t RESERVED        : 29;
+        } TFL_B;
+    };
+
+    /* @brief Reception FIFO level register */
+    union
+    {
+        __IOM uint32_t RFL;
+        struct
+        {
+            __IOM uint32_t RFL             : 3;
+            __IM  uint32_t RESERVED        : 29;
+        } RFL_B;
+    };
+
+    /* @brief Status register */
+    union
+    {
+        __IOM uint32_t STS;
+        struct
+        {
+            __IOM uint32_t BUSYF           : 1;
+            __IOM uint32_t TFNF            : 1;
+            __IOM uint32_t TFEF            : 1;
+            __IOM uint32_t RFNEF           : 1;
+            __IOM uint32_t RFFF            : 1;
+            __IM  uint32_t RESERVED1       : 1;
+            __IOM uint32_t DCEF            : 1;
+            __IM  uint32_t RESERVED2       : 25;
+        } STS_B;
+    };
+
+    /* @brief Interrupt enable register */
+    union
+    {
+        __IOM uint32_t INTEN;
+        struct
+        {
+            __IOM uint32_t TFEIE           : 1;
+            __IOM uint32_t TFOIE           : 1;
+            __IOM uint32_t RFUIE           : 1;
+            __IOM uint32_t RFOIE           : 1;
+            __IOM uint32_t RFFIE           : 1;
+            __IOM uint32_t MSTIE           : 1;
+            __IM  uint32_t RESERVED        : 26;
+        } INTEN_B;
+    };
+
+    /* @brief Interrupt status register */
+    union
+    {
+        __IM uint32_t ISTS;
+        struct
+        {
+            __IM  uint32_t TFEIF           : 1;
+            __IM  uint32_t TFOIF           : 1;
+            __IM  uint32_t RFUIF           : 1;
+            __IM  uint32_t RFOIF           : 1;
+            __IM  uint32_t RFFIF           : 1;
+            __IM  uint32_t MSTIF           : 1;
+            __IM  uint32_t RESERVED        : 26;
+        } ISTS_B;
+    };
+
+    /* @brief Raw interrupt register */
+    union
+    {
+        __IM uint32_t RIS;
+        struct
+        {
+            __IM  uint32_t TFEIF           : 1;
+            __IM  uint32_t TFOIF           : 1;
+            __IM  uint32_t RFUIF           : 1;
+            __IM  uint32_t RXOIR           : 1;
+            __IM  uint32_t RXFIR           : 1;
+            __IM  uint32_t MSTIR           : 1;
+            __IM  uint32_t RESERVED        : 26;
+        } RIS_B;
+    };
+
+    /* @brief Transmission FIFO overflow interrupt clear register */
+    union
+    {
+        __IM uint32_t TFOIC;
+        struct
+        {
+            __IM  uint32_t TFOIC           : 1;
+            __IM  uint32_t RESERVED        : 31;
+        } TFOIC_B;
+    };
+
+    /* @brief Reception FIFO overflow interrupt clear register */
+    union
+    {
+        __IM uint32_t RFOIC;
+        struct
+        {
+            __IM  uint32_t RFOIC           : 1;
+            __IM  uint32_t RESERVED        : 31;
+        } RFOIC_B;
+    };
+
+    /* @brief Reception FIFO underflow interrupt clear register */
+    union
+    {
+        __IM uint32_t RFUIC;
+        struct
+        {
+            __IM  uint32_t RFUIC           : 1;
+            __IM  uint32_t RESERVED        : 31;
+        } RFUIC_B;
+    };
+
+    /* @brief Master interrupt clear register */
+    union
+    {
+        __IM uint32_t MIC;
+        struct
+        {
+            __IM  uint32_t MIC             : 1;
+            __IM  uint32_t RESERVED        : 31;
+        } MIC_B;
+    };
+
+    /* @brief Interrupt clear register */
+    union
+    {
+        __IM uint32_t ICF;
+        struct
+        {
+            __IM  uint32_t ICF             : 1;
+            __IM  uint32_t RESERVED        : 31;
+        } ICF_B;
+    };
+
+    /* @brief DMA control register */
+    union
+    {
+        __IM uint32_t DMACTRL;
+        struct
+        {
+            __IM  uint32_t RDMAEN          : 1;
+            __IM  uint32_t TDMAEN          : 1;
+            __IM  uint32_t RESERVED        : 29;
+        } DMACTRL_B;
+    };
+
+    /* @brief DMA Tx data level register */
+    union
+    {
+        __IM uint32_t DMATDL;
+        struct
+        {
+            __IM  uint32_t DMATDL             : 1;
+            __IM  uint32_t RESERVED        : 31;
+        } DMATDL_B;
+    };
+
+    /* @brief DMA Rx data level register */
+    union
+    {
+        __IM uint32_t DMARDL;
+        struct
+        {
+            __IM  uint32_t DMARDL             : 1;
+            __IM  uint32_t RESERVED        : 31;
+        } DMARDL_B;
+    };
+
+    __IM  uint32_t RESERVED1[2];
+
+    /* @brief Data register */
+    union
+    {
+        __IOM uint32_t DATA;
+        struct
+        {
+            __IOM  uint32_t DATA           : 32;
+        } DATA_B;
+    };
+
+    __IM  uint32_t RESERVED2[35];
+
+    /* @brief Reception sample register */
+    union
+    {
+        __IOM uint32_t RSD;
+        struct
+        {
+            __IOM uint32_t RSD             : 8;
+            __IM  uint32_t RESERVED1       : 8;
+            __IOM uint32_t RSE             : 1;
+            __IM  uint32_t RESERVED2       : 15;
+        } RSD_B;
+    };
+
+    /* @brief Reception sample register */
+    union
+    {
+        __IOM uint32_t CTRL3;
+        struct
+        {
+            __IOM uint32_t IAT             : 2;
+            __IOM uint32_t ADDRLEN         : 4;
+            __IM  uint32_t RESERVED1       : 2;
+            __IOM uint32_t INSLEN          : 2;
+            __IM  uint32_t RESERVED2       : 1;
+            __IOM uint32_t WAITCYC         : 5;
+            __IM  uint32_t RESERVED3       : 14;
+            __IOM uint32_t CSEN            : 1;
+            __IM  uint32_t RESERVED4       : 1;
+        } CTRL3_B;
+    };
+
+    __IM  uint32_t  RESERVED3[66];
+
+    /* @brief IO switch register */
+    union
+    {
+        __IOM uint32_t IOSW;
+        struct
+        {
+            __IOM uint32_t IOSW            : 1;
+            __IM  uint32_t RESERVED        : 31;
+        } IOSW_B;
+    };
+} QSPI_T;
+
+/**
   * @}
   */
 
 /** @defgroup Peripheral_memory_map
   @{
 */
+
+/** USB OTG base address in the bit-band region */
+#define USB_OTG_FS_BASE         ((uint32_t)0x50000000)
+#define USB_OTG_FS_HOST_BASE    ((uint32_t)USB_OTG_FS_BASE + 0x400)
+#define USB_OTG_FS_DEV_BASE     ((uint32_t)USB_OTG_FS_BASE + 0x800)
+#define USB_OTG_FS_FIFO_BASE    ((uint32_t)USB_OTG_FS_BASE + 0x1000)
+#define USB_OTG_FS_PWR_BASE     ((uint32_t)USB_OTG_FS_BASE + 0xE00)
+
+#define USB_OTG_HS_BASE         ((uint32_t)0x40040000)
+#define USB_OTG_HS_HOST_BASE    ((uint32_t)USB_OTG_HS_BASE + 0x400)
+#define USB_OTG_HS_DEV_BASE     ((uint32_t)USB_OTG_HS_BASE + 0x800)
+#define USB_OTG_HS_FIFO_BASE    ((uint32_t)USB_OTG_HS_BASE + 0x1000)
+#define USB_OTG_HS_PWR_BASE     ((uint32_t)USB_OTG_HS_BASE + 0xE00)
+
 
 /** FMC base address in the alias region */
 #define FMC_BASE                ((uint32_t)0x08000000)
@@ -7184,7 +8892,7 @@ typedef struct
 /** EMMC registers base address */
 #define SMC_R_BASE              ((uint32_t)0xA0000000)
 /** QSPI registers base address */
-#define QSPI_BASE               ((uint32_t)0xA0000000)
+#define QSPI_BASE               ((uint32_t)0xA0001000)
 /** DMC registers base address */
 #define DMC_BASE                ((uint32_t)0xA0000000)
 
@@ -7199,8 +8907,10 @@ typedef struct
 #define TMR3_BASE               (APB1PERIPH_BASE + 0x0400)
 #define TMR4_BASE               (APB1PERIPH_BASE + 0x0800)
 #define TMR5_BASE               (APB1PERIPH_BASE + 0x0C00)
+
 #define TMR6_BASE               (APB1PERIPH_BASE + 0x1000)
 #define TMR7_BASE               (APB1PERIPH_BASE + 0x1400)
+
 #define TMR12_BASE              (APB1PERIPH_BASE + 0x1800)
 #define TMR13_BASE              (APB1PERIPH_BASE + 0x1C00)
 #define TMR14_BASE              (APB1PERIPH_BASE + 0x2000)
@@ -7230,25 +8940,36 @@ typedef struct
 #define TMR8_BASE               (APB2PERIPH_BASE + 0x0400)
 #define USART1_BASE             (APB2PERIPH_BASE + 0x1000)
 #define USART6_BASE             (APB2PERIPH_BASE + 0x1400)
+
 #define UART9_BASE              (APB2PERIPH_BASE + 0x1800U)
 #define UART10_BASE             (APB2PERIPH_BASE + 0x1C00U)
+#define ADC_BASE                (APB2PERIPH_BASE + 0x2300)
+
+#ifndef APM32F411
 #define ADC1_BASE               (APB2PERIPH_BASE + 0x2000)
 #define ADC2_BASE               (APB2PERIPH_BASE + 0x2100)
 #define ADC3_BASE               (APB2PERIPH_BASE + 0x2200)
-#define ADC_BASE                (APB2PERIPH_BASE + 0x2300)
+
+#else
+#define ADC1_BASE               (APB2PERIPH_BASE + 0x2000)
+#define ADC2_BASE               (APB2PERIPH_BASE + 0x2400)
+
+#endif
+
 #define SDIO_BASE               (APB2PERIPH_BASE + 0x2C00)
 #define SPI1_BASE               (APB2PERIPH_BASE + 0x3000)
-#define SPI4_BASE               (APB2PERIPH_BASE + 0x3400)
 #define SYSCFG_BASE             (APB2PERIPH_BASE + 0x3800)
+
+//#ifdef APM32F411
+#define SPI4_BASE               (APB2PERIPH_BASE + 0x3400)
+#define COMP_BASE               (APB2PERIPH_BASE + 0x3818)
+#define SPI5_BASE               (APB2PERIPH_BASE + 0x5000)
+//#endif
+
 #define EINT_BASE               (APB2PERIPH_BASE + 0x3C00)
 #define TMR9_BASE               (APB2PERIPH_BASE + 0x4000)
 #define TMR10_BASE              (APB2PERIPH_BASE + 0x4400)
 #define TMR11_BASE              (APB2PERIPH_BASE + 0x4800)
-#define SPI5_BASE               (APB2PERIPH_BASE + 0x5000)
-#define SPI6_BASE               (APB2PERIPH_BASE + 0x5400)
-#define SAI1_BASE               (APB2PERIPH_BASE + 0x5800)
-#define SAI1_Block_A_BASE       (SAI1_BASE + 0x004)
-#define SAI1_Block_B_BASE       (SAI1_BASE + 0x024)
 
 /** AHB1 peripherals */
 #define GPIOA_BASE              (AHB1PERIPH_BASE + 0x0000)
@@ -7256,12 +8977,16 @@ typedef struct
 #define GPIOC_BASE              (AHB1PERIPH_BASE + 0x0800)
 #define GPIOD_BASE              (AHB1PERIPH_BASE + 0x0C00)
 #define GPIOE_BASE              (AHB1PERIPH_BASE + 0x1000)
+#define GPIOH_BASE              (AHB1PERIPH_BASE + 0x1C00)
+
+
 #define GPIOF_BASE              (AHB1PERIPH_BASE + 0x1400)
 #define GPIOG_BASE              (AHB1PERIPH_BASE + 0x1800)
-#define GPIOH_BASE              (AHB1PERIPH_BASE + 0x1C00)
 #define GPIOI_BASE              (AHB1PERIPH_BASE + 0x2000)
 #define GPIOJ_BASE              (AHB1PERIPH_BASE + 0x2400)
 #define GPIOK_BASE              (AHB1PERIPH_BASE + 0x2800)
+
+
 #define CRC_BASE                (AHB1PERIPH_BASE + 0x3000)
 #define RCM_BASE                (AHB1PERIPH_BASE + 0x3800)
 #define FMC_R_BASE              (AHB1PERIPH_BASE + 0x3C00)
@@ -7283,6 +9008,8 @@ typedef struct
 #define DMA2_Stream5_BASE       (DMA2_BASE + 0x088)
 #define DMA2_Stream6_BASE       (DMA2_BASE + 0x0A0)
 #define DMA2_Stream7_BASE       (DMA2_BASE + 0x0B8)
+
+
 #define ETH_BASE                (AHB1PERIPH_BASE + 0x8000)
 #define ETH_MAC_BASE            (ETH_BASE)
 #define ETH_MMC_BASE            (ETH_BASE + 0x0100)
@@ -7290,12 +9017,14 @@ typedef struct
 #define ETH_DMA_BASE            (ETH_BASE + 0x1000)
 #define DMA2D_BASE              (AHB1PERIPH_BASE + 0xB000)
 
+
 /** AHB2 peripherals */
+#define RNG_BASE                (AHB2PERIPH_BASE + 0x60800)
+
 #define DCI_BASE                (AHB2PERIPH_BASE + 0x50000)
 #define CRYP_BASE               (AHB2PERIPH_BASE + 0x60000)
 #define HASH_BASE               (AHB2PERIPH_BASE + 0x60400)
 #define HASH_DIGEST_BASE        (AHB2PERIPH_BASE + 0x60710)
-#define RNG_BASE                (AHB2PERIPH_BASE + 0x60800)
 
 #define SMC_Bank1_R_BASE        (SMC_R_BASE + 0x0000)
 #define SMC_Bank1E_R_BASE       (SMC_R_BASE + 0x0104)
@@ -7319,6 +9048,24 @@ typedef struct
 /** @defgroup Peripheral_declaration
   @{
 */
+
+#define USB_OTG_FS              ((USB_OTG_GLOBAL_T *)USB_OTG_FS_BASE)
+#define USB_OTG_FS_H            ((USB_OTG_HOST_T *)USB_OTG_FS_HOST_BASE)
+#define USB_OTG_FS_D            ((USB_OTG_DEVICE_T *)USB_OTG_FS_DEV_BASE)
+
+#define USB_OTG_HS              ((USB_OTG_GLOBAL_T *)USB_OTG_HS_BASE)
+#define USB_OTG_HS_H            ((USB_OTG_HOST_T *)USB_OTG_HS_HOST_BASE)
+#define USB_OTG_HS_D            ((USB_OTG_DEVICE_T *)USB_OTG_HS_DEV_BASE)
+
+#define USB_OTG_FS_FIFO         ((USB_OTG_FIFO_T *) USB_OTG_FS_FIFO_BASE)
+#define USB_OTG_HS_FIFO         ((USB_OTG_FIFO_T *) USB_OTG_HS_FIFO_BASE)
+#define USB_OTG_FIFO_OFFSET     0x1000
+
+#define USB_OTG_FS_PWR          ((USB_OTG_PWRCLK_T *) USB_OTG_FS_PWR_BASE)
+#define USB_OTG_HS_PWR          ((USB_OTG_PWRCLK_T *) USB_OTG_HS_PWR_BASE)
+
+#define USB_OTG_HS2_BASE        ((uint32_t)USB_OTG_HS_BASE + 0x200)
+#define USB_OTG_HS2             ((USB_OTG_HS2_T *) USB_OTG_HS2_BASE)
 
 #define TMR2                    ((TMR_T *) TMR2_BASE)
 #define TMR3                    ((TMR_T *) TMR3_BASE)
@@ -7363,6 +9110,7 @@ typedef struct
 #define SPI1                    ((SPI_T *) SPI1_BASE)
 #define SPI4                    ((SPI_T *) SPI4_BASE)
 #define SYSCFG                  ((SYSCFG_T *) SYSCFG_BASE)
+#define COMP                    ((COMP_T *)COMP_BASE)
 #define EINT                    ((EINT_T *) EINT_BASE)
 #define TMR9                    ((TMR_T *) TMR9_BASE)
 #define TMR10                   ((TMR_T *) TMR10_BASE)
@@ -7410,6 +9158,7 @@ typedef struct
 #define CRYP                    ((CRYP_T *) CRYP_BASE)
 #define HASH                    ((HASH_T *) HASH_BASE)
 #define RNG                     ((RNG_T *) RNG_BASE)
+#define QSPI                    ((QSPI_T *) QSPI_BASE)
 
 #define SMC_Bank1               ((SMC_Bank1_T *) SMC_Bank1_R_BASE)
 #define SMC_Bank1E              ((SMC_Bank1E_T *) SMC_Bank1E_R_BASE)

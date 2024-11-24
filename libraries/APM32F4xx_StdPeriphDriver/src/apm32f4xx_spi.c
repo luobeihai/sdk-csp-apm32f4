@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the SPI firmware functions
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -42,7 +42,7 @@
 /*!
  * @brief     Reset the specified SPIx peripheral
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6
+ * @param     spi: The SPIx can be 1,2,3,4,5
  *
  * @retval    None
  */
@@ -73,17 +73,12 @@ void SPI_I2S_Reset(SPI_T* spi)
         RCM_EnableAPB2PeriphReset(RCM_APB2_PERIPH_SPI5);
         RCM_DisableAPB2PeriphReset(RCM_APB2_PERIPH_SPI5);
     }
-    else if (spi == SPI6)
-    {
-        RCM_EnableAPB2PeriphReset(RCM_APB2_PERIPH_SPI6);
-        RCM_DisableAPB2PeriphReset(RCM_APB2_PERIPH_SPI6);
-    }
 }
 
 /*!
  * @brief     Config the SPI peripheral according to the specified parameters in the spiConfig
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @param     spiConfig: pointer to a SPI_Config_T structure
  *
@@ -98,11 +93,11 @@ void SPI_Config(SPI_T* spi, SPI_Config_T* spiConfig)
     spi->CTRL1_B.CPOL = spiConfig->polarity;
     spi->CTRL1_B.SSEN = spiConfig->nss;
     spi->CTRL1_B.LSBSEL = spiConfig->firstBit;
-    /** 1 line or 2 lines */
+    /* 1 line or 2 lines */
     spi->CTRL1_B.BMEN = spiConfig->direction & 0x0001;
-    /** Tx or Rx in 1 line */
+    /* Tx or Rx in 1 line */
     spi->CTRL1_B.BMOEN = (spiConfig->direction & 0x0010) >> 4;
-    /** receive only or full-duplex in 2 lines */
+    /* receive only or full-duplex in 2 lines */
     spi->CTRL1_B.RXOMEN = (spiConfig->direction & 0x0100) >> 8;
     spi->CTRL1_B.BRSEL = spiConfig->baudrateDiv;
 
@@ -112,7 +107,7 @@ void SPI_Config(SPI_T* spi, SPI_Config_T* spiConfig)
 /*!
  * @brief     Config the I2S peripheral according to the specified parameters in the spiConfig
  *
- * @param     spi: The SPIx can be 2,3
+ * @param     spi: The SPIx can be 1,2,3,4,5.(1,4,5 is only for APM32F411)
  *
  * @param     i2sConfig: pointer to a I2S_Config_T structure
  *
@@ -178,7 +173,7 @@ void I2S_Config(SPI_T* spi, I2S_Config_T* i2sConfig)
     spi->I2SCFG_B.DATLEN  = i2sConfig->length >> 1;
     spi->I2SCFG_B.CPOL    = i2sConfig->polarity;
 
-    /** select I2S mode */
+    /* select I2S mode */
     spi->I2SCFG_B.MODESEL = BIT_SET;
 }
 
@@ -222,7 +217,7 @@ void I2S_ConfigStructInit(I2S_Config_T* i2sConfig)
 /*!
  * @brief     Enables the specified SPI peripheral
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @retval    None
  */
@@ -234,7 +229,7 @@ void SPI_Enable(SPI_T* spi)
 /*!
 * @brief     Disable the specified SPI peripheral
 *
-* @param     spi: The SPIx can be 1,2,3,4,5,6.
+* @param     spi: The SPIx can be 1,2,3,4,5.
 *
 * @retval    None
 */
@@ -246,7 +241,7 @@ void SPI_Disable(SPI_T* spi)
 /*!
  * @brief     Enables the specified I2S peripheral
  *
- * @param     spi: The I2S can be SPI2,SPI3
+ * @param     spi: The I2S can be SPI2,SPI3(APM32F411 extra set SPI1,SPI4,SPI5)
  *
  * @retval    None
  */
@@ -258,7 +253,7 @@ void I2S_Enable(SPI_T* spi)
 /*!
  * @brief     Disable the specified I2S peripheral
  *
- * @param     spi: The I2S can be SPI2,SPI3
+ * @param     spi: The I2S can be SPI2,SPI3(APM32F411 extra set SPI1,SPI4,SPI5)
  *
  * @retval    None
  */
@@ -270,7 +265,7 @@ void I2S_Disable(SPI_T* spi)
 /*!
  * @brief     Configures the data size for the selected SPI.
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @param     length: specifies the SPI data size.
  *                    This parameter can be one of the following values:
@@ -287,7 +282,7 @@ void SPI_ConfigDataSize(SPI_T* spi, SPI_DATA_LENGTH_T length)
 /*!
  * @brief     Configures the specified SPI data transfer direction
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @param     direction: Select the SPI data transfer direction
  *                      The parameter can be one of following values:
@@ -302,7 +297,7 @@ void SPI_ConfigBiDirectionalLine(SPI_T* spi, SPI_DIRECTION_SELECT_T direction)
 /*!
  * @brief     Set the SPI NSS internal by Software
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @retval    None
  */
@@ -314,7 +309,7 @@ void SPI_SetSoftwareNSS(SPI_T* spi)
 /*!
  * @brief     Reset the SPI NSS internal by Software
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @retval    None
  */
@@ -326,7 +321,7 @@ void SPI_ResetSoftwareNSS(SPI_T* spi)
 /*!
  * @brief     Enables the specified SPI SS output
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @retval    None
  */
@@ -338,7 +333,7 @@ void SPI_EnableSSOutput(SPI_T* spi)
 /*!
  * @brief     Disable the specified SPI SS output
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @retval    None
  */
@@ -350,7 +345,7 @@ void SPI_DisableSSOutput(SPI_T* spi)
 /*!
  * @brief     Enables the specified SPI TI mode
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @retval    None
  */
@@ -362,7 +357,7 @@ void SPI_EnableTIMode(SPI_T* spi)
 /*!
 * @brief     Disable the specified SPI TI mode
 *
-* @param     spi: The SPIx can be 1,2,3,4,5,6.
+* @param     spi: The SPIx can be 1,2,3,4,5.
 *
 * @retval    None
 */
@@ -391,11 +386,11 @@ void SPI_DisableTIMode(SPI_T* spi)
  */
 void I2S_ConfigFullDuplex(SPI_T* i2sExt, I2S_Config_T* i2sConfig)
 {
-    /** Reset I2SCFG and I2SPSC register */
+    /* Reset I2SCFG and I2SPSC register */
     i2sExt->I2SCFG = 0;
     i2sExt->I2SPSC = 0x0002;
 
-    /** Config the extended I2S */
+    /* Config the extended I2S */
     if ((i2sConfig->mode == I2S_MODE_MASTER_TX) || (i2sConfig->mode == I2S_MODE_SLAVE_TX))
     {
         i2sExt->I2SCFG_B.I2SMOD  = I2S_MODE_SLAVE_RX;
@@ -421,7 +416,7 @@ void I2S_ConfigFullDuplex(SPI_T* i2sExt, I2S_Config_T* i2sConfig)
 /*!
  * @brief     Transmits a Data through the SPIx/I2Sx peripheral.
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @param     data: Data to be transmitted
  *
@@ -429,13 +424,13 @@ void I2S_ConfigFullDuplex(SPI_T* i2sExt, I2S_Config_T* i2sConfig)
  */
 void SPI_I2S_TxData(SPI_T* spi, uint16_t data)
 {
-    spi->DATA = data;
+    spi->DATA_B.DATA = data;
 }
 
 /*!
 * @brief     Returns the most recent received data by the SPIx/I2Sx peripheral.
 *
-* @param     spi: The SPIx can be 1,2,3,4,5,6.
+* @param     spi: The SPIx can be 1,2,3,4,5.
 *
 * @retval    data :The value of the received data
 *
@@ -443,13 +438,13 @@ void SPI_I2S_TxData(SPI_T* spi, uint16_t data)
 */
 uint16_t SPI_I2S_RxData(SPI_T* spi)
 {
-    return spi->DATA;
+    return spi->DATA_B.DATA;
 }
 
 /*!
  * @brief     Enables the specified SPI CRC value calculation of the transferred bytes
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @retval    None
  */
@@ -461,7 +456,7 @@ void SPI_EnableCRC(SPI_T* spi)
 /*!
  * @brief     Disable the specified SPI CRC value calculation of the transferred bytes
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  */
 void SPI_DisableCRC(SPI_T* spi)
@@ -472,7 +467,7 @@ void SPI_DisableCRC(SPI_T* spi)
 /*!
  * @brief     Transmit CRC value
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @retval    None
  */
@@ -484,7 +479,7 @@ void SPI_TxCRC(SPI_T* spi)
 /*!
  * @brief     Reads the specified SPI transmit CRC register value
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @retval    The SPI transmit CRC register value
  */
@@ -496,7 +491,7 @@ uint16_t SPI_ReadTxCRC(SPI_T* spi)
 /*!
  * @brief     Reads the specified SPI receive CRC register value
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @retval    The SPI receive CRC register value
  */
@@ -508,7 +503,7 @@ uint16_t SPI_ReadRxCRC(SPI_T* spi)
 /*!
  * @brief     Reads the specified SPI CRC Polynomial register value
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @retval    The SPI CRC Polynomial register value
  */
@@ -520,7 +515,7 @@ uint16_t SPI_ReadCRCPolynomial(SPI_T* spi)
 /*!
  * @brief     Enables the SPIx/I2Sx DMA interface.
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6, When the I2S can be 2,3
+ * @param     spi: The SPIx can be 1,2,3,4,5, When the I2S can be 2,3
  *
  * @param     dmaReq: specifies the SPI/I2S DMA transfer request
  *                     The parameter can be one of following values:
@@ -544,7 +539,7 @@ void SPI_I2S_EnableDMA(SPI_T* spi, SPI_I2S_DMA_REQ_T dmaReq)
 /*!
  * @brief     Disables the SPIx/I2Sx DMA interface.
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6., When the I2S can be 2,3
+ * @param     spi: The SPIx can be 1,2,3,4,5., When the I2S can be 2,3
  *
  * @param     dmaReq: specifies the SPI/I2S DMA transfer request
  *                     The parameter can be one of following values:
@@ -568,7 +563,7 @@ void SPI_I2S_DisableDMA(SPI_T* spi, SPI_I2S_DMA_REQ_T dmaReq)
 /*!
  * @brief     Enables the specified SPI/I2S interrupts.
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6., When the I2S can be 2,3
+ * @param     spi: The SPIx can be 1,2,3,4,5., When the I2S can be 2,3
  *
  * @param     interrupt: specifies the TMR interrupts sources
  *                       The parameter can be any combination of following values:
@@ -586,7 +581,7 @@ void SPI_I2S_EnableInterrupt(SPI_T* spi, uint32_t interrupt)
 /*!
  * @brief     Disables the specified SPI/I2S interrupts.
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6., When the I2S can be 2,3
+ * @param     spi: The SPIx can be 1,2,3,4,5., When the I2S can be 2,3
  *
  * @param     interrupt: specifies the TMR interrupts sources
  *                     The parameter can be any combination of following values:
@@ -604,7 +599,7 @@ void SPI_I2S_DisableInterrupt(SPI_T* spi, uint32_t interrupt)
 /*!
  * @brief     Checks whether the specified SPI/I2S flag is set or not.
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6., When the I2S can be 2,3
+ * @param     spi: The SPIx can be 1,2,3,4,5., When the I2S can be 2,3
  *
  * @param     flag: specifies the SPI/I2S flag to check
  *                  The parameter can be one of following values:
@@ -621,13 +616,13 @@ void SPI_I2S_DisableInterrupt(SPI_T* spi, uint32_t interrupt)
  */
 uint8_t SPI_I2S_ReadStatusFlag(SPI_T* spi, SPI_FLAG_T flag)
 {
-    return (spi->STS & flag) ? SET : RESET;
+    return ((spi->STS & flag) == flag);
 }
 
 /*!
  * @brief     Clears the SPIx CRC Error flag
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @param     flag: only clears SPI_FLAG_CRCE(CRC Error flag)
  *
@@ -653,7 +648,7 @@ void SPI_I2S_ClearStatusFlag(SPI_T* spi, SPI_FLAG_T flag)
 /*!
  * @brief     Checks whether the specified SPI/I2S interrupt has occurred or not.
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6., When the I2S can be 2,3
+ * @param     spi: The SPIx can be 1,2,3,4,5., When the I2S can be 2,3
  *
  * @param     flag: specifies the SPI/I2S interrupt flag to check.
  *                     The parameter can be one of following values:
@@ -685,7 +680,7 @@ uint8_t SPI_I2S_ReadIntFlag(SPI_T* spi, SPI_I2S_INT_T flag)
 /*!
  * @brief     Clears the SPIx CRC Error interrupt flag
  *
- * @param     spi: The SPIx can be 1,2,3,4,5,6.
+ * @param     spi: The SPIx can be 1,2,3,4,5.
  *
  * @param     flag: only clears SPI_INT_CRCE(CRC Error interrupt flag)
  *

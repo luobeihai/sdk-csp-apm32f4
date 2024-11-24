@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the TMR firmware functions.
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -142,9 +142,9 @@ void TMR_ConfigTimeBase(TMR_T* tmr, TMR_BaseConfig_T* baseConfig)
         (tmr == TMR3) || (tmr == TMR4) || \
         (tmr == TMR5) || (tmr == TMR8))
     {
-        /** Count Direction */
+        /* Count Direction */
         tmr->CTRL1_B.CNTDIR = baseConfig->countMode & 0x01;
-        /** Aligned mode */
+        /* Aligned mode */
         tmr->CTRL1_B.CAMSEL = baseConfig->countMode >> 4;
     }
 
@@ -283,7 +283,7 @@ uint16_t TMR_ReadPrescaler(TMR_T* tmr)
  */
 void TMR_EnableUpdate(TMR_T* tmr)
 {
-    /** Clear Update Disable bit */
+    /* Clear Update Disable bit */
     tmr->CTRL1_B.UD = DISABLE;
 }
 
@@ -296,7 +296,7 @@ void TMR_EnableUpdate(TMR_T* tmr)
  */
 void TMR_DisableUpdate(TMR_T* tmr)
 {
-    /** Set Update Disable bit */
+    /* Set Update Disable bit */
     tmr->CTRL1_B.UD = ENABLE;
 }
 
@@ -1925,7 +1925,7 @@ void TMR_DisableHallSensor(TMR_T* tmr)
  *                   @arg TMR2_TMR8_TRGO     : TMR2 ITR1 input is connected to TMR8 Trigger output(default)
  *                   @arg TMR2_PTP_TRG       : TMR2 ITR1 input is connected to ETH PTP trigger output.
  *                   @arg TMR2_OTG_FSUSB_SOF : TMR2 ITR1 input is connected to OTG FS SOF.
- *                   @arg TMR2_OTG_HSUSB_SOF : TMR2 ITR1 input is connected to OTG HS SOF.
+ *                   @arg TMR2_OTG_HSUSB_SOF : TMR2 ITR1 input is connected to OTG HS SOF.(Not for APM32F411)
  *                   @arg TMR5_GPIO          : TMR5 CH4 input is connected to GPIO
  *                   @arg TMR5_LSI           : TMR5 CH4 input is connected to LSI clock.
  *                   @arg TMR5_LSE           : TMR5 CH4 input is connected to LSE clock.

@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the PMU firmware functions.
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -176,6 +176,7 @@ void PMU_DisableBackupRegulator(void)
  * @param     scale: This parameter can be one of the following values:
  *               @arg PMU_REGULATOR_VOLTAGE_SCALE1 : Select regulator voltage scale 1
  *               @arg PMU_REGULATOR_VOLTAGE_SCALE2 : Select regulator voltage scale 2
+ *               @arg PMU_REGULATOR_VOLTAGE_SCALE3 : Select regulator voltage scale 3(Only for APM32F411)
  *
  * @retval    None
  */
@@ -207,6 +208,134 @@ void PMU_EnableFlashPowerDown(void)
 void PMU_DisableFlashPowerDown(void)
 {
     PMU->CTRL_B.FPDSM = DISABLE ;
+}
+
+/*!
+ * @brief     Enables the Low Power Regulator Low Voltage in STOP mode.
+ *
+ * @param     None
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void PMU_EnableLowPowerRegulatorLowVoltage(void)
+{
+    PMU->CTRL_B.LPRLV = ENABLE ;
+}
+
+/*!
+ * @brief     Disables the Low Power Regulator Low Voltage in STOP mode.
+ *
+ * @param     None
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void PMU_DisableLowPowerRegulatorLowVoltage(void)
+{
+    PMU->CTRL_B.LPRLV = DISABLE ;
+}
+
+/*!
+ * @brief     Enables the main regulator low voltage in STOP mode.
+ *
+ * @param     None
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void PMU_EnableMainRegulatorLowVoltage(void)
+{
+    PMU->CTRL_B.MRLV = ENABLE ;
+}
+
+/*!
+ * @brief     Disables the main regulator low voltage in STOP mode.
+ *
+ * @param     None
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void PMU_DisableMainRegulatorLowVoltage(void)
+{
+    PMU->CTRL_B.MRLV = DISABLE ;
+}
+
+/*!
+ * @brief     Enables the ADC option1.
+ *
+ * @param     None
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void PMU_EnableADCOption1(void)
+{
+    PMU->CTRL_B.ADCO1EN = ENABLE ;
+}
+
+/*!
+ * @brief     Disables the ADC option1.
+ *
+ * @param     None
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void PMU_DisableADCOption1(void)
+{
+    PMU->CTRL_B.ADCO1EN = DISABLE ;
+}
+
+/*!
+ * @brief     Enables the ADC option1.
+ *
+ * @param     sleepmode:specifies the flash sleep mode
+ *                      @arg PMU_FLASH_Std_SLEEP_MODE : Standard mode
+ *                      @arg PMU_FLASH_DEEP_SLEEP_MODE: Stop mode or deep sleep mode
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void PMU_ConfigFlashSleepMode(PMU_FLASH_SLEEP_MODE_T sleepmode)
+{
+    PMU->CTRL_B.FSMODE = sleepmode ;
+}
+
+/*!
+ * @brief     Enables the Flash interface.
+ *
+ * @param     None
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void PMU_EnableFlashInterface(void)
+{
+    PMU->CTRL_B.FLASHEN = DISABLE ;
+}
+
+/*!
+ * @brief     Disables the Flash interface.
+ *
+ * @param     None
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void PMU_DisableFlashInterface(void)
+{
+    PMU->CTRL_B.FLASHEN = ENABLE ;
 }
 
 /*!

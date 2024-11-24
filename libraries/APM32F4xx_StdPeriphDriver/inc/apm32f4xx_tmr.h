@@ -3,19 +3,19 @@
  *
  * @brief       This file contains all the functions prototypes for the TMR firmware library.
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -515,12 +515,13 @@ typedef enum
 /**
  * @brief TMR Time Base Init structure definition
  * @note  This structure is used with all TMR except for TMR6 and TMR7.
+ * @param period：Between 0x0000 and 0xFFFF for all TMR except TMR2 and TMR5. Between 0x0000 and 0xFFFFFFFF for TMR2 and TMR5.
  */
 typedef struct
 {
     TMR_COUNTER_MODE_T countMode;           /*!< TMR counter mode selection */
     TMR_CLOCK_DIV_T    clockDivision;       /*!< TMR clock division selection */
-    uint32_t           period;              /*!< This must between 0x0000 and 0xFFFF */
+    uint32_t           period;              /*!< This must between 0x0000 and 0xFFFFFFFF */
     uint16_t           division;            /*!< This must between 0x0000 and 0xFFFF */
     uint8_t            repetitionCounter;   /*!< This must between 0x00 and 0xFF, only for TMR1 and TMR8. */
 } TMR_BaseConfig_T;

@@ -3,19 +3,19 @@
  *
  * @brief       This file provides all the RCM firmware functions
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -214,6 +214,22 @@ void RCM_DisableLSI(void)
 }
 
 /*!
+ * @brief     Select LSECLK bypass mode
+ *
+ * @param     mode: Select LSECLK bypass mode
+ *                  @arg RCM_LSE_LOWPOWER_MODE: Set LSECLK bypass mode to low power
+ *                  @arg RCM_LSE_HIGHPOWER_MODE: Set LSECLK bypass mode to high power
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411.
+ */
+void RCM_LSESEL(RCM_LSE_MODE_T mode)
+{
+    RCM->BDCTRL_B.LSESEL = mode;
+}
+
+/*!
  * @brief     Configures the main PLL clock source, multiplication and division factors
  *
  * @param     pllSelect: PLL entry clock source select
@@ -293,6 +309,21 @@ void RCM_ConfigPLL2(uint32_t i2sVcoMul, uint32_t i2sDiv)
 }
 
 /*!
+ * @brief     Configures the PLL2B of RCM_PLL2CFG register
+ *
+ * @param     i2sVcoDiv: specifies the frequency division value for PLL VCO output clock
+ *                       This parameter must be a number between 2 and 63
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void RCM_ConfigPLL2B(uint32_t vcoDiv)
+{
+    RCM->PLL2CFG_B.PLL2B = vcoDiv;
+}
+
+/*!
  * @brief      Enables the PLL2
  *
  * @param      None
@@ -363,7 +394,7 @@ void RCM_DisableCSS(void)
 void RCM_ConfigMCO1(RCM_MCO1_SEL_T mco1Select, RCM_MCO1_DIV_T mco1Div)
 {
     RCM->CFG_B.MCO1SEL = mco1Select;
-    RCM->CFG_B.MCO1PRE = mco1Div;
+    RCM->CFG_B.MCO1PSC = mco1Div;
 }
 
 /*!
@@ -389,7 +420,7 @@ void RCM_ConfigMCO1(RCM_MCO1_SEL_T mco1Select, RCM_MCO1_DIV_T mco1Div)
 void RCM_ConfigMCO2(RCM_MCO2_SEL_T mco2Select, RCM_MCO2_DIV_T mco2Div)
 {
     RCM->CFG_B.MCO2SEL = mco2Select;
-    RCM->CFG_B.MCO2PRE = mco2Div;
+    RCM->CFG_B.MCO2PSC = mco2Div;
 }
 
 /*!
@@ -488,6 +519,8 @@ void RCM_ConfigAPB2(RCM_APB_DIV_T APB2Div)
  *                     @arg RCM_SDRAM_DIV_4 : SDRAM clock = DMC clock / 4
  *
  * @retval    None
+ * 
+ * @note      It is not for APM32F411
  */
 void RCM_ConfigSDRAM(RCM_SDRAM_DIV_T SDRAMDiv)
 {
@@ -687,6 +720,23 @@ void RCM_ConfigI2SCLK(RCM_I2S_CLK_T i2sClkSource)
 }
 
 /*!
+ * @brief     Configures the TMR clock select (TMRCLK)
+ *
+ * @param     tmrclksel: specifies the TMR clock select
+ *                          This parameter can be one of the following values:
+ *                          @arg RCM_TMR_HCLK_1_2 : TMR Clock is HCLK or HCLK*2
+ *                          @arg RCM_TMR_HCLK_1_4 : TMR Clock is HCLK or HCLK*4
+ *
+ * @retval    None
+ * 
+ * @note      It is only for APM32F411
+ */
+void RCM_ConfigTMRCLK(RCM_TMR_CLK_T tmrclksel)
+{
+    RCM->CFGSEL_B.CLKPSEL = tmrclksel;
+}
+
+/*!
  * @brief    Enables AHB1 peripheral clock
  *
  * @param    AHB1Periph : Enable the specifies clock of AHB peripheral
@@ -793,6 +843,34 @@ void RCM_DisableAHB2PeriphClock(uint32_t AHB2Periph)
 }
 
 /*!
+ * @brief    Enables AHB3 peripheral clock
+ *
+ * @param    AHB3Periph : Enable the specifies clock of AHB2 peripheral
+ *                       This parameter can be any combination of the following values:
+ *                       @arg RCM_AHB3_PERIPH_EMMC
+ *
+ * @retval    None
+ */
+void RCM_EnableAHB3PeriphClock(uint32_t AHB3Periph)
+{
+    RCM->AHB3CLKEN |= AHB3Periph;
+}
+
+/*!
+ * @brief    Disable AHB3 peripheral clock
+ *
+ * @param    AHB2Periph : Disable the specifies clock of AHB3 peripheral
+ *                       This parameter can be any combination of the following values:
+ *                       @arg RCM_AHB3_PERIPH_EMMC
+ *
+ * @retval    None
+ */
+void RCM_DisableAHB3PeriphClock(uint32_t AHB3Periph)
+{
+    RCM->AHB3CLKEN &= (uint32_t)~AHB3Periph;
+}
+
+/*!
  * @brief    Enable the Low Speed APB (APB1) peripheral clock
  *
  * @param    APB1Periph : Enable specifies clock of the APB1 peripheral.
@@ -821,8 +899,6 @@ void RCM_DisableAHB2PeriphClock(uint32_t AHB2Periph)
  *                        @arg RCM_APB1_PERIPH_CAN2   : Enable CAN2 clock
  *                        @arg RCM_APB1_PERIPH_PMU    : Enable PMU clock
  *                        @arg RCM_APB1_PERIPH_DAC    : Enable DAC clock
- *                        @arg RCM_APB1_PERIPH_UART7  : Enable UART7 clock
- *                        @arg RCM_APB1_PERIPH_UART8  : Enable UART8 clock
  *
  * @retval   None
  */
@@ -860,8 +936,6 @@ void RCM_EnableAPB1PeriphClock(uint32_t APB1Periph)
  *                        @arg RCM_APB1_PERIPH_CAN2   : Disable CAN2 clock
  *                        @arg RCM_APB1_PERIPH_PMU    : Disable PMU clock
  *                        @arg RCM_APB1_PERIPH_DAC    : Disable DAC clock
- *                        @arg RCM_APB1_PERIPH_UART7  : Disable UART7 clock
- *                        @arg RCM_APB1_PERIPH_UART8  : Disable UART8 clock
  *
  * @retval   None
  */
@@ -890,7 +964,6 @@ void RCM_DisableAPB1PeriphClock(uint32_t APB1Periph)
  *                        @arg RCM_APB2_PERIPH_TMR10  : TMR10 clock
  *                        @arg RCM_APB2_PERIPH_TMR11  : TMR11 clock
  *                        @arg RCM_APB2_PERIPH_SPI5   : SPI5 clock
- *                        @arg RCM_APB2_PERIPH_SPI6   : SPI6 clock
  *
  * @retval   None
  */
@@ -919,7 +992,6 @@ void RCM_EnableAPB2PeriphClock(uint32_t APB2Periph)
  *                        @arg RCM_APB2_PERIPH_TMR10  : TMR10 clock
  *                        @arg RCM_APB2_PERIPH_TMR11  : TMR11 clock
  *                        @arg RCM_APB2_PERIPH_SPI5   : SPI5 clock
- *                        @arg RCM_APB2_PERIPH_SPI6   : SPI6 clock
  *
  * @retval   None
  */
@@ -938,20 +1010,21 @@ void RCM_DisableAPB2PeriphClock(uint32_t APB2Periph)
  *                       @arg RCM_AHB1_PERIPH_GPIOC       : Enable GPIOC reset
  *                       @arg RCM_AHB1_PERIPH_GPIOD       : Enable GPIOD reset
  *                       @arg RCM_AHB1_PERIPH_GPIOE       : Enable GPIOE reset
- *                       @arg RCM_AHB1_PERIPH_GPIOF       : Enable GPIOF reset
- *                       @arg RCM_AHB1_PERIPH_GPIOG       : Enable GPIOG reset
- *                       @arg RCM_AHB1_PERIPH_GPIOI       : Enable GPIOI reset
+ *                       @arg RCM_AHB1_PERIPH_GPIOF       : Enable GPIOF reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_GPIOG       : Enable GPIOG reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_GPIOH       : Enable GPIOH reset
+ *                       @arg RCM_AHB1_PERIPH_GPIOI       : Enable GPIOI reset(Not for APM32F411)
  *                       @arg RCM_AHB1_PERIPH_CRC         : Enable CRC reset
- *                       @arg RCM_AHB1_PERIPH_BKPSRAM     : Enable BKPSRAM interface reset
- *                       @arg RCM_AHB1_PERIPH_CCMDATARAMEN: Enable CCM data RAM interface reset
+ *                       @arg RCM_AHB1_PERIPH_BKPSRAM     : Enable BKPSRAM interface reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_CCMDATARAMEN: Enable CCM data RAM interface reset(Not for APM32F411)
  *                       @arg RCM_AHB1_PERIPH_DMA1        : Enable DMA1 reset
  *                       @arg RCM_AHB1_PERIPH_DMA2        : Enable DMA2 reset
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC     : Enable Ethernet MAC reset
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Tx  : Enable Ethernet Transmission reset
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Rx  : Enable Ethernet Reception reset
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC_PTP : Enable Ethernet PTP reset
- *                       @arg RCM_AHB1_PERIPH_OTG_HS      : Enable USB OTG HS reset
- *                       @arg RCM_AHB1_PERIPH_OTG_HS_ULPI : Enable USB OTG HS ULPI clock
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC     : Enable Ethernet MAC reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Tx  : Enable Ethernet Transmission reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Rx  : Enable Ethernet Reception reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC_PTP : Enable Ethernet PTP reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_OTG_HS      : Enable USB OTG HS reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_OTG_HS_ULPI : Enable USB OTG HS ULPI clock(Not for APM32F411)
  *
  * @retval    None
  */
@@ -970,20 +1043,21 @@ void RCM_EnableAHB1PeriphReset(uint32_t AHB1Periph)
  *                       @arg RCM_AHB1_PERIPH_GPIOC       : Disable GPIOC reset
  *                       @arg RCM_AHB1_PERIPH_GPIOD       : Disable GPIOD reset
  *                       @arg RCM_AHB1_PERIPH_GPIOE       : Disable GPIOE reset
- *                       @arg RCM_AHB1_PERIPH_GPIOF       : Disable GPIOF reset
- *                       @arg RCM_AHB1_PERIPH_GPIOG       : Disable GPIOG reset
- *                       @arg RCM_AHB1_PERIPH_GPIOI       : Disable GPIOI reset
+ *                       @arg RCM_AHB1_PERIPH_GPIOF       : Disable GPIOF reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_GPIOG       : Disable GPIOG reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_GPIOH       : Enable GPIOH reset
+ *                       @arg RCM_AHB1_PERIPH_GPIOI       : Disable GPIOI reset(Not for APM32F411)
  *                       @arg RCM_AHB1_PERIPH_CRC         : Disable CRC reset
- *                       @arg RCM_AHB1_PERIPH_BKPSRAM     : Disable BKPSRAM interface reset
- *                       @arg RCM_AHB1_PERIPH_CCMDATARAMEN: Disable CCM data RAM interface reset
+ *                       @arg RCM_AHB1_PERIPH_BKPSRAM     : Disable BKPSRAM interface reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_CCMDATARAMEN: Disable CCM data RAM interface reset(Not for APM32F411)
  *                       @arg RCM_AHB1_PERIPH_DMA1        : Disable DMA1 reset
  *                       @arg RCM_AHB1_PERIPH_DMA2        : Disable DMA2 reset
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC     : Disable Ethernet MAC reset
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Tx  : Disable Ethernet Transmission reset
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Rx  : Disable Ethernet Reception reset
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC_PTP : Disable Ethernet PTP reset
- *                       @arg RCM_AHB1_PERIPH_OTG_HS      : Disable USB OTG HS reset
- *                       @arg RCM_AHB1_PERIPH_OTG_HS_ULPI : Disable USB OTG HS ULPI reset
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC     : Disable Ethernet MAC reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Tx  : Disable Ethernet Transmission reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Rx  : Disable Ethernet Reception reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC_PTP : Disable Ethernet PTP reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_OTG_HS      : Disable USB OTG HS reset(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_OTG_HS_ULPI : Disable USB OTG HS ULPI reset(Not for APM32F411)
  *
  * @retval    None
  */
@@ -1000,6 +1074,7 @@ void RCM_DisableAHB1PeriphReset(uint32_t AHB1Periph)
  *                       @arg RCM_AHB2_PERIPH_DCI       : Enable DCI reset
  *                       @arg RCM_AHB2_PERIPH_FPU       : Enable FPU reset
  *                       @arg RCM_AHB2_PERIPH_BN        : Enable BN reset
+ *                       @arg RCM_AHB2_PERIPH_QSPI      : Enable QSPI reset(only for APM32F411)
  *                       @arg RCM_AHB2_PERIPH_SM        : Enable SM reset
  *                       @arg RCM_AHB2_PERIPH_CRYP      : Enable CRYP reset
  *                       @arg RCM_AHB2_PERIPH_HASH      : Enable HASH reset
@@ -1021,6 +1096,7 @@ void RCM_EnableAHB2PeriphReset(uint32_t AHB2Periph)
  *                       @arg RCM_AHB2_PERIPH_DCI       : Disable DCI reset
  *                       @arg RCM_AHB2_PERIPH_FPU       : Disable FPU reset
  *                       @arg RCM_AHB2_PERIPH_BN        : Disable BN reset
+ *                       @arg RCM_AHB2_PERIPH_QSPI      : Disable QSPI reset(only for APM32F411)
  *                       @arg RCM_AHB2_PERIPH_SM        : Disable SM reset
  *                       @arg RCM_AHB2_PERIPH_CRYP      : Disable CRYP reset
  *                       @arg RCM_AHB2_PERIPH_HASH      : Disable HASH reset
@@ -1035,6 +1111,34 @@ void RCM_DisableAHB2PeriphReset(uint32_t AHB2Periph)
 }
 
 /*!
+ * @brief    Enables AHB3 peripheral reset
+ *
+ * @param    AHB3Periph : Enable the specifies clock of AHB2 peripheral
+ *                       This parameter can be any combination of the following values:
+ *                       @arg RCM_AHB3_PERIPH_EMMC
+ *
+ * @retval    None
+ */
+void RCM_EnableAHB3PeriphReset(uint32_t AHB3Periph)
+{
+    RCM->AHB3RST |= AHB3Periph;
+}
+
+/*!
+ * @brief    Disable AHB3 peripheral reset
+ *
+ * @param    AHB2Periph : Disable the specifies clock of AHB3 peripheral
+ *                       This parameter can be any combination of the following values:
+ *                       @arg RCM_AHB3_PERIPH_EMMC
+ *
+ * @retval    None
+ */
+void RCM_DisableAHB3PeriphReset(uint32_t AHB3Periph)
+{
+    RCM->AHB3RST &= (uint32_t)~AHB3Periph;
+}
+
+/*!
  * @brief    Enable the Low Speed APB (APB1) peripheral reset
  *
  * @param    APB1Periph : Enable specifies reset of the APB1 peripheral.
@@ -1043,8 +1147,8 @@ void RCM_DisableAHB2PeriphReset(uint32_t AHB2Periph)
  *                        @arg RCM_APB1_PERIPH_TMR3   : Enable TMR3 reset
  *                        @arg RCM_APB1_PERIPH_TMR4   : Enable TMR4 reset
  *                        @arg RCM_APB1_PERIPH_TMR5   : Enable TMR5 reset
- *                        @arg RCM_APB1_PERIPH_TMR6   : Enable TMR6 reset
- *                        @arg RCM_APB1_PERIPH_TMR7   : Enable TMR7 reset
+ *                        @arg RCM_APB1_PERIPH_TMR6   : Enable TMR6 reset(Not for APM32F411)
+ *                        @arg RCM_APB1_PERIPH_TMR7   : Enable TMR7 reset(Not for APM32F411)
  *                        @arg RCM_APB1_PERIPH_TMR12  : Enable TMR12 reset
  *                        @arg RCM_APB1_PERIPH_TMR13  : Enable TMR13 reset
  *                        @arg RCM_APB1_PERIPH_TMR14  : Enable TMR14 reset
@@ -1058,13 +1162,11 @@ void RCM_DisableAHB2PeriphReset(uint32_t AHB2Periph)
  *                        @arg RCM_APB1_PERIPH_I2C1   : Enable I2C1 reset
  *                        @arg RCM_APB1_PERIPH_I2C2   : Enable I2C2 reset
  *                        @arg RCM_APB1_PERIPH_I2C3   : Enable I2C3 reset
- *                        @arg RCM_APB1_PERIPH_FMPI2C1: Enable FMPI2C1 reset
+ *                        @arg RCM_APB1_PERIPH_FMPI2C1: Enable FMPI2C1 reset(Not for APM32F411)
  *                        @arg RCM_APB1_PERIPH_CAN1   : Enable CAN1 reset
  *                        @arg RCM_APB1_PERIPH_CAN2   : Enable CAN2 reset
  *                        @arg RCM_APB1_PERIPH_PMU    : Enable PMU reset
- *                        @arg RCM_APB1_PERIPH_DAC    : Enable DAC reset
- *                        @arg RCM_APB1_PERIPH_UART7  : Enable UART7 reset
- *                        @arg RCM_APB1_PERIPH_UART8  : Enable UART8 reset
+ *                        @arg RCM_APB1_PERIPH_DAC    : Enable DAC reset(Not for APM32F411)
  *
  * @retval   None
  */
@@ -1082,8 +1184,8 @@ void RCM_EnableAPB1PeriphReset(uint32_t APB1Periph)
  *                        @arg RCM_APB1_PERIPH_TMR3   : Disable TMR3 reset
  *                        @arg RCM_APB1_PERIPH_TMR4   : Disable TMR4 reset
  *                        @arg RCM_APB1_PERIPH_TMR5   : Disable TMR5 reset
- *                        @arg RCM_APB1_PERIPH_TMR6   : Disable TMR6 reset
- *                        @arg RCM_APB1_PERIPH_TMR7   : Disable TMR7 reset
+ *                        @arg RCM_APB1_PERIPH_TMR6   : Disable TMR6 reset(Not for APM32F411)
+ *                        @arg RCM_APB1_PERIPH_TMR7   : Disable TMR7 reset(Not for APM32F411)
  *                        @arg RCM_APB1_PERIPH_TMR12  : Disable TMR12 reset
  *                        @arg RCM_APB1_PERIPH_TMR13  : Disable TMR13 reset
  *                        @arg RCM_APB1_PERIPH_TMR14  : Disable TMR14 reset
@@ -1097,13 +1199,11 @@ void RCM_EnableAPB1PeriphReset(uint32_t APB1Periph)
  *                        @arg RCM_APB1_PERIPH_I2C1   : Disable I2C1 reset
  *                        @arg RCM_APB1_PERIPH_I2C2   : Disable I2C2 reset
  *                        @arg RCM_APB1_PERIPH_I2C3   : Disable I2C3 reset
- *                        @arg RCM_APB1_PERIPH_FMPI2C1: Disable FMPI2C1 reset
+ *                        @arg RCM_APB1_PERIPH_FMPI2C1: Disable FMPI2C1 reset(Not for APM32F411)
  *                        @arg RCM_APB1_PERIPH_CAN1   : Disable CAN1 reset
  *                        @arg RCM_APB1_PERIPH_CAN2   : Disable CAN2 reset
  *                        @arg RCM_APB1_PERIPH_PMU    : Disable PMU reset
- *                        @arg RCM_APB1_PERIPH_DAC    : Disable DAC reset
- *                        @arg RCM_APB1_PERIPH_UART7  : Disable UART7 reset
- *                        @arg RCM_APB1_PERIPH_UART8  : Disable UART8 reset
+ *                        @arg RCM_APB1_PERIPH_DAC    : Disable DAC reset(Not for APM32F411)
  *
  * @retval   None
  */
@@ -1121,16 +1221,15 @@ void RCM_DisableAPB1PeriphReset(uint32_t APB1Periph)
  *                        @arg RCM_APB2_PERIPH_TMR8   : TMR8 reset
  *                        @arg RCM_APB2_PERIPH_USART1 : USART1 reset
  *                        @arg RCM_APB2_PERIPH_USART6 : USART6 reset
- *                        @arg RCM_APB2_PERIPH_ADC    : All of ADC reset
+ *                        @arg RCM_APB2_PERIPH_ADC    : All of ADC clock
  *                        @arg RCM_APB2_PERIPH_SDIO   : SDIO reset
  *                        @arg RCM_APB2_PERIPH_SPI1   : SPI1 reset
- *                        @arg RCM_APB2_PERIPH_SPI4   : SPI4 reset
+ *                        @arg RCM_APB2_PERIPH_SPI4   : SPI4 reset(only for APM32F411)
  *                        @arg RCM_APB2_PERIPH_SYSCFG : SYSCFG reset
  *                        @arg RCM_APB2_PERIPH_TMR9   : TMR9 reset
  *                        @arg RCM_APB2_PERIPH_TMR10  : TMR10 reset
  *                        @arg RCM_APB2_PERIPH_TMR11  : TMR11 reset
- *                        @arg RCM_APB2_PERIPH_SPI5   : SPI5 reset
- *                        @arg RCM_APB2_PERIPH_SPI6   : SPI6 reset
+ *                        @arg RCM_APB2_PERIPH_SPI5   : SPI5 reset(only for APM32F411)
  *
  * @retval   None
  */
@@ -1148,18 +1247,15 @@ void RCM_EnableAPB2PeriphReset(uint32_t APB2Periph)
  *                        @arg RCM_APB2_PERIPH_TMR8   : TMR8 reset
  *                        @arg RCM_APB2_PERIPH_USART1 : USART1 reset
  *                        @arg RCM_APB2_PERIPH_USART6 : USART6 reset
- *                        @arg RCM_APB2_PERIPH_ADC1   : ADC1 reset
- *                        @arg RCM_APB2_PERIPH_ADC2   : ADC2 reset
- *                        @arg RCM_APB2_PERIPH_ADC3   : ADC3 reset
+ *                        @arg RCM_APB2_PERIPH_ADC    : All of ADC clock
  *                        @arg RCM_APB2_PERIPH_SDIO   : SDIO reset
  *                        @arg RCM_APB2_PERIPH_SPI1   : SPI1 reset
- *                        @arg RCM_APB2_PERIPH_SPI4   : SPI4 reset
+ *                        @arg RCM_APB2_PERIPH_SPI4   : SPI4 reset(only for APM32F411)
  *                        @arg RCM_APB2_PERIPH_SYSCFG : SYSCFG reset
  *                        @arg RCM_APB2_PERIPH_TMR9   : TMR9 reset
  *                        @arg RCM_APB2_PERIPH_TMR10  : TMR10 reset
  *                        @arg RCM_APB2_PERIPH_TMR11  : TMR11 reset
- *                        @arg RCM_APB2_PERIPH_SPI5   : SPI5 reset
- *                        @arg RCM_APB2_PERIPH_SPI6   : SPI6 reset
+ *                        @arg RCM_APB2_PERIPH_SPI5   : SPI5 reset(only for APM32F411)
  *
  * @retval   None
  */
@@ -1178,20 +1274,23 @@ void RCM_DisableAPB2PeriphReset(uint32_t APB2Periph)
  *                       @arg RCM_AHB1_PERIPH_GPIOC       : Enable GPIOC clock
  *                       @arg RCM_AHB1_PERIPH_GPIOD       : Enable GPIOD clock
  *                       @arg RCM_AHB1_PERIPH_GPIOE       : Enable GPIOE clock
- *                       @arg RCM_AHB1_PERIPH_GPIOF       : Enable GPIOF clock
- *                       @arg RCM_AHB1_PERIPH_GPIOG       : Enable GPIOG clock
- *                       @arg RCM_AHB1_PERIPH_GPIOI       : Enable GPIOI clock
+ *                       @arg RCM_AHB1_PERIPH_GPIOF       : Enable GPIOF clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_GPIOG       : Enable GPIOG clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_GPIOH       : Enable GPIOH clock
+ *                       @arg RCM_AHB1_PERIPH_GPIOI       : Enable GPIOI clock(Not for APM32F411)
  *                       @arg RCM_AHB1_PERIPH_CRC         : Enable CRC clock
- *                       @arg RCM_AHB1_PERIPH_BKPSRAM     : Enable BKPSRAM interface clock
- *                       @arg RCM_AHB1_PERIPH_CCMDATARAMEN: Enable CCM data RAM interface clock
+ *                       @arg RCM_AHB1_PERIPH_FMC         : Enable FMC clock
+ *                       @arg RCM_AHB1_PERIPH_SRAM1       : Enable SRAM1 clock
+ *                       @arg RCM_AHB1_PERIPH_SRAM2       : Enable SRAM2 clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_BKPSRAM     : Enable BKPSRAM clock(Not for APM32F411)
  *                       @arg RCM_AHB1_PERIPH_DMA1        : Enable DMA1 clock
  *                       @arg RCM_AHB1_PERIPH_DMA2        : Enable DMA2 clock
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC     : Enable Ethernet MAC clock
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Tx  : Enable Ethernet Transmission clock
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Rx  : Enable Ethernet Reception clock
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC_PTP : Enable Ethernet PTP clock
- *                       @arg RCM_AHB1_PERIPH_OTG_HS      : Enable USB OTG HS clock
- *                       @arg RCM_AHB1_PERIPH_OTG_HS_ULPI : Enable USB OTG HS ULPI clock
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC     : Enable Ethernet MAC clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Tx  : Enable Ethernet Transmission clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Rx  : Enable Ethernet Reception clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC_PTP : Enable Ethernet PTP clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_OTG_HS      : Enable USB OTG HS clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_OTG_HS_ULPI : Enable USB OTG HS ULPI clock(Not for APM32F411)
  *
  * @retval    None
  */
@@ -1210,20 +1309,23 @@ void RCM_EnableAHB1PeriphClockLPMode(uint32_t AHB1Periph)
  *                       @arg RCM_AHB1_PERIPH_GPIOC       : Disable GPIOC clock
  *                       @arg RCM_AHB1_PERIPH_GPIOD       : Disable GPIOD clock
  *                       @arg RCM_AHB1_PERIPH_GPIOE       : Disable GPIOE clock
- *                       @arg RCM_AHB1_PERIPH_GPIOF       : Disable GPIOF clock
- *                       @arg RCM_AHB1_PERIPH_GPIOG       : Disable GPIOG clock
- *                       @arg RCM_AHB1_PERIPH_GPIOI       : Disable GPIOI clock
+ *                       @arg RCM_AHB1_PERIPH_GPIOF       : Disable GPIOF clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_GPIOG       : Disable GPIOG clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_GPIOH       : Disable GPIOH clock
+ *                       @arg RCM_AHB1_PERIPH_GPIOI       : Disable GPIOI clock(Not for APM32F411)
  *                       @arg RCM_AHB1_PERIPH_CRC         : Disable CRC clock
- *                       @arg RCM_AHB1_PERIPH_BKPSRAM     : Disable BKPSRAM interface clock
- *                       @arg RCM_AHB1_PERIPH_CCMDATARAMEN: Disable CCM data RAM interface clock
+ *                       @arg RCM_AHB1_PERIPH_FMC         : Disable FMC clock
+ *                       @arg RCM_AHB1_PERIPH_SRAM1       : Disable SRAM1 clock
+ *                       @arg RCM_AHB1_PERIPH_SRAM2       : Disable SRAM2 clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_BKPSRAM     : Disable BKPSRAM clock(Not for APM32F411)
  *                       @arg RCM_AHB1_PERIPH_DMA1        : Disable DMA1 clock
  *                       @arg RCM_AHB1_PERIPH_DMA2        : Disable DMA2 clock
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC     : Disable Ethernet MAC clock
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Tx  : Disable Ethernet Transmission clock
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Rx  : Disable Ethernet Reception clock
- *                       @arg RCM_AHB1_PERIPH_ETH_MAC_PTP : Disable Ethernet PTP clock
- *                       @arg RCM_AHB1_PERIPH_OTG_HS      : Disable USB OTG HS clock
- *                       @arg RCM_AHB1_PERIPH_OTG_HS_ULPI : Disable USB OTG HS ULPI clock
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC     : Disable Ethernet MAC clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Tx  : Disable Ethernet Transmission clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC_Rx  : Disable Ethernet Reception clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_ETH_MAC_PTP : Disable Ethernet PTP clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_OTG_HS      : Disable USB OTG HS clock(Not for APM32F411)
+ *                       @arg RCM_AHB1_PERIPH_OTG_HS_ULPI : Disable USB OTG HS ULPI clock(Not for APM32F411)
  *
  * @retval    None
  */
@@ -1240,6 +1342,7 @@ void RCM_DisableAHB1PeriphClockLPMode(uint32_t AHB1Periph)
  *                       @arg RCM_AHB2_PERIPH_DCI       : Enable DCI clock
  *                       @arg RCM_AHB2_PERIPH_FPU       : Enable FPU clock
  *                       @arg RCM_AHB2_PERIPH_BN        : Enable BN clock
+ *                       @arg RCM_AHB2_PERIPH_QSPI      : Enable QSPI clock(only for APM32F411)
  *                       @arg RCM_AHB2_PERIPH_SM        : Enable SM clock
  *                       @arg RCM_AHB2_PERIPH_CRYP      : Enable CRYP clock
  *                       @arg RCM_AHB2_PERIPH_HASH      : Enable HASH clock
@@ -1261,6 +1364,7 @@ void RCM_EnableAHB2PeriphClockLPMode(uint32_t AHB2Periph)
  *                       @arg RCM_AHB2_PERIPH_DCI       : Disable DCI clock
  *                       @arg RCM_AHB2_PERIPH_FPU       : Disable FPU clock
  *                       @arg RCM_AHB2_PERIPH_BN        : Disable BN clock
+ *                       @arg RCM_AHB2_PERIPH_QSPI      : Disable QSPI clock(only for APM32F411)
  *                       @arg RCM_AHB2_PERIPH_SM        : Disable SM clock
  *                       @arg RCM_AHB2_PERIPH_CRYP      : Disable CRYP clock
  *                       @arg RCM_AHB2_PERIPH_HASH      : Disable HASH clock
@@ -1275,6 +1379,34 @@ void RCM_DisableAHB2PeriphClockLPMode(uint32_t AHB2Periph)
 }
 
 /*!
+ * @brief     Enables AHB3 peripheral clock during Low Power (Sleep) mode
+ *
+ * @param     AHB3Periph : Enable the specifies clock of AHB3 peripheral
+ *                       This parameter can be any combination of the following values:
+ *                       @arg RCM_AHB3_PERIPH_EMMC
+ *
+ * @retval    None
+ */
+void RCM_EnableAHB3PeriphClockLPMode(uint32_t AHB3Periph)
+{
+    RCM->LPAHB3CLKEN |= AHB3Periph;
+}
+
+/*!
+ * @brief     Disable AHB3 peripheral clock during Low Power (Sleep) mode
+ *
+ * @param     AHB3Periph : Disable the specifies clock of AHB3 peripheral
+ *                       This parameter can be any combination of the following values:
+ *                       @arg RCM_AHB3_PERIPH_EMMC
+ *
+ * @retval    None
+ */
+void RCM_DisableAHB3PeriphClockLPMode(uint32_t AHB3Periph)
+{
+    RCM->LPAHB3CLKEN &= (uint32_t)~AHB3Periph;
+}
+
+/*!
  * @brief    Enable the Low Speed APB (APB1) peripheral clock during Low Power (Sleep) mode
  *
  * @param    APB1Periph : Enable specifies clock of the APB1 peripheral.
@@ -1283,8 +1415,8 @@ void RCM_DisableAHB2PeriphClockLPMode(uint32_t AHB2Periph)
  *                        @arg RCM_APB1_PERIPH_TMR3   : Enable TMR3 clock
  *                        @arg RCM_APB1_PERIPH_TMR4   : Enable TMR4 clock
  *                        @arg RCM_APB1_PERIPH_TMR5   : Enable TMR5 clock
- *                        @arg RCM_APB1_PERIPH_TMR6   : Enable TMR6 clock
- *                        @arg RCM_APB1_PERIPH_TMR7   : Enable TMR7 clock
+ *                        @arg RCM_APB1_PERIPH_TMR6   : Enable TMR6 clock(Not for APM32F411)
+ *                        @arg RCM_APB1_PERIPH_TMR7   : Enable TMR7 clock(Not for APM32F411)
  *                        @arg RCM_APB1_PERIPH_TMR12  : Enable TMR12 clock
  *                        @arg RCM_APB1_PERIPH_TMR13  : Enable TMR13 clock
  *                        @arg RCM_APB1_PERIPH_TMR14  : Enable TMR14 clock
@@ -1298,13 +1430,10 @@ void RCM_DisableAHB2PeriphClockLPMode(uint32_t AHB2Periph)
  *                        @arg RCM_APB1_PERIPH_I2C1   : Enable I2C1 clock
  *                        @arg RCM_APB1_PERIPH_I2C2   : Enable I2C2 clock
  *                        @arg RCM_APB1_PERIPH_I2C3   : Enable I2C3 clock
- *                        @arg RCM_APB1_PERIPH_FMPI2C1: Enable FMPI2C1 clock
  *                        @arg RCM_APB1_PERIPH_CAN1   : Enable CAN1 clock
  *                        @arg RCM_APB1_PERIPH_CAN2   : Enable CAN2 clock
  *                        @arg RCM_APB1_PERIPH_PMU    : Enable PMU clock
- *                        @arg RCM_APB1_PERIPH_DAC    : Enable DAC clock
- *                        @arg RCM_APB1_PERIPH_UART7  : Enable UART7 clock
- *                        @arg RCM_APB1_PERIPH_UART8  : Enable UART8 clock
+ *                        @arg RCM_APB1_PERIPH_DAC    : Enable DAC clock(Not for APM32F411)
  *
  * @retval   None
  */
@@ -1322,8 +1451,8 @@ void RCM_EnableAPB1PeriphClockLPMode(uint32_t APB1Periph)
  *                        @arg RCM_APB1_PERIPH_TMR3   : Disable TMR3 clock
  *                        @arg RCM_APB1_PERIPH_TMR4   : Disable TMR4 clock
  *                        @arg RCM_APB1_PERIPH_TMR5   : Disable TMR5 clock
- *                        @arg RCM_APB1_PERIPH_TMR6   : Disable TMR6 clock
- *                        @arg RCM_APB1_PERIPH_TMR7   : Disable TMR7 clock
+ *                        @arg RCM_APB1_PERIPH_TMR6   : Disable TMR6 clock(Not for APM32F411)
+ *                        @arg RCM_APB1_PERIPH_TMR7   : Disable TMR7 clock(Not for APM32F411)
  *                        @arg RCM_APB1_PERIPH_TMR12  : Disable TMR12 clock
  *                        @arg RCM_APB1_PERIPH_TMR13  : Disable TMR13 clock
  *                        @arg RCM_APB1_PERIPH_TMR14  : Disable TMR14 clock
@@ -1337,13 +1466,10 @@ void RCM_EnableAPB1PeriphClockLPMode(uint32_t APB1Periph)
  *                        @arg RCM_APB1_PERIPH_I2C1   : Disable I2C1 clock
  *                        @arg RCM_APB1_PERIPH_I2C2   : Disable I2C2 clock
  *                        @arg RCM_APB1_PERIPH_I2C3   : Disable I2C3 clock
- *                        @arg RCM_APB1_PERIPH_FMPI2C1: Disable FMPI2C1 clock
  *                        @arg RCM_APB1_PERIPH_CAN1   : Disable CAN1 clock
  *                        @arg RCM_APB1_PERIPH_CAN2   : Disable CAN2 clock
  *                        @arg RCM_APB1_PERIPH_PMU    : Disable PMU clock
- *                        @arg RCM_APB1_PERIPH_DAC    : Disable DAC clock
- *                        @arg RCM_APB1_PERIPH_UART7  : Disable UART7 clock
- *                        @arg RCM_APB1_PERIPH_UART8  : Disable UART8 clock
+ *                        @arg RCM_APB1_PERIPH_DAC    : Disable DAC clock(Not for APM32F411)
  *
  * @retval   None
  */
@@ -1363,16 +1489,15 @@ void RCM_DisableAPB1PeriphClockLPMode(uint32_t APB1Periph)
  *                        @arg RCM_APB2_PERIPH_USART6 : USART6 clock
  *                        @arg RCM_APB2_PERIPH_ADC1   : ADC1 clock
  *                        @arg RCM_APB2_PERIPH_ADC2   : ADC2 clock
- *                        @arg RCM_APB2_PERIPH_ADC3   : ADC3 clock
+ *                        @arg RCM_APB2_PERIPH_ADC3   : ADC3 clock(Not for APM32F411)
  *                        @arg RCM_APB2_PERIPH_SDIO   : SDIO clock
  *                        @arg RCM_APB2_PERIPH_SPI1   : SPI1 clock
- *                        @arg RCM_APB2_PERIPH_SPI4   : SPI4 clock
+ *                        @arg RCM_APB2_PERIPH_SPI4   : SPI4 clock(only for APM32F411)
  *                        @arg RCM_APB2_PERIPH_SYSCFG : SYSCFG clock
  *                        @arg RCM_APB2_PERIPH_TMR9   : TMR9 clock
  *                        @arg RCM_APB2_PERIPH_TMR10  : TMR10 clock
  *                        @arg RCM_APB2_PERIPH_TMR11  : TMR11 clock
- *                        @arg RCM_APB2_PERIPH_SPI5   : SPI5 clock
- *                        @arg RCM_APB2_PERIPH_SPI6   : SPI6 clock
+ *                        @arg RCM_APB2_PERIPH_SPI5   : SPI5 clock(only for APM32F411)
  *
  * @retval   None
  */
@@ -1392,16 +1517,15 @@ void RCM_EnableAPB2PeriphClockLPMode(uint32_t APB2Periph)
  *                        @arg RCM_APB2_PERIPH_USART6 : USART6 clock
  *                        @arg RCM_APB2_PERIPH_ADC1   : ADC1 clock
  *                        @arg RCM_APB2_PERIPH_ADC2   : ADC2 clock
- *                        @arg RCM_APB2_PERIPH_ADC3   : ADC3 clock
+ *                        @arg RCM_APB2_PERIPH_ADC3   : ADC3 clock(Not for APM32F411)
  *                        @arg RCM_APB2_PERIPH_SDIO   : SDIO clock
  *                        @arg RCM_APB2_PERIPH_SPI1   : SPI1 clock
- *                        @arg RCM_APB2_PERIPH_SPI4   : SPI4 clock
+ *                        @arg RCM_APB2_PERIPH_SPI4   : SPI4 clock(only for APM32F411)
  *                        @arg RCM_APB2_PERIPH_SYSCFG : SYSCFG clock
  *                        @arg RCM_APB2_PERIPH_TMR9   : TMR9 clock
  *                        @arg RCM_APB2_PERIPH_TMR10  : TMR10 clock
  *                        @arg RCM_APB2_PERIPH_TMR11  : TMR11 clock
- *                        @arg RCM_APB2_PERIPH_SPI5   : SPI5 clock
- *                        @arg RCM_APB2_PERIPH_SPI6   : SPI6 clock
+ *                        @arg RCM_APB2_PERIPH_SPI5   : SPI5 clock(only for APM32F411)
  *
  * @retval   None
  */

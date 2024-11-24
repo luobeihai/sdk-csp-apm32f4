@@ -3,19 +3,19 @@
  *
  * @brief       CMSIS Cortex-M4 Device Peripheral Access Layer System Source File
  *
- * @version     V1.0.2
+ * @version     V1.0.3
  *
- * @date        2022-06-23
+ * @date        2023-07-31
  *
  * @attention
  *
- *  Copyright (C) 2021-2022 Geehy Semiconductor
+ *  Copyright (C) 2021-2023 Geehy Semiconductor
  *
  *  You may not use this file except in compliance with the
  *  GEEHY COPYRIGHT NOTICE (GEEHY SOFTWARE PACKAGE LICENSE).
  *
  *  The program is only for reference, which is distributed in the hope
- *  that it will be usefull and instructional for customers to develop
+ *  that it will be useful and instructional for customers to develop
  *  their software. Unless required by applicable law or agreed to in
  *  writing, the program is distributed on an "AS IS" BASIS, WITHOUT
  *  ANY WARRANTY OR CONDITIONS OF ANY KIND, either express or implied.
@@ -48,15 +48,27 @@
 /* Vector Table base offset field. This value must be a multiple of 0x200. */
 #define VECT_TAB_OFFSET  0x00
 
+#ifdef APM32F411
+#define APB1_PSC 0x04
+#define APB2_PSC 0x00
 /* PLL_VCO = (HSE_VALUE or HSI_VALUE / PLL_B) * PLL_A */
-#define PLL_B      8
-
+#define PLL_B      4
 /* USB OTG FS, SDIO and RNG Clock =  PLL_VCO / PLL_D */
 #define PLL_D      7
-
+#define PLL_A      100
+/* SYSCLK = PLL_VCO / PLL_C */
+#define PLL_C      2
+#else
+#define APB1_PSC 0x05
+#define APB2_PSC 0x04
+/* PLL_VCO = (HSE_VALUE or HSI_VALUE / PLL_B) * PLL_A */
+#define PLL_B      8
+/* USB OTG FS, SDIO and RNG Clock =  PLL_VCO / PLL_D */
+#define PLL_D      7
 #define PLL_A      336
 /* SYSCLK = PLL_VCO / PLL_C */
 #define PLL_C      2
+#endif /* APM32F411 */
 
 /**@} end of group System_Macros*/
 
@@ -68,7 +80,7 @@
  * @brief    APM32F4xx_System_Private_Variables
  */
 
-uint32_t SystemCoreClock = 168000000;
+uint32_t SystemCoreClock = 8000000;
 
 __I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
 
@@ -222,10 +234,10 @@ static void SystemClockConfig(void)
         RCM->CFG_B.AHBPSC = 0x0000;
 
         /* PCLK2 = HCLK / 2*/
-        RCM->CFG_B.APB2PSC = 0x04;
+        RCM->CFG_B.APB2PSC = APB2_PSC;
 
         /* PCLK1 = HCLK / 4*/
-        RCM->CFG_B.APB1PSC = 0x05;
+        RCM->CFG_B.APB1PSC = APB1_PSC;
 
         /* Configure the main PLL */
         RCM->PLL1CFG = PLL_B | (PLL_A << 6) | (((PLL_C >> 1) -1) << 16) |(PLL_D << 24);
@@ -255,6 +267,7 @@ static void SystemClockConfig(void)
     {
         /* If HSE fails to start-up, the application will have wrong clock configuration. */
     }
+    SystemCoreClockUpdate();
 }
 
 #if defined (DATA_IN_ExtSRAM)
